@@ -62,8 +62,9 @@ class OrderItemsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def load_order
-    @order = Order.find_by(id: session[:order_id],user_id: session[:user_id], status: "unsubmitted") || Order.new(id: session[:order_id],user_id: session[:user_id], status: "unsubmitted")
+    @order = Order.find_by(id: session[:order_id], status: "unsubmitted") || current_user.orders.build(id: session[:order_id], status: "unsubmitted")
     if @order.new_record?
+      #@order.user_id = current_user.id
       @order.save!
       session[:order_id] = @order.id
     end

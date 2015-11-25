@@ -1,4 +1,5 @@
 module ApplicationHelper
+
 	def check_stock(stock, requested = 0)
 		check = false
 		lock = stock - requested
