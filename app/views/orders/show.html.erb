@@ -29,7 +29,7 @@
   <td><%= link_to item.quantity, edit_order_item_path(item) %></td>
   <% end %>
   <td><%= print_price(item.product.price)%></td>
-  <td><%= print_stock(item.product.stock, item.quantity)%> </td>
+  <td><%= print_stock(item.product.stock, item.product.quantites_total)%> </td>
   <td><%= print_price item.subtotal(item.quantity, item.product.price) %>
   <td><%= link_to 'Remove', item, method: :delete, data: { confirm: 'Are you sure?' } %></td>
 </td>
