@@ -15,23 +15,26 @@ class OrderItemsController < ApplicationController
   def create
     # w create tworzymy nowa instancje, a albo szukamy utworzonej 
 
-
-    @order_item = @order.order_items.find_by(product_id: params[:product_id])|| @order.order_items.new(quantity: 1, product_id: params[:product_id])
-    if @order_item.new_record?
-      @order_item.quantity = 1
-    else 
-       @order_item.quantity += 1
-    end
-
-    check_in = @order_item.product.stock - @order_item.quantity
-    respond_to do |format|
-      if check_in > -1 && @order_item.save
-        format.html { redirect_to @order, notice: 'Order item was successfully created.' }
-        format.json { render :show, status: :created, location: @order_item }
-      else
-        format.html { render :new, notice: 'Order item was not created.'  }
-        format.json { render json: @order_item.errors, status: :unprocessable_entity }
+      @order_item = @order.order_items.find_by(product_id: params[:product_id])|| @order.order_items.new(quantity: 1, product_id: params[:product_id])
+      if @order_item.new_record?
+        @order_item.quantity = 1
+      else 
+         @order_item.quantity += 1
       end
+
+    if current_user.id != Product.find(@order_item.product_id).user_id
+      check_in = @order_item.product.stock - @order_item.quantity
+      respond_to do |format|
+        if check_in > -1 && @order_item.save
+          format.html { redirect_to @order, notice: 'Order item was successfully created.' }
+          format.json { render :show, status: :created, location: @order_item }
+        else
+          format.html { render :new, notice: 'Order item was not created.'  }
+          format.json { render json: @order_item.errors, status: :unprocessable_entity }
+        end
+      end
+    else
+      redirect_to :back , notice: 'You can not buy your product' 
     end
   end
 
