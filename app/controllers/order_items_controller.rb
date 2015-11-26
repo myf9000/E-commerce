@@ -66,11 +66,13 @@ class OrderItemsController < ApplicationController
     @order.status = "submitted"
     @order.save
     @order.order_items.each do |f|
+      @user = User.find(Product.find(f.product_id).user_id)
+      @user.active = true
+      @user.save
       f.product = Product.find(f.product_id)
       f.product.stock = f.product.stock - f.quantity
       f.product.save
     end
-     
   end
 
   private

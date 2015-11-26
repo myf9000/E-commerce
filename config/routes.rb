@@ -1,7 +1,12 @@
 Rails.application.routes.draw do
 
+
   devise_for :users
-  resources :users, :only => [:show]
+  resources :users, :only => [:show] do
+    member do
+      resources :votes, :only => [:new, :create]
+    end
+  end
   resources :orders
   resources :order_items do
     collection do
@@ -9,6 +14,7 @@ Rails.application.routes.draw do
     end
   end 
   resources :products
+
 
   root 'products#index'
 

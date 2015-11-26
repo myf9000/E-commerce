@@ -1,0 +1,11 @@
+<%= simple_form_for @vote do |f| %>
+  <%= f.input :comunication %>
+  <%= f.input :culture%>
+  <%= f.input :compatibility %>
+  <%= f.input :comment%>
+  <%= f.select :summary, [ "Super", "Ok", "Bad" ], { :prompt => 'Select One' }, { class: "form-control", :id => "select" } %>
+  <%= f.select :type_orders, [ "Buyer", "Seller"], { :prompt => 'Select One' }, { class: "form-control", :id => "select" } %>
+
+  <%= f.button :submit %>
+<% end %>
+

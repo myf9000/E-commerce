@@ -17,4 +17,6 @@ class UsersController < ApplicationController
   		end
   	end
   end
+
+  # ze statusami zamowienia pobawie sie pozniej 
 end

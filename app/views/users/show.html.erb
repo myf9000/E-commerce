@@ -47,9 +47,37 @@
   <h4>Past sellers</h4>
    <% @brr.each do |f| %>
     <% if Order.find(f.order_id).status == "submitted"%>
-      <%= link_to f.product_id, product_path(f.product_id) %>
+      <%= link_to f.product_id, product_path(f.product_id) %> 
     <% end %>
   <% end %>
 
 <% end %>
+
+<hr>
+<h3>Vote</h3>
+<% p = 0 %>
+<% @user.votes.each do |f| %>
+    <p><%p+= f.culture%></p>
+    <p><%p+= f.comunication%></p>
+    <p><%p+= f.compatibility%></p>
+<% end %>
+
+<h4>Average vote: <%= (p/(@user.votes.count*3.0))%> </h4>
+
+<hr>
+  <% @user.votes.each do |f| %>
+    <p><%= f.culture%></p>
+    <p><%= f.comunication%></p>
+    <p><%= f.compatibility%></p>
+    <p><%= f.summary%></p>
+    <p><%= f.type_orders%></p>
+    <p><%= f.comment%></p>
+    <br>
+  <% end %>
+<hr>
+
+<%if @user.active %>
+  <%= link_to "Vote", new_vote_path(@user)%>
+<% end %>
+<hr>
 
