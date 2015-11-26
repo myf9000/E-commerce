@@ -38,7 +38,9 @@
 </table>
 
 <h2> Total: </h2> <%= print_price @order.total%> 
-
+<br>
+<%= link_to "Buy", buy_order_items_path %>
+<br>
 <%= link_to "Empty Cart", @order, data: { confirm: 'Are you sure?' }, method: :delete %>
 
 

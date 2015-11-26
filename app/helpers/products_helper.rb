@@ -4,13 +4,12 @@ module ProductsHelper
 	end
 
 	def print_stock(stock, requested = 1)
-		  lock = stock - requested
-		  if lock == 0
+		  if stock == 0
 		  	content_tag(:span, "Out of Stock", class: ["out_stock"])
-		  elsif lock >= requested
-		  	content_tag(:span, "In Stock (#{lock})", class: ["in_stock"])
-		  elsif lock < requested + 3
-		  	content_tag(:span, "Insufficient stock (#{lock})", class: "low_stock")
+		  elsif stock >= requested
+		  	content_tag(:span, "In Stock (#{stock})", class: ["in_stock"])
+		  elsif stock < requested + (stock * 0.1).to_i
+		  	content_tag(:span, "Insufficient stock (#{stock})", class: "low_stock")
 		  end
 	end
 

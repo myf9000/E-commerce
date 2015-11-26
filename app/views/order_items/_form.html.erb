@@ -14,7 +14,7 @@
   <%= @order_item.product.title %>
   <div class="field">
     <%= f.label :quantity %><br>
-    <%= f.number_field :quantity, max: @order_item.product.stock %>
+    <%= f.number_field :quantity, max: @order_item.product.stock, default: 1 %>
   </div>
   <div class="actions">
     <%= f.submit %>

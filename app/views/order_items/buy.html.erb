@@ -1,0 +1,12 @@
+<h1>Your Order</h1>
+
+
+
+<% @order.order_items.each do |f| %>
+  <p>Seller: <%= User.find(Product.find(f.product_id).user_id).email %></p>
+  <p>Buyer: <%= User.find(Order.find(f.order_id).user_id).email %></p>
+  <p>Product <%= Product.find(f.product_id).title %></p>
+  <p>Pay: <%= f.subtotal(f.quantity, Product.find(f.product_id).price)  %></p>
+
+  <hr>
+<% end %>

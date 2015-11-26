@@ -1,6 +1,6 @@
 class OrderItemsController < ApplicationController
   before_action :set_order_item, only: [:edit, :update, :destroy]
-  before_action :load_order, only: [:create, :update]
+  before_action :load_order, only: [:create, :update, :buy]
 
 
   # GET /order_items
@@ -62,10 +62,21 @@ class OrderItemsController < ApplicationController
     end
   end
 
+  def buy
+    @order.status = "submitted"
+    @order.save
+    @order.order_items.each do |f|
+      f.product = Product.find(f.product_id)
+      f.product.stock = f.product.stock - f.quantity
+      f.product.save
+    end
+     
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def load_order
-    @order = Order.find_by(id: session[:order_id], status: "unsubmitted") || current_user.orders.build(id: session[:order_id], status: "unsubmitted")
+    @order = Order.find_by(id: session[:order_id], status: "unsubmitted") || current_user.orders.build(status: "unsubmitted")
     if @order.new_record?
       #@order.user_id = current_user.id
       @order.save!
