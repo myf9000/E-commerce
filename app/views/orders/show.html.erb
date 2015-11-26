@@ -25,13 +25,15 @@
   <tr>
   <td></td>
   <td><%= item.product.title%></td>
-  <% if check_stock(item.product.stock, item.quantity) %>
+  <% if check_stock(item.product.stock, item.quantity) &&  @order.status == "unsubmitted" %>
   <td><%= link_to item.quantity, edit_order_item_path(item) %></td>
   <% end %>
   <td><%= print_price(item.product.price)%></td>
   <td><%= print_stock(item.product.stock, item.product.quantites_total)%> </td>
   <td><%= print_price item.subtotal(item.quantity, item.product.price) %>
-  <td><%= link_to 'Remove', item, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  <% if @order.status == "unsubmitted" %>
+    <td><%= link_to 'Remove', item, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  <% end %>
 </td>
   </tr>
 <% end %>
@@ -39,8 +41,16 @@
 
 <h2> Total: </h2> <%= print_price @order.total%> 
 <br>
-<%= link_to "Buy", buy_order_items_path %>
-<br>
-<%= link_to "Empty Cart", @order, data: { confirm: 'Are you sure?' }, method: :delete %>
 
-
+<% if @order.status == "unsubmitted" %>
+  <%= link_to "Buy", buy_order_items_path %>
+  <br>
+  <%= link_to "Empty Cart", @order, data: { confirm: 'Are you sure?' }, method: :delete %>
+<% elsif @order.status == "submitted"%>
+  <% @order.order_items.each do |f| %>
+  <p>Seller: <%= User.find(Product.find(f.product_id).user_id).email %></p>
+  <p>Buyer: <%= User.find(Order.find(f.order_id).user_id).email %></p>
+  <p>Product <%= Product.find(f.product_id).title %></p>
+  <p>Pay: <%= f.subtotal(f.quantity, Product.find(f.product_id).price)  %></p>
+<% end %>
+<% end %>

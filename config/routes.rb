@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
+
   devise_for :users
+  resources :users, :only => [:show]
   resources :orders
   resources :order_items do
     collection do

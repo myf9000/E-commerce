@@ -1,0 +1,55 @@
+<h1>User</h1>
+<p><%= @user.email %></p>
+
+<hr>
+
+<h3>User product</h3>
+<% @user.products.each do |f| %>
+  <% if f.stock > 0 %>
+    <%= link_to f.title, product_path(f) %>
+  <% end %>
+<% end %>
+
+<h3>Sell product</h3>
+<% @user.products.each do |f| %>
+  <% if f.stock == 0 %>
+    <%= link_to f.title, product_path(f) %>
+  <% end %>
+<% end %>
+
+<%if current_user.id == @user.id %>
+  
+  <h4> Active Orders </h4>
+    <% @user.orders.product.each do |f| %>
+    <% f.each do |ff| %>
+    <% if ff.status == "unsubmitted" %>
+      <%= link_to ff.id, order_path(f) %>
+    <% end %>
+    <% end %>
+  <% end %>
+
+  <h4> Past Orders </h4>
+    <% @user.orders.product.each do |f| %>
+    <% f.each do |ff| %>
+    <% if ff.status == "submitted" %>
+      <%= link_to ff.id, order_path(f) %>
+
+    <% end %>
+    <% end %>
+  <% end %>
+
+  <h4>Active sellers</h4>
+  <% @brr.each do |f| %>
+    <% if Order.find(f.order_id).status == "unsubmitted"%>
+      <%= link_to f.product_id, product_path(f.product_id) %>
+    <% end %>
+  <% end %>
+  <h4>Past sellers</h4>
+   <% @brr.each do |f| %>
+    <% if Order.find(f.order_id).status == "submitted"%>
+      <%= link_to f.product_id, product_path(f.product_id) %>
+    <% end %>
+  <% end %>
+
+<% end %>
+

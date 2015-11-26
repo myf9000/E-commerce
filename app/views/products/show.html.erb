@@ -16,9 +16,42 @@
 </p>
 
 <p>
+  <strong>Stock:</strong>
+  <%= @product.stock %>
+</p>
+
+<p>
   <strong>Image url:</strong>
   <%= @product.image_url %>
 </p>
+
+<%if current_user.id == @product.user.id %>
+<hr>
+  <h4>Info to send </h4>
+  <% @product.order_items.each do |f| %>
+    <% if (Order.find(f.order_id).status == "submitted") %>
+      <p>Seller: <%= User.find(Product.find(f.product_id).user_id).email %></p>
+      <p>Buyer: <%= User.find(Order.find(f.order_id).user_id).email %></p>
+      <p>Adress: LOLEK</p>
+      <p><%= f.quantity %></p>
+      <br>
+    <% end %>
+  <% end %>
+<hr>
+
+<hr>
+  <h4>In Basket</h4>
+  <% @product.order_items.each do |f| %>
+    <% if (Order.find(f.order_id).status == "unsubmitted") %>
+      <p>Seller: <%= User.find(Product.find(f.product_id).user_id).email %></p>
+      <p>Buyer: <%= User.find(Order.find(f.order_id).user_id).email %></p>
+      <p>Adress: LOLEK</p>
+      <p><%= f.quantity %></p>
+      <br>
+    <% end %>
+  <% end %>
+<hr>
+<% end %>
 
 <%= link_to 'Edit', edit_product_path(@product) %> |
 <%= link_to 'Back', products_path %>
