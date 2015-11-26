@@ -18,7 +18,12 @@
 <% end %>
 
 <%if current_user.id == @user.id %>
-  
+<h4> Follow </h4>
+  <% @user.all_following.each do |f| %>
+    <%= link_to f.email, user_path(f.id) %>
+  <% end %>
+
+
   <h4> Active Orders </h4>
     <% @user.orders.product.each do |f| %>
     <% f.each do |ff| %>
@@ -79,5 +84,8 @@
 <%if @user.active %>
   <%= link_to "Vote", new_vote_path(@user)%>
 <% end %>
+<hr>
+<%= link_to "Follow", follow_user_path(@user)%>
+<%= link_to "Unfollow", follow_user_path(@user, type: "unfollow")%>
 <hr>
 
