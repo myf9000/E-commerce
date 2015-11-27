@@ -95,6 +95,10 @@ class OrderItemsController < ApplicationController
         @user = User.find(Product.find(f.product_id).user_id)
         @user.active = true
         @user.save
+
+        @user_order = User.find(Order.find(f.order_id).user_id)
+        @user_order.active = true
+        @user_order.save
       end
     end
     @order.save

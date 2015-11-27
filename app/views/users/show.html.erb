@@ -142,7 +142,7 @@
   <% end %>
 <hr>
 
-<%if @user.active %>
+<%if @user.active && @user.id != current_user.id%>
   <%= link_to "Vote", new_vote_path(@user)%>
 <% end %>
 <hr>
