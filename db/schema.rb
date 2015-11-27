@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151126205841) do
+ActiveRecord::Schema.define(version: 20151127094740) do
 
   create_table "follows", force: :cascade do |t|
     t.integer  "followable_id",                   null: false
@@ -46,10 +46,11 @@ ActiveRecord::Schema.define(version: 20151126205841) do
     t.decimal  "price",       precision: 8, scale: 2
     t.text     "description"
     t.string   "image_url"
-    t.datetime "created_at",                                      null: false
-    t.datetime "updated_at",                                      null: false
+    t.datetime "created_at",                                         null: false
+    t.datetime "updated_at",                                         null: false
     t.integer  "stock",                               default: 0
     t.integer  "user_id"
+    t.boolean  "active",                              default: true
   end
 
   create_table "users", force: :cascade do |t|

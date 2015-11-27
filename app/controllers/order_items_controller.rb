@@ -71,6 +71,9 @@ class OrderItemsController < ApplicationController
       @user.save
       f.product = Product.find(f.product_id)
       f.product.stock = f.product.stock - f.quantity
+      if f.product.stock == 0
+        f.product.active = false
+      end
       f.product.save
     end
   end

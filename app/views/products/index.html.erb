@@ -13,6 +13,7 @@
 
   <tbody>
     <% @products.each do |product| %>
+    <% if product.active == true %>
   <tr>
     <td><span class="product_title"><%= product.title %></span><%= product.description %></td>
     <td><%= print_price(product.price) %></td>
@@ -25,6 +26,7 @@
       <td><%= button_to "Add to Cart", order_items_path(product_id: product.id) %></td>
     <% end %>
   </tr>
+  <% end %>
 <% end %>
 <%= link_to 'New Product', new_product_path %>
   </tbody>
