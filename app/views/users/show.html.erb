@@ -14,13 +14,19 @@
 <% @user.products.each do |f| %>
   <% if f.stock == 0 %>
     <%= link_to f.title, product_path(f) %>
-  <% end %>
+  <% end %> 
 <% end %>
 
 <%if current_user.id == @user.id %>
 <h4> Follow </h4>
   <% @user.all_following.each do |f| %>
     <%= link_to f.email, user_path(f.id) %>
+    <% @follow_user = User.find(f.id) %>
+    <br>
+    <% @follow_user.products.each do |p| %>
+      <%= link_to p.title, product_path(p.id) %>
+    <% end %>
+    <br>
   <% end %>
 
 
