@@ -13,6 +13,9 @@ Rails.application.routes.draw do
     collection do
       get 'buy'
     end
+    member do
+      get 'product_orders'
+    end
   end 
   resources :products
 

@@ -63,20 +63,45 @@ class OrderItemsController < ApplicationController
   end
 
   def buy
-    @order.status = "submitted"
-    @order.save
-    @order.order_items.each do |f|
-      @user = User.find(Product.find(f.product_id).user_id)
-      @user.active = true
-      @user.save
-      f.product = Product.find(f.product_id)
-      f.product.stock = f.product.stock - f.quantity
-      if f.product.stock == 0
-        f.product.active = false
+    if @order.total == 0
+      @order.destroy
+      redirect_to products_path, notice: "You can buy nothing!"
+    else
+      @order.status = "submitted"
+      @order.save
+      @order.order_items.each do |f|
+        f.product = Product.find(f.product_id)
+        f.product.stock = f.product.stock - f.quantity
+        if f.product.stock == 0
+          f.product.active = false
+        end
+        f.product.save
       end
-      f.product.save
     end
   end
+
+  def product_orders
+    @order_item = OrderItem.find(params[:id])
+    type = params[:type]
+
+    @order = Order.find(@order_item.order_id)
+    if type == "paid"
+      @order.status = "paid"
+    elsif type == "sent"
+      @order.status = "sent"
+    elsif type == "delivered"
+      @order.status = "delivered"
+      @order.order_items.each do |f|
+        @user = User.find(Product.find(f.product_id).user_id)
+        @user.active = true
+        @user.save
+      end
+    end
+    @order.save
+    redirect_to user_path(current_user.id)
+  end
+
+
 
   private
     # Use callbacks to share common setup or constraints between actions.
