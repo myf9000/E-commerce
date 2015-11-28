@@ -12,6 +12,8 @@ Rails.application.routes.draw do
   resources :order_items do
     collection do
       get 'buy'
+      get 'delivered'
+      get 'accepted'
     end
     member do
       get 'product_orders'

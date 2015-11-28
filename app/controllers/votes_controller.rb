@@ -9,14 +9,15 @@ class VotesController < ApplicationController
   	@vote.comentator_id = current_user.id
   	@vote.user_id = params[:id]
   	@user = User.find(@vote.user_id)
-  	@user.active = true
+  	@user.active = false
   	@user.save
       if @vote.save
         redirect_to user_path(@vote.user_id), notice: 'Vote was successfully created.' 
       else
         render :new, notice: 'Vote was not successfully created.' 
       end
-  end
+  end  # nie ma stanu posredniego jeden wszystko robi dobrze drugi nie ma prawa glosu
+       # jak odbiorca zaglosuje pierwszy drugi nie ma prawa glosu, gdy drugi zaglosuje pierwszy moze glosowac kilka razy
 
   def check_pair
     pair_one = false

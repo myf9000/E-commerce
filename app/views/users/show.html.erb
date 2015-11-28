@@ -72,7 +72,17 @@
     <% f.each do |ff| %>
     <% if ff.status == "delivered" %>
       <%= link_to ff.id, order_path(f) %>
+      <%= link_to "Vote", delivered_order_items_path %>
 
+    <% end %>
+    <% end %>
+  <% end %>
+
+  <h4> Delivered to you Orders </h4>
+    <% @user.orders.product.each do |f| %>
+    <% f.each do |ff| %>
+    <% if ff.status == "vote" %>
+      <%= link_to ff.id, order_path(f) %>
     <% end %>
     <% end %>
   <% end %>
@@ -114,6 +124,14 @@
    <% @brr.each do |f| %>
     <% if Order.find(f.order_id).status == "delivered"%>
       <%= link_to f.product_id, product_path(f.product_id) %>
+      <%= link_to "Vote", delivered_order_items_path %>
+    <% end %>
+  <% end %>
+<hr>
+   <h4>Vote products</h4>
+   <% @brr.each do |f| %>
+    <% if Order.find(f.order_id).status == "vote"%>
+      <%= link_to f.product_id, product_path(f.product_id) %>
     <% end %>
   <% end %>
 
@@ -142,9 +160,6 @@
   <% end %>
 <hr>
 
-<%if @user.active && @user.id != current_user.id%>
-  <%= link_to "Vote", new_vote_path(@user)%>
-<% end %>
 <hr>
 <%= link_to "Follow", follow_user_path(@user)%>
 <%= link_to "Unfollow", follow_user_path(@user, type: "unfollow")%>
