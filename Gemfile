@@ -29,6 +29,7 @@ gem 'simple_form'
 # Use Unicorn as the app server
 # gem 'unicorn'
 gem 'acts_as_follower'
+gem 'acts-as-messageable'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development

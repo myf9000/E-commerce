@@ -111,6 +111,8 @@ class OrderItemsController < ApplicationController
         @user_order.active = true
         @user_order.save
 
+
+        # tu lezy problem to trzeba oznaczyc
         @order = Order.find(f.order_id)
         @order.status = "vote"
 

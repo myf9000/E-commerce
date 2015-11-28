@@ -9,4 +9,6 @@ class User < ActiveRecord::Base
   has_many :votes
 
   acts_as_follower
+
+  acts_as_messageable
 end

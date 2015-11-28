@@ -13,7 +13,6 @@ Rails.application.routes.draw do
     collection do
       get 'buy'
       get 'delivered'
-      get 'accepted'
     end
     member do
       get 'product_orders'
@@ -21,7 +20,12 @@ Rails.application.routes.draw do
   end 
   resources :products
 
-
+  resources :messages, only: [:index, :show, :new, :create] do
+    collection do 
+      get 'outbox'
+    end
+  end
+  
   root 'products#index'
 
   

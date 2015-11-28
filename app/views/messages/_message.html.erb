@@ -1,0 +1,12 @@
+<div class="message" id="message_<%= message.id %>">
+  <div class="message_checkbox">
+    <%= check_box_tag "message_checkbox_#{message.id}" %>
+  </div>
+  <div class="message_user_avatar" id="message_user_avatar_<%= message.id %>"></div>
+  <div class="message_and_body">
+    <div class="message_topic" id="message_topic_<%= message.id %>">
+      <%= link_to message.topic, message_path(message.id) %>
+    </div>
+    <div class="message_body" id="message_body_<%= message.id %>">
+      <%= message.body %>
+    </div>
