@@ -40,7 +40,7 @@
 
   <div class="field">
     <%= f.label :subcategory %><br>
-    <%= f.collection_select :subcategory, Category.where.not(:categories => {:parent_id => nil } ), :id, :name %>
+    <%= f.grouped_collection_select :subcategory, Category.where(:categories => {:parent_id => nil } ),:subcategories, :name, :id, :name %>
   </div>
 
   <div class="actions">
