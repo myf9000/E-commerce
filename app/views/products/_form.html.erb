@@ -32,6 +32,17 @@
     <%= f.label :image_url %><br>
     <%= f.text_field :image_url %>
   </div>
+
+  <div class="field">
+    <%= f.label :category %><br>
+    <%= f.collection_select :category, Category.where(:categories => {:parent_id => nil } ), :id, :name %>
+  </div>
+
+  <div class="field">
+    <%= f.label :subcategory %><br>
+    <%= f.collection_select :subcategory, Category.where.not(:categories => {:parent_id => nil } ), :id, :name %>
+  </div>
+
   <div class="actions">
     <%= f.submit %>
   </div>
