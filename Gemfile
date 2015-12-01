@@ -30,7 +30,7 @@ gem 'simple_form'
 # gem 'unicorn'
 gem 'acts_as_follower'
 gem 'acts-as-messageable'
-
+gem 'squeel'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
