@@ -32,6 +32,7 @@ gem 'acts_as_follower'
 gem 'acts-as-messageable'
 gem 'squeel'
 gem 'jquery-turbolinks'
+gem 'pry-rails', :group => :development
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 

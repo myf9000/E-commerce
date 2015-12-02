@@ -15,7 +15,7 @@
     <% @products.each do |product| %>
     <% if product.active == true %>
   <tr>
-    <td><span class="product_title"><%= product.title %></span><%= product.description %></td>
+    <td><span class="product_title"><%= link_to product.title, product %></span><%= product.description %></td>
     <td><%= print_price(product.price) %></td>
     <% if product.order_items %>
       <td><%= print_stock(product.stock, product.quantites_total) %></td>

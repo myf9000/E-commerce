@@ -21,12 +21,6 @@ Rails.application.routes.draw do
     end
   end 
   resources :products
-
-  resources :messages, only: [:index, :show, :new, :create] do
-    collection do 
-      get 'outbox'
-    end
-  end
   
   root 'products#index'
 
