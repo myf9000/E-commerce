@@ -33,8 +33,13 @@ gem 'acts-as-messageable'
 gem 'squeel'
 gem 'jquery-turbolinks'
 gem 'pry-rails', :group => :development
+
+gem 'bootstrap-sass'
+gem 'mailboxer', '~> 0.13.0'
+gem 'chosen-rails'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
+gem "compass-rails", github: "Compass/compass-rails", branch: "master"
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
