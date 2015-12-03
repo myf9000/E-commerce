@@ -10,7 +10,7 @@ class Product < ActiveRecord::Base
 	extend FriendlyId
   	friendly_id :title, use: :slugged
 
-  	is_impressionable
+  	is_impressionable :counter_cache => true, :column_name => :viewed_count, :unique => true
 
 	def price=(input)
   		input.delete!("$")
@@ -23,5 +23,9 @@ class Product < ActiveRecord::Base
 	      q += f.quantity
 		end
 		q
+	end
+
+	def related(product)
+		products = Product.all.select {|i| i.subcategory == product.subcategory and i.id != product.id}
 	end
 end

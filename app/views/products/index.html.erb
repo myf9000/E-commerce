@@ -1,4 +1,19 @@
 <% provide(:title,"Index") %>
+
+<h3>Sorted</h3>
+<%= link_to "Created DESC", sort_path("DESC") %>
+<br>
+<%= link_to "Created ASC", sort_path("ASC") %>
+<br>
+<%= link_to "From smallest price", sort_path("small") %>
+<br>
+<%= link_to "From biggest price", sort_path("big") %>
+<br>
+<%= link_to "Top", sort_path("top") %>
+<hr>
+
+
+
 <h1>Listing Products</h1>
 
 <table>

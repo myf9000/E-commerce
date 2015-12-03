@@ -11,7 +11,7 @@ class ProductsController < ApplicationController
   # GET /products/1
   # GET /products/1.json
   def show
-    impressionist(@product)
+    #impressionist(@product)
   end
 
   # GET /products/new
@@ -22,6 +22,23 @@ class ProductsController < ApplicationController
   # GET /products/1/edit
   def edit
   end
+
+  def sort_list
+    if params[:sort] == "DESC"
+      @products = Product.all.order("created_at DESC").paginate(:page => params[:page], :per_page => 3)
+    elsif params[:sort] == "ASC"
+      @products = Product.all.order("created_at ASC").paginate(:page => params[:page], :per_page => 3)
+    elsif params[:sort] == "small"
+      @products = Product.all.order("price ASC").paginate(:page => params[:page], :per_page => 3)
+    elsif params[:sort] == "big"
+      @products = Product.all.order("price DESC").paginate(:page => params[:page], :per_page => 3)
+    elsif params[:sort] == "top"
+      @products = Product.all.order("viewed_count ASC").paginate(:page => params[:page], :per_page => 3)
+    else
+      @products = Product.all.paginate(:page => params[:page], :per_page => 3)
+    end
+  end
+
 
   # POST /products
   # POST /products.json

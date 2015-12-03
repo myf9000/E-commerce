@@ -1,0 +1,14 @@
+<% provide(:title, "Category") %>
+
+<h1>Products list</h1>
+
+<% @products.each do |f| %>
+  <%= link_to f.title, f %>
+  <br>
+<% end %>
+
+<br>
+<%= will_paginate @products %>
+
+<hr>
+<%= link_to "Back", products_path %>
