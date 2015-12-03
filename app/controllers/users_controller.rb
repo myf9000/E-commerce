@@ -31,7 +31,7 @@ class UsersController < ApplicationController
   private
 
   def user_set
-    @user = User.find(params[:id])
+    @user = User.friendly.find(params[:id])
   end
   # ze statusami zamowienia pobawie sie pozniej 
 end

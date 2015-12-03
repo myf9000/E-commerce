@@ -4,6 +4,9 @@ class Product < ActiveRecord::Base
 	has_many :order_items
 	belongs_to :user
 
+	extend FriendlyId
+  	friendly_id :title, use: :slugged
+
 	def price=(input)
   		input.delete!("$")
   		super

@@ -7,6 +7,8 @@ class User < ActiveRecord::Base
   has_many :orders
   has_many :products
   
+  extend FriendlyId
+  friendly_id :email, use: :slugged
 
   acts_as_follower
 
