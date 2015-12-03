@@ -26,6 +26,10 @@
   <%= image_tag @product.avatar.url(:medium) %>
 </p>
 
+<% @product.pictures.each do |pic| %>
+  <%= image_tag pic.pict.url(:thumb) %> 
+<% end %>
+
 <%if current_user.id == @product.user.id %>
 <hr>
   <h4>Info to send </h4>

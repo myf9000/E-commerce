@@ -12,6 +12,11 @@ class Product < ActiveRecord::Base
 
   	is_impressionable :counter_cache => true, :column_name => :viewed_count, :unique => true
 
+  	has_many :pictures
+ 	accepts_nested_attributes_for :pictures,
+								  reject_if: proc { |attributes| attributes['pict'].blank? },
+								  allow_destroy: true
+
 	def price=(input)
   		input.delete!("$")
   		super

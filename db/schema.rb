@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151203140021) do
+ActiveRecord::Schema.define(version: 20151203184819) do
 
   create_table "average_caches", force: :cascade do |t|
     t.integer  "rater_id"
@@ -155,6 +155,19 @@ ActiveRecord::Schema.define(version: 20151203140021) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "pictures", force: :cascade do |t|
+    t.string   "pict"
+    t.integer  "product_id"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+    t.string   "pict_file_name"
+    t.string   "pict_content_type"
+    t.integer  "pict_file_size"
+    t.datetime "pict_updated_at"
+  end
+
+  add_index "pictures", ["product_id"], name: "index_pictures_on_product_id"
 
   create_table "products", force: :cascade do |t|
     t.string   "title"

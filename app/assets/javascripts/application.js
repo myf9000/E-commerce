@@ -13,6 +13,7 @@
 //= require jquery
 //= require jquery.turbolinks
 //= require jquery_ujs
+//= require cocoon
 //= require chosen-jquery
 //= require turbolinks
 //= require_tree .

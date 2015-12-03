@@ -45,6 +45,7 @@ gem 'friendly_id', '~> 5.1.0'
 gem 'impressionist'
 gem 'will_paginate', '~> 3.0.6'
 gem 'paperclip'
+gem 'cocoon', '~> 1.2.6'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

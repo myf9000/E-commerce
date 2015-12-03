@@ -43,6 +43,15 @@
     <%= f.grouped_collection_select :subcategory, Category.where(:categories => {:parent_id => nil } ),:subcategories, :name, :id, :name %>
   </div>
 
+   <div id="picture">
+    <%= f.simple_fields_for :pictures do |i| %>
+      <%= render 'picture_fields', f: i %>
+    <% end %>
+    <div class="links">
+      <%= link_to_add_association 'add picture', f, :pictures, class: "btn btn-default add-button" %>
+    </div>
+  </div>
+
   <div class="actions">
     <%= f.submit %>
   </div>
