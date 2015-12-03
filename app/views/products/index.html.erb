@@ -31,6 +31,6 @@
 <%= link_to 'New Product', new_product_path %>
   </tbody>
 </table>
-
+<%= will_paginate @products %>
 <hr>
 User profile: <%= link_to "#{current_user.email}", user_path(current_user) %>
