@@ -42,6 +42,7 @@ gem 'chosen-rails'
 gem "compass-rails", github: "Compass/compass-rails", branch: "master"
 gem 'ratyrate'
 gem 'friendly_id', '~> 5.1.0'
+gem 'impressionist'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

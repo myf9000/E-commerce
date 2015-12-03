@@ -1,4 +1,5 @@
 class ProductsController < ApplicationController
+  impressionist :actions=>[:show]
   before_action :set_product, only: [:show, :edit, :update, :destroy]
 
   # GET /products
@@ -10,6 +11,7 @@ class ProductsController < ApplicationController
   # GET /products/1
   # GET /products/1.json
   def show
+    impressionist(@product)
   end
 
   # GET /products/new
