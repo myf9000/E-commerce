@@ -13,6 +13,8 @@
 //= require jquery
 //= require jquery.turbolinks
 //= require jquery_ujs
+//= require jquery-ui
+//= require autocomplete-rails
 //= require cocoon
 //= require chosen-jquery
 //= require turbolinks

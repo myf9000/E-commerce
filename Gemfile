@@ -46,6 +46,10 @@ gem 'impressionist'
 gem 'will_paginate', '~> 3.0.6'
 gem 'paperclip'
 gem 'cocoon', '~> 1.2.6'
+gem 'gon'
+
+gem 'rails4-autocomplete'
+gem 'jquery-ui-rails'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

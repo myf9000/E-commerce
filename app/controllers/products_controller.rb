@@ -1,11 +1,20 @@
 class ProductsController < ApplicationController
   impressionist :actions=>[:show]
   before_action :set_product, only: [:show, :edit, :update, :destroy]
+  autocomplete :product, :title, :full => true
 
   # GET /products
   # GET /products.json
-  def index
-    @products = Product.all.paginate(:page => params[:page], :per_page => 2)
+   def index
+    @products = Product.all
+    t = []
+    @products.each do |f| t << f.title end
+    t = t.uniq
+    gon.titles = t
+    @products = Product.all.all.paginate(:page => params[:page], :per_page => 3)
+    if params[:search]
+      @products = Product.title_like("%#{params[:search]}%").order('title').all.paginate(:page => params[:page], :per_page => 3)
+    end
   end
 
   # GET /products/1

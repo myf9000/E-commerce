@@ -17,6 +17,8 @@ class Product < ActiveRecord::Base
 								  reject_if: proc { |attributes| attributes['pict'].blank? },
 								  allow_destroy: true
 
+	scope :title_like, -> (title) { where("title like ?", title)}
+
 	def price=(input)
   		input.delete!("$")
   		super

@@ -9,8 +9,18 @@
       </button>
       <%= link_to "Merchant", root_path, class: "navbar-brand" %>
     </div>
+
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav pull-right">
+
+       <form class="navbar-form navbar-left" role="search">
+        <div class="form-group">
+           <div class="ui-widget">
+            <input id="titles" class="form-control" placeholder="Search" />
+          </div>
+        </div>
+      </form>
+
         <% if user_signed_in? %>
             <li><%= link_to "Hello, #{current_user.email}", "#" %></li>
             
