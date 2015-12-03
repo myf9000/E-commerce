@@ -44,6 +44,7 @@ gem 'ratyrate'
 gem 'friendly_id', '~> 5.1.0'
 gem 'impressionist'
 gem 'will_paginate', '~> 3.0.6'
+gem 'paperclip'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151203123519) do
+ActiveRecord::Schema.define(version: 20151203134727) do
 
   create_table "average_caches", force: :cascade do |t|
     t.integer  "rater_id"
@@ -158,17 +158,20 @@ ActiveRecord::Schema.define(version: 20151203123519) do
 
   create_table "products", force: :cascade do |t|
     t.string   "title"
-    t.decimal  "price",       precision: 8, scale: 2
+    t.decimal  "price",               precision: 8, scale: 2
     t.text     "description"
-    t.string   "image_url"
-    t.datetime "created_at",                                         null: false
-    t.datetime "updated_at",                                         null: false
-    t.integer  "stock",                               default: 0
+    t.datetime "created_at",                                                 null: false
+    t.datetime "updated_at",                                                 null: false
+    t.integer  "stock",                                       default: 0
     t.integer  "user_id"
-    t.boolean  "active",                              default: true
+    t.boolean  "active",                                      default: true
     t.string   "category"
     t.string   "subcategory"
     t.string   "slug"
+    t.string   "avatar_file_name"
+    t.string   "avatar_content_type"
+    t.integer  "avatar_file_size"
+    t.datetime "avatar_updated_at"
   end
 
   add_index "products", ["slug"], name: "index_products_on_slug", unique: true
