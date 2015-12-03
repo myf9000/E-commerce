@@ -53,4 +53,19 @@
   <p>Product <%= Product.find(f.product_id).title %></p>
   <p>Pay: <%= f.subtotal(f.quantity, Product.find(f.product_id).price)  %></p>
 <% end %>
-<% end %>
+<% elsif @order.status == "delivered"%>
+  <div class="row">
+  <div class="small-2 large-4 columns">
+  <% @order.order_items.each do |f| %>
+    <% if current_user %>
+      User:  <%= User.find(Product.find(f.product_id).user_id).email %>
+      <br>
+      Culture: <%= rating_for User.find(Product.find(f.product_id).user_id), "culture", disable_after_rate: true, enable_half: true, imdb_avg: true%>
+      <br>
+      Speed: <%= rating_for User.find(Product.find(f.product_id).user_id), "speed", disable_after_rate: true, enable_half: true, imdb_avg: true %>
+
+    <% end %>
+  </div>
+</div>
+<%end %>
+<%end %>

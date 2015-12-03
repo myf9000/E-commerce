@@ -77,15 +77,6 @@
     <% end %>
   <% end %>
 
-  <h4> Delivered to you Orders </h4>
-    <% @user.orders.product.each do |f| %>
-    <% f.each do |ff| %>
-    <% if ff.status == "vote" %>
-      <%= link_to ff.id, order_path(f) %>
-    <% end %>
-    <% end %>
-  <% end %>
-
 <hr>
 
   <h4>Active sellers</h4>
@@ -125,18 +116,19 @@
       <%= link_to f.product_id, product_path(f.product_id) %>
     <% end %>
   <% end %>
-<hr>
-   <h4>Vote products</h4>
-   <% @brr.each do |f| %>
-    <% if Order.find(f.order_id).status == "vote"%>
-      <%= link_to f.product_id, product_path(f.product_id) %>
-    <% end %>
-  <% end %>
 
-<% end %>
 
 <hr>
 <%= link_to "Follow", follow_user_path(@user)%>
 <%= link_to "Unfollow", follow_user_path(@user, type: "unfollow")%>
+<hr>
+<% end %>
+<% if @user.average("culture") != nil %>
+  User culture: <%= @user.average("culture").avg%>
+  <br>
+  User speed: <%= @user.average("speed").avg%>
+  <br>
+  User total <%= (@user.average("culture").avg + @user.average("speed").avg) / 2%>
+<% end %>
 <hr>
 

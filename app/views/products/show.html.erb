@@ -42,7 +42,7 @@
 <hr>
   <h4>In Basket</h4>
   <% @product.order_items.each do |f| %>
-    <% if (Order.find(f.order_id).status == "unsubmitted") %>
+    <% if (Order.find(f.order_id).status != "submitted") %>
       <p>Seller: <%= User.find(Product.find(f.product_id).user_id).email %></p>
       <p>Buyer: <%= User.find(Order.find(f.order_id).user_id).email %></p>
       <p>Adress: LOLEK</p>
@@ -53,6 +53,21 @@
 <hr>
 <% end %>
 
+<hr>
+
+<h4>Delivered</h4>
+  <% @product.order_items.each do |f| %>
+    <% if (Order.find(f.order_id).status == "delivered") %>
+      <p>Buyer: <%= User.find(Order.find(f.order_id).user_id).email %></p>
+      <br>
+      Culture: <%= rating_for User.find(Order.find(f.order_id).user_id), "culture", disable_after_rate: true, enable_half: true, imdb_avg: true %>
+      <br>
+      Speed: <%= rating_for User.find(Order.find(f.order_id).user_id), "speed", disable_after_rate: true, enable_half: true, imdb_avg: true%>
+    <% end %>
+  <% end %>
+<hr>
+
+<hr>
 <%= link_to 'Edit', edit_product_path(@product) %> |
 <%= link_to 'Back', products_path %>
 

@@ -12,6 +12,10 @@ class User < ActiveRecord::Base
 
   acts_as_messageable
 
+  ratyrate_rater
+
+  ratyrate_rateable 'culture', 'speed'
+
   def mailboxer_email(object)
     self.email
   end
