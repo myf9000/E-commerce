@@ -26,4 +26,13 @@ module ApplicationHelper
   def active_page(active_page)
     @active == active_page ? "active" : ""
   end
+
+  def set_title_of_page(page_title="")
+		add = "Shopper"
+		if page_title.empty?
+			page_title = add
+		else
+			page_title = page_title+ " | " +add
+		end
+  end
 end

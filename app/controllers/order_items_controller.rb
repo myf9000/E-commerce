@@ -97,30 +97,6 @@ class OrderItemsController < ApplicationController
   end
 
 
-  def delivered  # zaglosowanie jako link przy ostatniej akcji nowy status vote i tyle
-    @order_or_product = Order.find_by_user_id(current_user.id)
-    if !@order_or_product 
-      @order_or_product = Product.find_by_user_id(current_user.id)
-    end
-    @order_or_product.order_items.each do |f|
-        @user_product = User.find(Product.find(f.product_id).user_id)
-        @user_product.active = true
-        @user_product.save
-
-        @user_order = User.find(Order.find(f.order_id).user_id)
-        @user_order.active = true
-        @user_order.save
-
-
-        # tu lezy problem to trzeba oznaczyc
-        @order = Order.find(f.order_id)
-        @order.status = "vote"
-
-        @order.save
-    end
-  end
-
-
   private
     # Use callbacks to share common setup or constraints between actions.
     def load_order
