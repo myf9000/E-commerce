@@ -1,5 +1,6 @@
 class CategoriesController < ApplicationController
   before_action :category_set, only: [:show, :destroy, :edit, :update]
+  load_and_authorize_resource
 
   def index
    @category = nil

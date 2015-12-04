@@ -10,7 +10,7 @@ class Product < ActiveRecord::Base
 	extend FriendlyId
   	friendly_id :title, use: :slugged
 
-  	is_impressionable :counter_cache => true, :column_name => :viewed_count, :unique => true
+  	#is_impressionable :counter_cache => true, :column_name => :viewed_count, :unique => true
 
   	has_many :pictures
  	accepts_nested_attributes_for :pictures,
