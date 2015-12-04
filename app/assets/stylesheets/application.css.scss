@@ -13,11 +13,16 @@
  *= require_tree .
  *= require chosen
  *= require jquery-ui
+ *= require social-share-button
  *= require_self
  */
 
+
+@import "social-share-button";
 
 .notify{
   margin: 0px;
   
 }
+
+

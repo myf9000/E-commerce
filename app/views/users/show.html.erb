@@ -1,4 +1,6 @@
 <% provide(:title, "#{@user.email}") %>
+
+<%= social_share_button_tag(@user.email) %>
 <h1>User</h1>
 <p><%= @user.email %></p>
 

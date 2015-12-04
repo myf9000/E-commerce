@@ -1,6 +1,8 @@
 <% provide(:title, "#{@product.title}" ) %>
 <p id="notice"><%= notice %></p>
 
+
+<%= social_share_button_tag(@product.title) %>
 <p>
   <strong>Title:</strong>
   <%= @product.title %>
