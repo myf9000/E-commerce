@@ -1,7 +1,6 @@
 class ProductsController < ApplicationController
   impressionist :actions=>[:show]
   before_action :set_product, only: [:show, :edit, :update, :destroy]
-  autocomplete :product, :title, :full => true
 
   # GET /products
   # GET /products.json

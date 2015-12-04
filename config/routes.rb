@@ -21,9 +21,7 @@ Rails.application.routes.draw do
       get 'product_orders'
     end
   end 
-  resources :products do
-    get 'products/autocomplete_product_title' , :on => :collection
-  end
+  resources :products
   
   root 'products#index'
 
