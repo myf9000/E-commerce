@@ -1,6 +1,8 @@
-<% provide(:title,"Index") %>
+<% provide(:title,"Home") %>
 
 <h3>Sorted</h3>
+<%= link_to "Filtering", searching_path, class: "btn btn-default"  %>
+<br>
 <%= link_to "Created DESC", sort_path("DESC") %>
 <br>
 <%= link_to "Created ASC", sort_path("ASC") %>

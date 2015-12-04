@@ -30,7 +30,7 @@ gem 'simple_form'
 # gem 'unicorn'
 gem 'acts_as_follower'
 gem 'acts-as-messageable'
-gem 'squeel'
+gem 'squeel', github: 'activerecord-hackery/squeel'
 gem 'jquery-turbolinks'
 gem 'pry-rails', :group => :development
 
@@ -48,6 +48,7 @@ gem 'paperclip'
 gem 'cocoon', '~> 1.2.6'
 gem 'gon'
 gem 'jquery-ui-rails'
+gem 'ransack'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

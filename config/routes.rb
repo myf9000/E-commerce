@@ -38,6 +38,7 @@ Rails.application.routes.draw do
     end
   end
 
+  get '/searching', to: 'products#searching', as: :searching
   get 'sort/:sort', to: 'products#sort_list', as: :sort
   
   # The priority is based upon order of creation: first created -> highest priority.

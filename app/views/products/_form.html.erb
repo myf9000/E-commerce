@@ -35,12 +35,12 @@
 
   <div class="field">
     <%= f.label :category %><br>
-    <%= f.collection_select :category, Category.where(:categories => {:parent_id => nil } ), :id, :name %>
+    <%= f.collection_select :category, Category.where(:categories => {:parent_id => nil } ), :id, :name, { prompt: "Choose a category" } %>
   </div>
 
   <div class="field">
     <%= f.label :subcategory %><br>
-    <%= f.grouped_collection_select :subcategory, Category.where(:categories => {:parent_id => nil } ),:subcategories, :name, :id, :name %>
+    <%= f.grouped_collection_select :subcategory, Category.where(:categories => {:parent_id => nil } ),:subcategories, :name, :id, :name, { prompt: "Choose a category" } %>
   </div>
 
    <div id="picture">

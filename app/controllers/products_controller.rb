@@ -4,22 +4,28 @@ class ProductsController < ApplicationController
 
   # GET /products
   # GET /products.json
-   def index
-    @products = Product.all
-    t = []
-    @products.each do |f| t << f.title end
-    t = t.uniq
-    gon.titles = t
-    @products = Product.all.all.paginate(:page => params[:page], :per_page => 3)
-    if params[:search]
-      @products = Product.title_like("%#{params[:search]}%").order('title').all.paginate(:page => params[:page], :per_page => 3)
-    end
-  end
+  def searching
+    @search = Product.search(params[:q])
+    @products = @search.result
+  end       
 
   # GET /products/1
   # GET /products/1.json
   def show
     #impressionist(@product)
+  end
+
+
+  def index
+    @products = Product.all
+    t = []
+    @products.each do |f| t << f.title end
+    t = t.uniq
+    gon.titles = t
+    @products = Product.all.paginate(:page => params[:page], :per_page => 3)
+    if params[:search]
+      @products = Product.title_like("%#{params[:search]}%").order('title').all.paginate(:page => params[:page], :per_page => 3)
+    end
   end
 
   # GET /products/new
@@ -82,10 +88,7 @@ class ProductsController < ApplicationController
   # DELETE /products/1.json
   def destroy
     @product.destroy
-    respond_to do |format|
-      format.html { redirect_to products_url, notice: 'Product was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    redirect_to products_path, notice: "Product was deleted"  
   end
 
   private
