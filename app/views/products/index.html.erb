@@ -1,53 +1,63 @@
 <% provide(:title,"Home") %>
 
-<h3>Sorted</h3>
-<%= link_to "Filtering", searching_path, class: "btn btn-default"  %>
-<br>
-<%= link_to "Created DESC", sort_path("DESC") %>
-<br>
-<%= link_to "Created ASC", sort_path("ASC") %>
-<br>
-<%= link_to "From smallest price", sort_path("small") %>
-<br>
-<%= link_to "From biggest price", sort_path("big") %>
-<br>
-<%= link_to "Top", sort_path("top") %>
-<hr>
 
+<div class="row">
+  <div class="spacer"></div>
+    <div class="col-md-4">
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <h3>Sorted</h3>
+          <%= link_to "Filtering", searching_path, class: "btn btn-default"  %>
+          <br>
+          <%= link_to "Created DESC", sort_path("DESC") %>
+          <br>
+          <%= link_to "Created ASC", sort_path("ASC") %>
+          <br>
+          <%= link_to "From smallest price", sort_path("small") %>
+          <br>
+          <%= link_to "From biggest price", sort_path("big") %>
+          <br>
+          <%= link_to "Top", sort_path("top") %>
+        </div>
+      </div>
+    </div>
 
+<div class="col-md-8">
+  <div class="panel panel-default">
+    <div class="panel-footer">
+      <h1>Listing Products</h1>
 
-<h1>Listing Products</h1>
+      <table>
+        <thead>
+          <tr>
+            <th>Title</th>
+            <th>Price</th>
+           
+            <th colspan="3"></th>
+          </tr>
+        </thead>
 
-<table>
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th>Price</th>
-     
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @products.each do |product| %>
-    <% if product.active == true %>
-  <tr>
-    <td><span class="product_title"><%= link_to product.title, product %></span><%= product.description %></td>
-    <td><%= print_price(product.price) %></td>
-    <% if product.order_items %>
-      <td><%= print_stock(product.stock, product.quantites_total) %></td>
-    <% else %>
-      <td><%= print_stock(product.stock, 0) %></td>
-    <% end %>
-    <% if check_stock(product.stock, product.quantites_total) %>
-      <td><%= button_to "Add to Cart", order_items_path(product_id: product.id) %></td>
-    <% end %>
-  </tr>
-  <% end %>
-<% end %>
-<%= link_to 'New Product', new_product_path %>
-  </tbody>
-</table>
-<%= will_paginate @products %>
-<hr>
-User profile: <%= link_to "#{current_user.email}", user_path(current_user) %>
+        <tbody>
+          <% @products.each do |product| %>
+          <% if product.active == true %>
+          <tr>
+            <td><span class="product_title"><%= link_to product.title, product %></span><%= product.description %></td>
+            <td><%= print_price(product.price) %></td>
+            <% if product.order_items %>
+              <td><%= print_stock(product.stock, product.quantites_total) %></td>
+            <% else %>
+              <td><%= print_stock(product.stock, 0) %></td>
+            <% end %>
+            <% if check_stock(product.stock, product.quantites_total) %>
+              <td><%= button_to "Add to Cart", order_items_path(product_id: product.id) %></td>
+            <% end %>
+          </tr>
+          <% end %>
+        <% end %>
+        </tbody>
+      </table>
+      <%= will_paginate @products %>
+      </div>
+    </div>
+  </div>
+</div>

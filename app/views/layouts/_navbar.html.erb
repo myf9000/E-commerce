@@ -1,16 +1,11 @@
 <nav class="navbar navbar-default navbar-fixed-top">
   <div class="container">
     <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <%= link_to "Merchant", root_path, class: "navbar-brand" %>
+      <%= link_to image_tag('logo.png'), root_path%> 
     </div>
+    
 
-
+   
      
 
     <div id="navbar" class="navbar-collapse collapse">
@@ -18,23 +13,41 @@
 
        <div class="navbar-form navbar-left">
           <div class="ui-widget">
-            <input id="titles" class="form-control" placeholder="Search" />
+            <input id="titles" class="form-control" placeholder="Search..." />
           </div>
       </div>
 
+         <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Products <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="#">Filter</a></li>
+            <li><a href="#">Top</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="<%= new_product_path %>">New</a></li>
+          </ul>
+        </li>
 
         <% if user_signed_in? %>
-            <li><%= link_to "Hello, #{current_user.email}", "#" %></li>
+            <li><%= link_to user_path(current_user) do%>
+              <div class="notify">
+                <span class="label label-success pull-right"><%=unread_messages_count%></span>
+                <em class="fa fa-user fa-lg"> </em> &nbsp;
+              </div>
+              <% end %>
+
+
+            </li>
             
-            <li class="active"><%= link_to mailbox_inbox_path do%> 
+            <li><%= link_to mailbox_inbox_path do%> 
               <div class="notify">
                 <span class="label label-danger pull-right"><%=unread_messages_count%></span>
-                <em class="fa fa-inbox fa-lg"> </em> Inbox &nbsp;
+                <em class="fa fa-envelope fa-lg"> </em>&nbsp;
               </div>
               <% end %>
             </li>
            
-            <li><%= link_to "Logout", destroy_user_session_path, method: :delete %></li>
+
+            <li><%= link_to destroy_user_session_path, method: :delete do %>Logout &nbsp;<em class="fa fa-sign-out fa-lg"> </em><% end %></li>
         <% else %>
             <li class="active"><%= link_to "Login", new_user_session_path %></li>
             <li><%= link_to "Sign up", new_user_registration_path %></li>
