@@ -1,0 +1,34 @@
+br
+  div class="col-md-8 col-md-offset-4"
+    div class="col-md-6"
+    	div class="panel-transparento"
+    	  div class="panel-body"
+		      
+		    div class="col-md-4 col-md-offset-4"
+		      = image_tag('logo.png')
+
+		    div class="col-md-8 col-md-offset-2" 
+			  br
+              div class="hruj"
+		      br
+
+			= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| 
+			  = devise_error_messages! 
+
+			  div class="col-md-8 col-md-offset-2"
+				.field
+				  = f.label :email
+				  br
+				  = f.email_field :email, autofocus: true 
+			  div class="col-md-8 col-md-offset-2" 
+			  	br
+                div class="hruj"
+				br
+
+			  div class="col-md-4 col-md-offset-4" 
+				.actions
+				  = f.submit "Reset", class: "btn btn-success" 
+		  br
+	      div class="panel panel-info"
+		    div class="panel-heading"
+		      = render "devise/shared/links" 

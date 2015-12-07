@@ -1,0 +1,35 @@
+nav
+  footer.footer-distributed
+    .footer-left
+      = link_to image_tag('logo2.png'), root_path
+      p.footer-links
+        a href="#"  Home
+        | ·
+        a href="#"  Pricing
+        | ·
+        a href="#"  About
+        | ·
+        a href="#"  Faq
+        | ·
+        a href="#"  Contact
+      p.footer-company-name Shopify © 2015
+    .footer-center
+      div
+        i.fa.fa-map-marker
+        p
+          span 21 Revolution Street
+          | Paris, France
+      div
+        i.fa.fa-phone
+        p +1 555 123456
+      div
+        i.fa.fa-envelope
+        p
+          a href="mailto:support@company.com"  support@company.com
+    .footer-right
+      p.footer-company-about
+        span About the company
+        | Lorem ipsum dolor sit amet, consectateur adispicing elit. Fusce euismod convallis velit, eu auctor lacus vehicula sit amet.
+      hr
+      = social_share_button_tag(products_path)
+

@@ -1,0 +1,80 @@
+  
+    div class="panel-transparent"
+      div class="panel-body"
+        div class="col-md-10 col-md-offset-1"
+            
+            div class="col-md-2 col-md-offset-5" 
+              = image_tag('logo3.png')
+              br
+          
+            div class="col-md-12" 
+                div class="hruj"
+                
+
+            = simple_form_for @product, html: { multipart: true } do |f|
+              - if @product.errors.any? 
+                |product errors
+                = pluralize(@product.errors.count, "error")
+                ul
+                - @product.errors.full_messages.each do |msg|
+                  li
+                    = msg
+              
+              div class="col-md-12"
+                br 
+              div class="col-md-6" 
+                = f.input :title, input_html: {class: 'form-control'}
+
+              div class="col-md-3"
+                = f.input :price, input_html: {class: 'form-control'}
+
+              div class="col-md-3"
+                = f.input :stock, input_html: {class: 'form-control'} 
+
+              div class="col-md-12"
+                = f.input :description, input_html: {class: 'form-control', :rows => 10} 
+
+              div class="col-md-12"
+                br
+                div class="hruj"
+                br
+
+              div class="col-md-3" 
+                = f.select :company, [ "Aple", "Microsoft", "IBM" ], { :prompt => 'Select Company' }, { class: "form-control", :id => "select" } 
+
+              div class="col-md-3" 
+                = f.collection_select :category, Category.where(:categories => {:parent_id => nil } ), :id, :name, { prompt: "Choose a category" },  { class: "form-control"}
+              
+              div class="col-md-3"  
+                = f.input :subcategory, label: false do              
+                  = f.grouped_collection_select :subcategory, Category.where(:categories => {:parent_id => nil } ),:subcategories, :name, :id, :name, { prompt: "Choose a subcategory" },  { class: "form-control"}
+
+              div class="col-md-12"
+                br
+                
+              div class="col-md-3"
+                = f.input :avatar, input_html: {class: 'control-label'}
+              
+              div class="col-md-12" 
+                div id="picture"
+                  = f.simple_fields_for :pictures do |i| 
+                    = render 'picture_fields', f: i 
+                  
+                  div class="links"
+                    br
+                    = link_to_add_association 'Add gallery', f, :pictures, class: "btn btn-warning add-button" 
+
+              div class="col-md-12" 
+                br
+
+              div class="col-md-12" 
+                div class="hruj"
+                br
+                = f.button :submit, class: "btn btn-success"
+    br
+    br
+    br
+              
+
+
+

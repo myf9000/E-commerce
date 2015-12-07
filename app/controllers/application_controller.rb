@@ -5,6 +5,7 @@ class ApplicationController < ActionController::Base
   before_action :authenticate_user!
 
   helper_method :mailbox, :conversation
+  layout :layout_by_resource
 
   
   rescue_from CanCan::AccessDenied do | exception |
@@ -25,6 +26,16 @@ class ApplicationController < ActionController::Base
 
   def conversation
     @conversation ||= mailbox.conversations.find(params[:id])
+  end
+
+  protected
+
+  def layout_by_resource
+    if devise_controller?
+      "layout_for_form"
+    else
+      "application"
+    end
   end
 
 

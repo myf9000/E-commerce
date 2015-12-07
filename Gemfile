@@ -34,7 +34,6 @@ gem 'squeel', github: 'activerecord-hackery/squeel'
 gem 'jquery-turbolinks'
 gem 'pry-rails', :group => :development
 
-gem 'bootstrap-sass'
 gem 'mailboxer', '~> 0.13.0'
 gem 'chosen-rails'
 # Use Capistrano for deployment
@@ -51,6 +50,9 @@ gem 'jquery-ui-rails'
 gem 'ransack'
 gem 'cancancan'
 gem 'social-share-button', '~> 0.1.6'
+gem 'slim'
+gem 'bootstrap-sass', '~> 3.3.6'
+
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

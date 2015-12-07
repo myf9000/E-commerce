@@ -1,6 +1,7 @@
 class ProductsController < ApplicationController
   impressionist :actions=>[:show]
   before_action :set_product, only: [:show, :edit, :update, :destroy]
+
   #load_and_authorize_resource
 
   # GET /products
@@ -32,10 +33,12 @@ class ProductsController < ApplicationController
   # GET /products/new
   def new
     @product = current_user.products.build
+    render layout: "layout_for_form" 
   end
 
   # GET /products/1/edit
   def edit
+    render layout: "layout_for_form" 
   end
 
   def sort_list
@@ -100,6 +103,6 @@ class ProductsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def product_params
-      params.require(:product).permit(:title, :price, :description, :avatar, :stock, :category, :subcategory, pictures_attributes: [:id, :pict, :_destroy])
+      params.require(:product).permit(:title, :price, :description, :avatar, :stock, :company, :category, :subcategory, pictures_attributes: [:id, :pict, :_destroy])
     end
 end
