@@ -1,5 +1,5 @@
 class OrderItemsController < ApplicationController
-  before_action :set_order_item, only: [:edit, :update, :destroy]
+  before_action :find_resource, only: [:edit, :update, :destroy]
   before_action :load_order, only: [:create, :update, :buy]
 
 
@@ -107,10 +107,6 @@ class OrderItemsController < ApplicationController
       session[:order_id] = @order.id
     end
   end
-
-    def set_order_item
-      @order_item = OrderItem.find(params[:id])
-    end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def order_item_params

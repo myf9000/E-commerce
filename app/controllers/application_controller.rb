@@ -17,8 +17,14 @@ class ApplicationController < ActionController::Base
     method = "#{resource}_params"
     params[resource] &&= send(method) if respond_to?(method, true)
   end
-  
+
   private
+
+  def find_resource
+    class_name = params[:controller].singularize
+    klass = class_name.camelize.constantize
+    self.instance_variable_set "@" + class_name, klass.find(params[:id])
+  end
 
   def mailbox
     @mailbox ||= current_user.mailbox

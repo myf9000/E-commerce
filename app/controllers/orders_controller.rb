@@ -1,5 +1,5 @@
 class OrdersController < ApplicationController
-  before_action :set_order, only: [:edit, :update, :destroy]
+  before_action :find_resource, only: [:edit, :update, :destroy]
   load_and_authorize_resource
 
   # GET /orders
@@ -67,9 +67,6 @@ class OrdersController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
-    def set_order
-      @order = Order.find(params[:id])
-    end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def order_params

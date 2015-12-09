@@ -1,5 +1,5 @@
 class CategoriesController < ApplicationController
-  before_action :category_set, only: [:show, :destroy, :edit, :update]
+  before_action :find_resource, only: [:show, :destroy, :edit, :update]
   load_and_authorize_resource
 
   def index
@@ -48,10 +48,6 @@ class CategoriesController < ApplicationController
 
 
   private
-
-  def category_set
-  	@category = Category.find(params[:id])
-  end
 
   def category_params
   	params.require(:category).permit(:name)
