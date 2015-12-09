@@ -217,7 +217,7 @@
 
 .panel-transparent .panel-body{
     background: rgba(78,93,108,0.6)!important;
-    border-radius: 7px;
+    border-radius: 4px;
 }
 
 .panel-transparento {
@@ -232,3 +232,23 @@
 .hruj {
 	border-top: 1px solid white;
 }
+
+.img_related {
+  height: 55px; 
+  width: 55px; 
+  border-radius: 2px 2px 2px 2px;
+}
+
+.top_img {
+  width: 500px; 
+  height: auto;
+  border-radius: 3px 3px 3px 3px;
+ 
+}
+
+
+.related {
+  
+  display: inline;
+}
+

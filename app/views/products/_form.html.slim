@@ -7,10 +7,6 @@
               = image_tag('logo3.png')
               br
           
-            div class="col-md-12" 
-                div class="hruj"
-                
-
             = simple_form_for @product, html: { multipart: true } do |f|
               - if @product.errors.any? 
                 |product errors
@@ -32,12 +28,18 @@
                 = f.input :stock, input_html: {class: 'form-control'} 
 
               div class="col-md-12"
-                = f.input :description, input_html: {class: 'form-control', :rows => 10} 
+                = f.input :description, input_html: {class: 'form-control', :rows => 7}
+
+              div class="col-md-12"
+                = f.input :technical, input_html: {class: 'form-control', :rows => 7} 
+
+
+              div class="col-md-12"
+                = f.input :shipment, input_html: {class: 'form-control', :rows => 2}  
 
               div class="col-md-12"
                 br
-                div class="hruj"
-                br
+               
 
               div class="col-md-3" 
                 = f.select :company, [ "Aple", "Microsoft", "IBM" ], { :prompt => 'Select Company' }, { class: "form-control", :id => "select" } 

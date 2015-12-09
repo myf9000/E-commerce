@@ -34,5 +34,6 @@ class Product < ActiveRecord::Base
 
 	def related(product)
 		products = Product.all.select {|i| i.subcategory == product.subcategory and i.id != product.id}
+		products = products[0..10]
 	end
 end
