@@ -28,6 +28,7 @@ class ProductsController < ApplicationController
     if params[:search]
       @products = Product.title_like("%#{params[:search]}%").order('title').all.paginate(:page => params[:page], :per_page => 3)
     end
+    render layout: "layout_for_index" 
   end
 
   # GET /products/new

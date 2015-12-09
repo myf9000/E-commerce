@@ -2,6 +2,8 @@
 p id="notice"
   = notice 
 
+- breadcrumb :product, @product
+
 div class="row"
   div class="col-md-4"
     div class="panel panel-danger"
@@ -99,7 +101,7 @@ div class="row"
           hr
           // = render "users_operations"
         
-        = link_to 'Back', root_path, class: "btn btn-warning" 
+        = link_to 'Back', :back, class: "btn btn-warning" 
         |  
         = link_to 'Edit', edit_product_path(@product), class: "btn btn-info" if can? :update, @product
         |  

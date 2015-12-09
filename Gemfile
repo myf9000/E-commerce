@@ -52,6 +52,7 @@ gem 'cancancan'
 gem 'social-share-button', '~> 0.1.6'
 gem 'slim'
 gem 'bootstrap-sass', '~> 3.3.6'
+gem 'gretel'
 
 
 group :development, :test do

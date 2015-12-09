@@ -1,2 +1,3 @@
 <% provide(:title, "Trash") %>
+<% breadcrumb :trash %>
 <%= render partial: 'mailbox/folder_view', locals: { is_conversation: false, messages: @trash  }  %>
