@@ -34,12 +34,9 @@ end
 
 crumb :order do |f|
   link "Order", order_path
-  parent :index
+  parent :root
 end
 
-crumb :lot do
-
-end
 
 # crumb :projects do
 #   link "Projects", projects_path

@@ -1,8 +1,8 @@
 doSearch = (term, location) ->
   if term.length > 0
-    window.location.href = 'products?utf8=✓&search=' + term + '&commit=Search'
+    window.location.href = 'http://localhost:3000/products?utf8=✓&search=' + term + '&commit=Search'
   else
-    window.location.href = 'products?utf8=✓&search&commit=Search'
+    window.location.href = 'http://localhost:3000/products?utf8=✓&search&commit=Search'
   return
 
 jQuery ->
