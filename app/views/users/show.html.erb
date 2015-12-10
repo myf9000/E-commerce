@@ -1,5 +1,5 @@
 <% provide(:title, "#{@user.email}") %>
-
+<% breadcrumb :user, @user %>
 <%= social_share_button_tag(@user.email) %>
 <h1>User</h1>
 <p><%= @user.email %></p>
@@ -21,6 +21,9 @@
 <% end %>
 
 <%if current_user.id == @user.id %>
+<%= link_to "Edit", edit_user_registration_path %>
+<br>
+
 <h4> Follow </h4>
   <% @user.all_following.each do |f| %>
     <%= link_to f.email, user_path(f.id) %>

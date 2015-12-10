@@ -6,35 +6,67 @@ p id="notice"
 
 div class="row"
   div class="col-md-4"
-    div class="panel panel-danger"
+    div class="panel panel-dafault"
       div class="panel-heading"
-        ul class="nav nav-pills nav-stacked"
-          b Title: 
-          p = @product.title
+        ul class="nav nav-pills nav-stacked" 
+          h4 style="text-align:center"
+            = @product.title
+
           
-          b Price: 
-          p = @product.price
-         
-          b Company: 
-          p = @product.company
-         
-          b Stock: 
-          p = @product.stock 
-          
+
+          table class="table table-hover"
+            tbody
+              tr 
+                td
+                  b Price: 
+                td
+                  p = print_price @product.price
+              tr 
+                td
+                  b Company: 
+                td
+                  p      
+                    i.fa.fa-building-o
+                      |  
+                      b 
+                        = @product.company
+              tr
+                td
+                  b Stock: 
+                td
+                  p 
+                    = print_stock (@product.stock) 
+                    |  in Magazine
+                  
           - if check_stock(@product.stock, @product.quantites_total)  
             p style="text-align:center"
-              = link_to "Add to Cart", order_items_path(@product.id), class: "btn btn-success"
-                
-         
-    
-      div class="panel-body"
-          h5 Owner:
-          p = link_to User.find(@product.user_id).email, user_path(@product.user_id)
-          br
-          p style="text-align:center"
-            = link_to root_path, class: "btn btn-warning" do
-              em.fa.fa-envelope
-                |  Send Message 
+              = link_to order_items_path(@product.id), class: "btn btn-success" do
+                em.fa.fa-shopping-cart
+                  |  Add to Cart
+                      
+               
+      div class="panel panel-danger"
+        div class="panel-heading"
+          h4 style="text-align:center"
+            | Owner:
+
+          table class="table"
+            tbody
+              tr 
+                td
+                  = link_to image_tag(User.find(@product.user_id).avatar.url(:thumb), class: "img_user"), user_path(@product.user_id)
+                td
+                  p 
+                    h5 = User.find(@product.user_id).email
+
+                  p 
+                    i.fa.fa-star
+                    |  2.44
+                    //= User.find(@product.user_id).average("speed").avg
+                  p
+                    = link_to root_path, class: "btn btn-warning" do
+                      em.fa.fa-envelope
+                        |  Send Message 
 
 
 
@@ -65,47 +97,49 @@ div class="row"
   div class="col-md-8"
     div class="panel-transparent"
       div class="panel-body"
-        = image_tag(@product.avatar.url(:medium), class: "top_img")
-        
-        - @product.pictures.each do |pic| 
-          |  
-          = image_tag pic.pict.url(:thumb)
+        div class="col-md-9"
+          = image_tag(@product.avatar.url(:medium), class: "top_img")
+        div class="col-md-3"
+          - @product.pictures.each do |pic| 
+            p  
+              = image_tag(pic.pict.url(:thumb), class: "round_img")
 
-        
-        hr
-        ul class="nav nav-tabs"
-          li class="active" 
-            a href="#description" data-toggle="tab" aria-expanded="false" 
-              h5 Description
-          li class="" 
-            a href="#technical" data-toggle="tab" aria-expanded="false" 
-              h5 Technical
-          li class="" 
-            a href="#shipment" data-toggle="tab" aria-expanded="false" 
-              h5 Shipment
-
-        div id="myTabContent" class="tab-content"
-          br
-          div class="tab-pane fade active in" id="description"
-            p = @product.description
-          div class="tab-pane fade" id="technical"
-            p = @product.technical
-          div class="tab-pane fade" id="shipment"
-            p = @product.shipment
-        
-          b Viewed: 
-          | 12
-          = social_share_button_tag(@product.title)
-
-        - if current_user.id == @product.user.id
+        div class="col-md-12"
           hr
+          ul class="nav nav-tabs"
+            li class="active" 
+              a href="#description" data-toggle="tab" aria-expanded="false" 
+                h5 Description
+            li class="" 
+              a href="#technical" data-toggle="tab" aria-expanded="false" 
+                h5 Technical
+            li class="" 
+              a href="#shipment" data-toggle="tab" aria-expanded="false" 
+                h5 Shipment
+
+          div id="myTabContent" class="tab-content"
+            br
+            div class="tab-pane fade active in" id="description"
+              p = @product.description
+            div class="tab-pane fade" id="technical"
+              p = @product.technical
+            div class="tab-pane fade" id="shipment"
+              p = @product.shipment
+          
+            b Viewed: 
+            | 12
+            = social_share_button_tag(@product.title)
+
+          - if current_user.id == @product.user.id
           // = render "users_operations"
-        
-        = link_to 'Back', :back, class: "btn btn-warning" 
-        |  
-        = link_to 'Edit', edit_product_path(@product), class: "btn btn-info" if can? :update, @product
-        |  
-        = link_to "Delete", product_path, method: :delete, data: {confirm: "Are You Sure?"}, class: "btn btn-info" if can? :delete, @product
+        div class="col-md-12"
+          hr
+          
+          = link_to 'Back', :back, class: "btn btn-warning" 
+          |  
+          = link_to 'Edit', edit_product_path(@product), class: "btn btn-info" if can? :update, @product
+          |  
+          = link_to "Delete", product_path, method: :delete, data: {confirm: "Are You Sure?"}, class: "btn btn-info" if can? :delete, @product
 
 br
   

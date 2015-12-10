@@ -239,16 +239,41 @@
   border-radius: 2px 2px 2px 2px;
 }
 
+.img_user {
+  height: 95px; 
+  width: 95px; 
+  border-radius: 2px 2px 2px 2px;
+}
+
 .top_img {
-  width: 500px; 
+  width: 530px; 
   height: auto;
   border-radius: 3px 3px 3px 3px;
  
 }
 
+.round_img {
+	width: 120px; 
+  	height: auto;
+	border-radius: 2px 2px 2px 2px;
+}
 
 .related {
-  
   display: inline;
 }
 
+.low_stock{
+    color: #cccc00;
+}
+
+.out_stock{
+    color: #cc0033;  
+}
+
+.in_stock{
+    color: #009900;
+}
+
+.send_user {
+	color: white;
+}

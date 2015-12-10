@@ -37,6 +37,11 @@ crumb :order do |f|
   parent :root
 end
 
+crumb :user do |f|
+  link f.email, user_path
+  parent :root
+end
+
 
 # crumb :projects do
 #   link "Projects", projects_path
