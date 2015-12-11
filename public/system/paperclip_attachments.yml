@@ -1,0 +1,15 @@
+---
+:User:
+  :avatar:
+  - :medium
+  - :thumb
+:Picture:
+  :pict:
+  - :large
+  - :medium
+  - :super_large
+  - :thumb
+:Product:
+  :avatar:
+  - :medium
+  - :thumb

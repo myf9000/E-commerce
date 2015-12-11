@@ -14,6 +14,7 @@
  *= require chosen
  *= require jquery-ui
  *= require social-share-button
+ *= require lightbox
  *= require_self
  */
 
@@ -21,6 +22,7 @@
 @import "social-share-button";
 @import "bootstrap-sprockets";
 @import "bootstrap";
+
 
 .notify{
   margin: 0px;

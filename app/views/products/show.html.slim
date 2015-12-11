@@ -101,8 +101,9 @@ div class="row"
           = image_tag(@product.avatar.url(:medium), class: "top_img")
         div class="col-md-3"
           - @product.pictures.each do |pic| 
-            p  
-              = image_tag(pic.pict.url(:thumb), class: "round_img")
+            p data-lightbox="roadtrip" 
+              = link_to image_tag(pic.pict.url(:thumb), class: "round_img"), pic.pict.url(:super_large), :rel => "lightbox[imagesetname]"
+
 
         div class="col-md-12"
           hr

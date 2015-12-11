@@ -53,6 +53,7 @@ gem 'social-share-button', '~> 0.1.6'
 gem 'slim'
 gem 'bootstrap-sass', '~> 3.3.6'
 gem 'gretel'
+gem 'lightbox2-rails'
 
 
 group :development, :test do

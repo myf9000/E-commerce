@@ -19,6 +19,7 @@
 //= require chosen-jquery
 //= require turbolinks
 //= require social-share-button
+//= require lightbox
 //= require_tree .
 
 
