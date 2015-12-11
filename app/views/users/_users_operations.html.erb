@@ -1,25 +1,3 @@
-<% provide(:title, "#{@user.email}") %>
-<% breadcrumb :user, @user %>
-<%= social_share_button_tag(@user.email) %>
-<h1>User</h1>
-<p><%= @user.email %></p>
-
-<hr>
-
-<h3>User product</h3>
-<% @user.products.each do |f| %>
-  <% if f.stock > 0 %>
-    <%= link_to f.title, product_path(f) %>
-  <% end %>
-<% end %>
-
-<h3>Sell product</h3>
-<% @user.products.each do |f| %>
-  <% if f.stock == 0 %>
-    <%= link_to f.title, product_path(f) %>
-  <% end %> 
-<% end %>
-
 <%if current_user.id == @user.id %>
 <%= link_to "Edit", edit_user_registration_path %>
 <br>
@@ -125,20 +103,3 @@
 <% end %>
 
 <hr>
-
-<% if current_user != @user %>
-
-  <%= link_to "Follow", follow_user_path(@user)%>
-  <%= link_to "Unfollow", follow_user_path(@user, type: "unfollow")%>
-<hr>
-<% end %>
-
-<% if @user.average("culture") != nil %>
-  User culture: <%= @user.average("culture").avg%>
-  <br>
-  User speed: <%= @user.average("speed").avg%>
-  <br>
-  User total <%= (@user.average("culture").avg + @user.average("speed").avg) / 2%>
-<% end %>
-<hr>
-

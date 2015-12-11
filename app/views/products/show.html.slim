@@ -1,7 +1,4 @@
 - provide(:title, "#{@product.title}" ) 
-p id="notice"
-  = notice 
-
 - breadcrumb :product, @product
 
 div class="row"
@@ -11,8 +8,6 @@ div class="row"
         ul class="nav nav-pills nav-stacked" 
           h4 style="text-align:center"
             = @product.title
-
-          
 
           table class="table table-hover"
             tbody
@@ -68,13 +63,6 @@ div class="row"
                       em.fa.fa-envelope
                         |  Send Message 
 
-
-
-              
-
-   
-
-  
     div class="panel panel-warning"
       div class="panel-heading"
         ul class="nav nav-pills nav-stacked"
@@ -92,8 +80,6 @@ div class="row"
             = link_to image_tag(f.avatar.url(:medium), class: "img_related"), f
             |  
           
-
-
   div class="col-md-8"
     div class="panel-transparent"
       div class="panel-body"
@@ -103,7 +89,6 @@ div class="row"
           - @product.pictures.each do |pic| 
             p data-lightbox="roadtrip" 
               = link_to image_tag(pic.pict.url(:thumb), class: "round_img"), pic.pict.url(:super_large), :rel => "lightbox[imagesetname]"
-
 
         div class="col-md-12"
           hr

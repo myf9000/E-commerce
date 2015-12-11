@@ -15,11 +15,11 @@
 //= require jquery.turbolinks
 //= require jquery_ujs
 //= require jquery-ui
+//= require lightbox
 //= require cocoon
 //= require chosen-jquery
 //= require turbolinks
 //= require social-share-button
-//= require lightbox
 //= require_tree .
 
 

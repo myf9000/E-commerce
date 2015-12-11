@@ -1,0 +1,102 @@
+- provide(:title, "#{@user.email}") 
+- breadcrumb :user, @user 
+
+div class="row"
+  div class="col-md-4"
+    div class="panel panel-dafault"
+      div class="panel-heading"
+        ul class="nav nav-pills nav-stacked" 
+          h4 style="text-align:center"
+            = image_tag('logo.png')
+
+          table class="table"
+            tbody
+              tr 
+                td
+                  = link_to image_tag(@user.avatar.url(:thumb), class: "img_user_profile"), user_path(@user.id)
+                td
+                  p 
+                    h5 = @user.email
+                  p 
+                    i.fa.fa-star
+                    |  
+                    = print_user_score(@user.average("culture").avg + @user.average("speed").avg)
+                    //= User.find(@product.user_id).average("speed").avg
+                  p
+                    = link_to root_path, class: "btn btn-success" do
+                      em.fa.fa-envelope
+                        |  Send Message 
+      div class="panel panel-warning"
+          div class="panel-heading"
+            h4 style="text-align:center"
+              p
+                = @user.description
+              = link_to follow_user_path(@user), class: "btn btn-danger" do
+                em.fa.fa-check-square
+                  |  Follow
+              hr
+              = social_share_button_tag(@user.email)
+
+  div class="col-md-8"
+    div class="panel-transparent"
+      div class="panel-body"
+        div class="col-md-12"
+          h3 style="text-align:center"
+            | Opinion about user:
+
+          - if @user.average("culture") != nil and  @user.average("speed") != nil
+            | User total 
+            = (@user.average("culture").avg + @user.average("speed").avg) 
+        
+
+        hr
+        div class="col-md-12"
+          ul class="nav nav-tabs"
+            li class="active" 
+              a href="#active" data-toggle="tab" aria-expanded="false" 
+                h5 Active Product
+            li class="" 
+              a href="#sell" data-toggle="tab" aria-expanded="false" 
+                h5 Sell Product
+
+          div id="myTabContent" class="tab-content"
+            br
+            div class="tab-pane fade active in" id="active"
+              table class="table table-hover"
+                tbody
+                  - @user.products.each do |f| 
+                    tr 
+                      - if f.stock > 0
+                        td 
+                          = link_to image_tag(f.avatar.url(:thumb)), f
+                        td
+                          h5 = f.title
+                          p
+                            = f.description.truncate_words(30)
+                            |   
+                            = link_to "Read more", f
+
+            div class="tab-pane fade" id="sell"
+              table class="table table-hover"
+                tbody
+                  - @user.products.each do |f| 
+                    tr 
+                      - if f.stock == 0
+                        td 
+                          = link_to image_tag(f.avatar.url(:thumb)), f
+                        td
+                          h5 = f.title
+                          p
+                            = f.description.truncate_words(30)
+                            |    
+                            = link_to "Read more", f
+
+br
+
+
+//- if current_user.id == @user.id 
+//  = render "users_operations" 
+//- if current_user != @user 
+//  = link_to "Follow", follow_user_path(@user)
+//  = link_to "Unfollow", follow_user_path(@user, type: "unfollow")
+
