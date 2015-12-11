@@ -11,11 +11,11 @@
 // about supported directives.
 //
 //= require jquery
-//= require bootstrap-sprockets
 //= require jquery.turbolinks
+//= require lightbox
+//= require bootstrap-sprockets
 //= require jquery_ujs
 //= require jquery-ui
-//= require lightbox
 //= require cocoon
 //= require chosen-jquery
 //= require turbolinks

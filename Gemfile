@@ -54,6 +54,7 @@ gem 'slim'
 gem 'bootstrap-sass', '~> 3.3.6'
 gem 'gretel'
 gem 'lightbox2-rails'
+gem 'chartkick'
 
 
 group :development, :test do

@@ -43,13 +43,13 @@ div class="row"
         div class="col-md-12"
           h3 style="text-align:center"
             | Opinion about user:
+            br
+            = raw pie_chart ({"Good opinion" => (@user.average("culture").avg + @user.average("speed").avg), "Bad opinion" => (10-(@user.average("culture").avg + @user.average("speed").avg))}) 
 
-          - if @user.average("culture") != nil and  @user.average("speed") != nil
-            | User total 
-            = (@user.average("culture").avg + @user.average("speed").avg) 
-        
-
-        hr
+          //- if @user.average("culture") != nil and  @user.average("speed") != nil
+          //  | User total 
+          //  = (@user.average("culture").avg + @user.average("speed").avg) 
+          hr
         div class="col-md-12"
           ul class="nav nav-tabs"
             li class="active" 
