@@ -3,7 +3,7 @@ Chartkick.options = {
 		legend: { enabled: true }, 
 		exporting: { enabled: false }, 
 		backgroundColor: "#f0ad4e", 
-		height: "300px", 
-		width: "200px" 
+		height: "80px", 
+		width: "300px" 
 	} 
 }

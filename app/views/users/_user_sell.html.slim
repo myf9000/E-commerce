@@ -1,0 +1,12 @@
+tbody
+  - @user.products.each do |f| 
+    tr 
+      - if f.stock == 0
+        td 
+          = link_to image_tag(f.avatar.url(:thumb)), f
+        td
+          h5 = f.title
+          p
+            = f.description.truncate_words(30)
+            |    
+            = link_to "Read more", f

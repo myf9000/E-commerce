@@ -19,7 +19,7 @@ div class="row"
               tr 
                 td
                   b Company: 
-                td
+                td 
                   p      
                     i.fa.fa-building-o
                       |  
@@ -34,8 +34,8 @@ div class="row"
                     |  in Magazine
                   
           - if check_stock(@product.stock, @product.quantites_total)  
-            p style="text-align:center"
-              = link_to order_items_path(@product), class: "btn btn-success" do
+            p style="text-align:center" 
+              = link_to order_items_path(product_id: @product.id), method: :post, class: "btn btn-success" do  
                 em.fa.fa-shopping-cart
                   |  Add to Cart
                       
