@@ -1,6 +1,7 @@
 class ProductsController < ApplicationController
   impressionist :actions=>[:show]
   before_action :set_product, only: [:show, :edit, :update, :destroy]
+  before_action :set_index, only: [:index]
 
   #load_and_authorize_resource
 
@@ -15,16 +16,13 @@ class ProductsController < ApplicationController
   # GET /products/1.json
   def show
     #impressionist(@product)
+    @owner = owner(@product.user_id)
+    @category = find_category(@product.category)
+    @subcategory = find_category(@product.subcategory)
   end
 
 
-  def index
-    @products = Product.all
-    t = []
-    @products.each do |f| t << f.title end
-    t = t.uniq
-    gon.titles = t
-    @products = Product.all.paginate(:page => params[:page], :per_page => 3)
+  def index  
     if params[:search]
       @products = Product.title_like("%#{params[:search]}%").order('title').all.paginate(:page => params[:page], :per_page => 3)
     end
@@ -43,18 +41,8 @@ class ProductsController < ApplicationController
   end
 
   def sort_list
-    if params[:sort] == "DESC"
-      @products = Product.all.order("created_at DESC").paginate(:page => params[:page], :per_page => 3)
-    elsif params[:sort] == "ASC"
-      @products = Product.all.order("created_at ASC").paginate(:page => params[:page], :per_page => 3)
-    elsif params[:sort] == "small"
-      @products = Product.all.order("price ASC").paginate(:page => params[:page], :per_page => 3)
-    elsif params[:sort] == "big"
-      @products = Product.all.order("price DESC").paginate(:page => params[:page], :per_page => 3)
-    elsif params[:sort] == "top"
-      @products = Product.all.order("viewed_count ASC").paginate(:page => params[:page], :per_page => 3)
-    else
-      @products = Product.all.paginate(:page => params[:page], :per_page => 3)
+    if params[:sort] 
+      @products = Product.ordered_by(params[:sort]).paginate(:page => params[:page], :per_page => 3)
     end
   end
 
@@ -106,4 +94,11 @@ class ProductsController < ApplicationController
     def product_params
       params.require(:product).permit(:title, :price, :description, :avatar, :stock, :shipment, :company, :technical, :category, :subcategory, pictures_attributes: [:id, :pict, :_destroy])
     end
+
+    def set_index
+      @products = Product.all.paginate(:page => params[:page], :per_page => 3)
+      t = []
+      @products.all.each { |f| t << f.title }
+      gon.titles = t.uniq
+    end   
 end

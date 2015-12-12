@@ -25,5 +25,12 @@ class User < ActiveRecord::Base
     self.email
   end
 
+  def user_score
+    self.average("culture").avg + self.average("speed").avg
+  end
+
+  def owner(product)
+    self.find_by_product_id(product.id)
+  end
   
 end

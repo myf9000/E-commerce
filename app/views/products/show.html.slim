@@ -35,7 +35,7 @@ div class="row"
                   
           - if check_stock(@product.stock, @product.quantites_total)  
             p style="text-align:center"
-              = link_to order_items_path(@product.id), class: "btn btn-success" do
+              = link_to order_items_path(@product), class: "btn btn-success" do
                 em.fa.fa-shopping-cart
                   |  Add to Cart
                       
@@ -49,15 +49,14 @@ div class="row"
             tbody
               tr 
                 td
-                  = link_to image_tag(User.find(@product.user_id).avatar.url(:thumb), class: "img_user"), user_path(@product.user_id)
+                  = link_to image_tag(@owner.avatar.url(:thumb), class: "img_user"), user_path(@owner)
                 td
                   p 
-                    h5 = User.find(@product.user_id).email
+                    h5 = @owner.email
 
                   p 
                     i.fa.fa-star
-                    |  2.44
-                    //= User.find(@product.user_id).average("speed").avg
+                    =  print_user_score @owner.user_score
                   p
                     = link_to root_path, class: "btn btn-warning" do
                       em.fa.fa-envelope
@@ -71,46 +70,21 @@ div class="row"
             p 
               span class="label label-default"
                 i.fa.fa-tag 
-                = Category.find(@product.category).name
+                = @category.name
               |  
               span class="label label-default"
                 i.fa.fa-tags 
-                = Category.find(@product.subcategory).name
-          - @product.related(@product).each do |f| 
-            = link_to image_tag(f.avatar.url(:medium), class: "img_related"), f
-            |  
+                = @subcategory.name
+          = render 'product_related' 
           
   div class="col-md-8"
     div class="panel-transparent"
       div class="panel-body"
-        div class="col-md-9"
-          = image_tag(@product.avatar.url(:medium), class: "top_img")
-        div class="col-md-3"
-          - @product.pictures.each do |pic| 
-            p data-lightbox="roadtrip" 
-              = link_to image_tag(pic.pict.url(:thumb), class: "round_img"), pic.pict.url(:super_large), :rel => "lightbox[imagesetname]"
+        = render 'product_images'
 
         div class="col-md-12"
           hr
-          ul class="nav nav-tabs"
-            li class="active" 
-              a href="#description" data-toggle="tab" aria-expanded="false" 
-                h5 Description
-            li class="" 
-              a href="#technical" data-toggle="tab" aria-expanded="false" 
-                h5 Technical
-            li class="" 
-              a href="#shipment" data-toggle="tab" aria-expanded="false" 
-                h5 Shipment
-
-          div id="myTabContent" class="tab-content"
-            br
-            div class="tab-pane fade active in" id="description"
-              p = @product.description
-            div class="tab-pane fade" id="technical"
-              p = @product.technical
-            div class="tab-pane fade" id="shipment"
-              p = @product.shipment
+          = render 'product_tabs'
           
             b Viewed: 
             | 12

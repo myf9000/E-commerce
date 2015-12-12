@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
 
   before_filter :configure_permitted_parameters, if: :devise_controller?
 
-  helper_method :mailbox, :conversation
+  helper_method :mailbox, :conversation, :owner, :find_category
   layout :layout_by_resource
 
   
@@ -19,6 +19,7 @@ class ApplicationController < ActionController::Base
     method = "#{resource}_params"
     params[resource] &&= send(method) if respond_to?(method, true)
   end
+  
 
   private
 
@@ -36,6 +37,14 @@ class ApplicationController < ActionController::Base
     @conversation ||= mailbox.conversations.find(params[:id])
   end
 
+  def owner(id)
+    User.find(id)
+  end
+
+  def find_category(id)
+    Category.find(id)
+  end
+
   protected
 
   def layout_by_resource
@@ -46,10 +55,10 @@ class ApplicationController < ActionController::Base
     end
   end
 
-   def configure_permitted_parameters
-        devise_parameter_sanitizer.for(:sign_up) { |u| u.permit(:name, :email, :password) }
-        devise_parameter_sanitizer.for(:account_update) { |u| u.permit(:name, :email, :description, :password, :current_password, :is_female, :date_of_birth, :avatar) }
-    end
+  def configure_permitted_parameters
+    devise_parameter_sanitizer.for(:sign_up) { |u| u.permit(:name, :email, :password) }
+    devise_parameter_sanitizer.for(:account_update) { |u| u.permit(:name, :email, :description, :password, :current_password, :is_female, :date_of_birth, :avatar) }
+  end
 
 
 end

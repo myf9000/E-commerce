@@ -2,7 +2,7 @@ Chartkick.options = {
 	library: { 
 		legend: { enabled: true }, 
 		exporting: { enabled: false }, 
-		backgroundColor: "#4E5D6C", 
+		backgroundColor: "#f0ad4e", 
 		height: "300px", 
 		width: "200px" 
 	} 

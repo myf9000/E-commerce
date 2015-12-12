@@ -1,0 +1,19 @@
+ul class="nav nav-tabs"
+  li class="active" 
+    a href="#description" data-toggle="tab" aria-expanded="false" 
+      h5 Description
+  li class="" 
+    a href="#technical" data-toggle="tab" aria-expanded="false" 
+      h5 Technical
+  li class="" 
+    a href="#shipment" data-toggle="tab" aria-expanded="false" 
+      h5 Shipment
+
+div id="mytabcontent" class="tab-content"
+  br
+  div class="tab-pane fade active in" id="description"
+    p = @product.description
+  div class="tab-pane fade" id="technical"
+    p = @product.technical
+  div class="tab-pane fade" id="shipment"
+    p = @product.shipment

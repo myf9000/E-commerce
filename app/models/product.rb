@@ -5,23 +5,23 @@ class Product < ActiveRecord::Base
 	belongs_to :user
 
 	has_attached_file :avatar, styles: { medium: "300x300>", thumb: "100x100>" }, default_url: "http://res.freestockphotos.biz/pictures/9/9552-a-green-apple-on-a-dark-background-pv.jpg"
-  	validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\Z/
+		validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\Z/
 
 	extend FriendlyId
-  	friendly_id :title, use: :slugged
+		friendly_id :title, use: :slugged
 
-  	#is_impressionable :counter_cache => true, :column_name => :viewed_count, :unique => true
+		#is_impressionable :counter_cache => true, :column_name => :viewed_count, :unique => true
 
-  	has_many :pictures
- 	accepts_nested_attributes_for :pictures,
+		has_many :pictures
+		accepts_nested_attributes_for :pictures,
 								  reject_if: proc { |attributes| attributes['pict'].blank? },
 								  allow_destroy: true
 
 	scope :title_like, -> (title) { where("title like ?", title)}
 
 	def price=(input)
-  		input.delete!("$")
-  		super
+			input.delete!("$")
+			super
 	end
 
 	def quantites_total
@@ -32,8 +32,19 @@ class Product < ActiveRecord::Base
 		q
 	end
 
-	def related(product)
-		products = Product.all.select {|i| i.subcategory == product.subcategory and i.id != product.id}
+	def related
+		products = Product.all.select {|i| i.subcategory == self.subcategory and i.id != self.id}
 		products = products[0..10]
 	end
+
+	def self.ordered_by(param)
+	    case param
+		    when 'DESC'     	then 	Product.all.order("created_at DESC")
+		    when 'ASC'		 	then 	Product.all.order("created_at ASC")
+		    when 'small'		then 	Product.all.order("price ASC")
+		    when 'big'			then 	Product.all.order("price DESC")
+		    when 'top'			then 	Product.all.order("viewed_count ASC")
+		    else                  		Product.all
+		end
+  	end
 end

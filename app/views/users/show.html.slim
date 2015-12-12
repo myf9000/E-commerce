@@ -20,10 +20,9 @@ div class="row"
                   p 
                     i.fa.fa-star
                     |  
-                    = print_user_score(@user.average("culture").avg + @user.average("speed").avg)
-                    //= User.find(@product.user_id).average("speed").avg
+                    = print_user_score(@user.user_score)
                   p
-                    = link_to root_path, class: "btn btn-success" do
+                    = link_to root_path, class: "btn btn-success" do 
                       em.fa.fa-envelope
                         |  Send Message 
       div class="panel panel-warning"
@@ -44,11 +43,9 @@ div class="row"
           h3 style="text-align:center"
             | Opinion about user:
             br
-            = raw pie_chart ({"Good opinion" => (@user.average("culture").avg + @user.average("speed").avg), "Bad opinion" => (10-(@user.average("culture").avg + @user.average("speed").avg))}) 
+            - if @user.average("culture") != nil and  @user.average("speed") != nil
+              = raw pie_chart ({"Good opinion" => (@user.average("culture").avg + @user.average("speed").avg), "Bad opinion" => (10-(@user.average("culture").avg + @user.average("speed").avg))}) 
 
-          //- if @user.average("culture") != nil and  @user.average("speed") != nil
-          //  | User total 
-          //  = (@user.average("culture").avg + @user.average("speed").avg) 
           hr
         div class="col-md-12"
           ul class="nav nav-tabs"
