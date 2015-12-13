@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
 
 
+  resources :comments, :only => [:create]
+
   post '/rate' => 'rater#create', :as => 'rate'
   resources :categories
 
@@ -37,7 +39,7 @@ Rails.application.routes.draw do
       post :untrash
     end
   end
-
+  get '/comments/new/(:parent_id)', to: 'comments#new', as: :new_comment
   get '/searching', to: 'products#searching', as: :searching
   get 'sort/:sort', to: 'products#sort_list', as: :sort
   

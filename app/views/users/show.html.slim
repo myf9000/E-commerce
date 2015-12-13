@@ -80,5 +80,11 @@ div class="row"
               table class="table table-hover"
                 = render 'user_operations'
 
+          hr
+          div class="col-md-12"
+            h4 Comments (#{@user.comments.count})
+            p Add a comment!
+            = render 'comments/form'
+            = comments_tree_for @comments 
 br
 

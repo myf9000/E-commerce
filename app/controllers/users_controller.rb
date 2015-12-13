@@ -2,6 +2,9 @@ class UsersController < ApplicationController
   before_action :user_set
 
   def show
+    @comments = @user.comments.hash_tree
+    @comment = @user.comments.build(parent_id: params[:parent_id])
+    @comment.user.id = @user.id
   	arr = Array.new
   	@user.products.each do |f|
   		arr << f.id

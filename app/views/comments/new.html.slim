@@ -1,0 +1,14 @@
+div class="panel-transparento"
+  div class="panel-body"
+    div class="col-md-10 col-md-offset-1"
+      div class="col-md-12" 
+    	h1 Reply for comments!
+
+	    - if @comment.parent 
+	      = render 'comment', comment: @comment.parent, from_reply_form: true 
+
+    	= render 'form' 
+    	br
+       	= link_to "Back", root_path, class: "btn btn-info"
+       	br
+  
