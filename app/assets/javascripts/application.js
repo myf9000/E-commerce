@@ -15,6 +15,7 @@
 //= require lightbox
 //= require bootstrap-sprockets
 //= require jquery_ujs
+//= require masonry/jquery.masonry
 //= require jquery-ui
 //= require cocoon
 //= require chosen-jquery

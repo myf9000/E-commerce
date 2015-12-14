@@ -56,6 +56,7 @@ gem 'gretel'
 gem 'lightbox2-rails'
 gem 'chartkick'
 gem 'closure_tree'
+gem 'masonry-rails', '~> 0.2.1'
 
 
 group :development, :test do

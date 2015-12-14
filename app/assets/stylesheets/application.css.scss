@@ -11,6 +11,7 @@
  * file per style scope.
  *
  *= require_tree .
+ *= require 'masonry/transitions'
  *= require chosen
  *= require jquery-ui
  *= require social-share-button
@@ -298,4 +299,60 @@
 	display: inline-block;
 	text-algin: center;
 }
+
+#products {
+  margin: 0 auto;
+  width: 100%;
+  .box {
+    margin: 5px;
+    width: 262px;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.22);
+    border-radius: 6px;
+    border-color: #eaeff1;
+    text-align: center;
+    img {
+      width: 100%;
+      height: auto;
+      max-width: 100%;
+    }
+     h2 {
+      font-size: 22px;
+      margin: 0;
+      padding: 25px 10px;
+      a {
+        color: #2c3e50;
+      }
+      .user {
+      font-size: 12px;
+      border-top: 1px solid #EAEAEA;
+      padding: 15px;
+      margin: 0;
+    }
+    }
+
+  }
+}
+
+.hover13 figure:hover img {
+  opacity: 1;
+  -webkit-animation: flash 3.5s;
+  animation: flash 3.5s;
+}
+@-webkit-keyframes flash {
+  0% {
+    opacity: .8;
+  }
+  100% {
+    opacity: 6;
+  }
+}
+@keyframes flash {
+  0% {
+    opacity: .9;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
 

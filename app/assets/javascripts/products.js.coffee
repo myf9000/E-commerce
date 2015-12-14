@@ -39,4 +39,10 @@ jQuery ->
       $('#product_subcategory').empty()
       $('#product_subcategory').parent().hide()
 
+$ ->
+  $('#products').imagesLoaded ->
+    $('#products').masonry
+      itemSelector: '.box'
+      isFitWidth: true
+
 

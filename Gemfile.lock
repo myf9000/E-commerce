@@ -172,6 +172,8 @@ GEM
       carrierwave (>= 0.5.8)
       foreigner (>= 0.9.1)
       rails (>= 3.2.0)
+    masonry-rails (0.2.4)
+      railties
     method_source (0.8.2)
     mime-types (2.99)
     mimemagic (0.3.0)
@@ -317,6 +319,7 @@ DEPENDENCIES
   jquery-ui-rails
   lightbox2-rails
   mailboxer (~> 0.13.0)
+  masonry-rails (~> 0.2.1)
   paperclip
   pry-rails
   rails (= 4.2.4)

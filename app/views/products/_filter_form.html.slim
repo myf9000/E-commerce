@@ -1,0 +1,16 @@
+div class="row"
+  div class="col-md-12"
+    div class="panel-transparent"
+      div class="panel-body"
+        h4 style="text-align:center"
+          = link_to image_tag('logo.png'), root_path
+        = search_form_for @search, url: products_path do |f| 
+          = f.text_field :price_gteq, class: 'form-control', placeholder: "Minumum Price" 
+          br
+          = f.text_field :price_lteq, class: 'form-control', placeholder: "Maximum Price" 
+          br
+          = f.grouped_collection_select :subcategory_eq, Category.where(:categories => {:parent_id => nil } ),:subcategories, :name, :id, :name, { prompt: "Choose a category" }, { class: "form-control"}
+          br
+          p style="text-align:center"
+            = f.submit "Search", class: "btn btn-success" 
+   

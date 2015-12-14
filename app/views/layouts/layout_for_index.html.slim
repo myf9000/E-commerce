@@ -10,13 +10,14 @@ head
 
 body
   = render 'layouts/navbar' 
-  .body
-    - flash.each do |key, value|
-      div class=("text-center #{flash_class(key)}") 
-        = value
-    br
-    div class="container"
-      == yield 
-
-  = render 'layouts/footer' 
+  div class="col-md-12"
+    .body
+      - flash.each do |key, value|
+        div class=("text-center #{flash_class(key)}") 
+          = value
+      br
+      div class="container"
+        == yield 
+br
+= render 'layouts/footer' 
 
