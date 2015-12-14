@@ -17,6 +17,7 @@ class OrdersController < ApplicationController
     else 
       redirect_to products_path, notice: 'You can not see that' 
     end
+    render layout: "layout_for_form" 
   end
 
   # GET /orders/new
@@ -26,6 +27,7 @@ class OrdersController < ApplicationController
 
   # GET /orders/1/edit
   def edit
+    
   end
 
   # POST /orders

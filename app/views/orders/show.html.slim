@@ -1,0 +1,74 @@
+- provide(:title, "Order") 
+- breadcrumb :order 
+
+div class="col-md-8 col-md-offset-2"
+  div class="panel panel-default"
+    div class="panel-body"
+      h4 style="text-align:center"
+        = image_tag('logo.png')
+      table class="table table-striped table-hover"
+        tr class="success"
+          th Title
+          th Quantity
+          th Unit Price
+          th Stock
+          th Subtotal
+          th Action
+        
+        - @order.order_items.each do |item| 
+          tr
+            td
+              = link_to item.product.title, product_path(item.product)
+            - if check_stock(item.product.stock, item.quantity) &&  @order.status == "unsubmitted" 
+              td
+                = link_to item.quantity, edit_order_item_path(item) 
+            td
+              = print_price(item.product.price)
+            td
+              = print_stock(item.product.stock, item.product.quantites_total)
+            td
+              = print_price item.subtotal(item.quantity, item.product.price) 
+            - if @order.status == "unsubmitted" 
+              td
+                = link_to item, method: :delete, data: { confirm: 'Are you sure?' } 
+                  em.fa.fa-times
+         
+
+      h4 Total: #{print_price @order.total}
+
+      hr
+
+      - if @order.status == "unsubmitted" 
+        p style="text-align:center"
+          = link_to buy_order_items_path, class: "btn btn-success" do 
+            em.fa.fa-shopping-cart
+            |  Buy
+          |    
+          = link_to @order, data: { confirm: 'Are you sure?' }, method: :delete, class: "btn btn-info" do
+            em.fa.fa-minus-square
+            |  Empty Cart
+
+      - elsif @order.status == "submitted"
+        - @order.order_items.each do |f| 
+        p Seller: 
+          = User.find(Product.find(f.product_id).user_id).email 
+        p Buyer: 
+          = User.find(Order.find(f.order_id).user_id).email 
+        p Product 
+          = Product.find(f.product_id).title 
+        p Pay: 
+          = f.subtotal(f.quantity, Product.find(f.product_id).price) 
+      - elsif @order.status == "delivered"
+        div class="row"
+          div class="small-2 large-4 columns"
+            - @order.order_items.each do |f| 
+              - if current_user 
+              | User:    
+              = User.find(Product.find(f.product_id).user_id).email 
+              br
+              | Culture:  
+              = rating_for User.find(Product.find(f.product_id).user_id), "culture", disable_after_rate: true, enable_half: true, imdb_avg: true
+              br
+              | Speed:  
+                = rating_for User.find(Product.find(f.product_id).user_id), "speed", disable_after_rate: true, enable_half: true, imdb_avg: true 
+

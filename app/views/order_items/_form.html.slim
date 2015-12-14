@@ -1,0 +1,23 @@
+= simple_form_for(@order_item) do |f|
+  - if @order_item.errors.any?
+    #error_explanation
+      h2
+        = pluralize(@order_item.errors.count, "error")
+        | prohibited this order_item from being saved:
+      ul
+        - @order_item.errors.full_messages.each do |message|
+          li= message
+
+  div class="col-md-6"
+    = link_to image_tag(Product.find(@order_item.product_id).avatar.url(:thumb)), product_path(@order_item.product)
+
+  div class="col-md-6"
+    .field
+      = f.input :quantity, max: @order_item.product.stock, default: 1, input_html: {class: 'form-control'} 
+
+  div class="col-md-12"
+    hr
+    .actions
+      p style="text-align:center"
+        = f.button :submit, class: "btn btn-success"
+  

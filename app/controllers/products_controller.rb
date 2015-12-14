@@ -10,6 +10,9 @@ class ProductsController < ApplicationController
   def searching
     @search = Product.search(params[:q])
     @products = @search.result
+    if params[:search]
+      @products = Product.title_like("%#{params[:search]}%").order('title')
+    end
   end       
 
   # GET /products/1
@@ -23,10 +26,12 @@ class ProductsController < ApplicationController
 
 
   def index  
-    if params[:search]
-      @products = Product.title_like("%#{params[:search]}%").order('title').all.paginate(:page => params[:page], :per_page => 3)
-    end
+    @search = Product.search(params[:q])
+    @products = @search.result.all.paginate(:page => params[:page], :per_page => 3)
     render layout: "layout_for_index" 
+    if params[:sort] 
+      @products = Product.ordered_by(params[:sort]).paginate(:page => params[:page], :per_page => 3)
+    end
   end
 
   # GET /products/new

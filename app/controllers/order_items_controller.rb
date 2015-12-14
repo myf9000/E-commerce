@@ -8,6 +8,7 @@ class OrderItemsController < ApplicationController
   
   # GET /order_items/1/edit
   def edit
+    render layout: "layout_for_form" 
   end
 
   # POST /order_items

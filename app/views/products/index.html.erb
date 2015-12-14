@@ -6,17 +6,16 @@
       <div class="panel panel-default">
         <div class="panel-body">
           <h3>Sorted</h3>
-          <%= link_to "Filtering", searching_path, class: "btn btn-default"  %>
+          <%= link_to "Created DESC", products_path("DESC") %>
           <br>
-          <%= link_to "Created DESC", sort_path("DESC") %>
+          <%= link_to "Created ASC", products_path("ASC") %>
           <br>
-          <%= link_to "Created ASC", sort_path("ASC") %>
+          <%= link_to "From smallest price", products_path("small") %>
           <br>
-          <%= link_to "From smallest price", sort_path("small") %>
+          <%= link_to "From biggest price", products_path("big") %>
           <br>
-          <%= link_to "From biggest price", sort_path("big") %>
-          <br>
-          <%= link_to "Top", sort_path("top") %>
+          <%= link_to "Top", products_path("top") %>
+          <%= render 'filter_form' %>
         </div>
       </div>
     </div>
@@ -24,7 +23,7 @@
 <div class="col-md-8">
   <div class="panel panel-default"> 
     <div class="panel-footer">
-      <h1>Listing Products</h1>
+      <h1>Listing Products (<%= @products.count %>)</h1>
 
       <table>
         <thead>
@@ -55,7 +54,7 @@
         <% end %>
         </tbody>
       </table>
-      <%= will_paginate @products %>
+      <!--<%= will_paginate @products %> -->
       </div>
     </div>
   </div>
