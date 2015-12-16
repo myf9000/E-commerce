@@ -9,7 +9,7 @@
         div class="transitions-enabled" id="products"
           - @products.each do |f|
             - if f.stock > 0
-              div class="box panel panel-default"
+              div class="box panel panel-info"
                 = image_tag(f.avatar.url)
                 div class="hover13 column"
                   h4 class="pull-right"
@@ -23,5 +23,6 @@
                   p class="pull-right"
                     | Stock: 
                     = print_stock f.stock
+br
 
                 

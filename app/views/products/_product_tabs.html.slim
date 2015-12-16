@@ -1,19 +1,45 @@
 ul class="nav nav-tabs"
-  li class="active" 
-    a href="#description" data-toggle="tab" aria-expanded="false" 
-      h5 Description
-  li class="" 
-    a href="#technical" data-toggle="tab" aria-expanded="false" 
-      h5 Technical
-  li class="" 
-    a href="#shipment" data-toggle="tab" aria-expanded="false" 
-      h5 Shipment
+
+  - if current_user.id == @product.user.id 
+    li class="active" 
+      a href="#operations_order" data-toggle="tab" aria-expanded="false" 
+        h5 Operations
+    li class=""
+      a href="#description_order" data-toggle="tab" aria-expanded="false" 
+        h5 Description
+    li class="" 
+      a href="#technical_order" data-toggle="tab" aria-expanded="false" 
+        h5 Technical
+    li class="" 
+      a href="#shipment_order" data-toggle="tab" aria-expanded="false" 
+        h5 Shipment
+  - else
+    li class="active" 
+      a href="#description_order" data-toggle="tab" aria-expanded="false" 
+        h5 Description
+    li class="" 
+      a href="#technical_order" data-toggle="tab" aria-expanded="false" 
+        h5 Technical
+    li class="" 
+      a href="#shipment_order" data-toggle="tab" aria-expanded="false" 
+        h5 Shipment
+
 
 div id="mytabcontent" class="tab-content"
   br
-  div class="tab-pane fade active in" id="description"
-    p = @product.description
-  div class="tab-pane fade" id="technical"
-    p = @product.technical
-  div class="tab-pane fade" id="shipment"
-    p = @product.shipment
+  - if current_user.id == @product.user.id 
+    div class="tab-pane fade active in" id="operations_order"
+        = render 'users_operations'
+    div class="tab-pane fade" id="description_order"
+      p = @product.description
+    div class="tab-pane fade" id="technical_order"
+      p = @product.technical
+    div class="tab-pane fade" id="shipment_order"
+      p = @product.shipment
+  - else 
+    div class="tab-pane fade active in" id="description_order"
+      p = @product.description
+    div class="tab-pane fade" id="technical_order"
+      p = @product.technical
+    div class="tab-pane fade" id="shipment_order"
+      p = @product.shipment

@@ -38,7 +38,7 @@ class ApplicationController < ActionController::Base
   end
 
   def owner(id)
-    User.find(id)
+    User.friendly.find(id)
   end
 
   def find_category(id)

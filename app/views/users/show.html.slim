@@ -53,8 +53,11 @@ div class="row"
           ul class="nav nav-tabs"
             - if @user == current_user
               li class="active" 
-                a href="#operations" data-toggle="tab" aria-expanded="false" 
-                  h5 Operations
+                a href="#buyer" data-toggle="tab" aria-expanded="false" 
+                  h5 Buyer
+              li class="" 
+                a href="#seller" data-toggle="tab" aria-expanded="false" 
+                  h5 Seller
               li class="" 
                 a href="#active" data-toggle="tab" aria-expanded="false" 
                   h5 Active Product
@@ -71,12 +74,13 @@ div class="row"
               li class="" 
                 a href="#sell" data-toggle="tab" aria-expanded="false" 
                   h5 Sell Product
-
           - if @user == current_user
             div id="myTabContent" class="tab-content"
               br
-              div class="tab-pane fade active in" id="operations"
+              div class="tab-pane fade active in" id="buyer"
                 = render 'user_operations'
+              div class="tab-pane fade" id="seller"
+                = render 'seller_operations'
               div class="tab-pane fade" id="active"
                 table class="table table-hover"
                   = render 'user_active'
@@ -96,9 +100,6 @@ div class="row"
                 table class="table table-hover"
                   = render 'user_sell'
               
-
-           
-        
         div class="col-md-12"
           h4 Comments (#{@user.comments.count})
           p Add a comment!

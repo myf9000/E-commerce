@@ -2,7 +2,7 @@ div class="row"
   div class="col-md-2"
     ul class="nav nav-pills nav-stacked"
       li class="active"
-        a href="#active_orders" data-toggle="tab" aria-expanded="false"  Active
+        a href="#active" data-toggle="tab" aria-expanded="false"  Active
       li 
         a href="#past" data-toggle="tab" aria-expanded="false" Past
       li 
@@ -16,7 +16,7 @@ div class="row"
     div class="panel panel-dafault"
       div class="panel-heading"
         div id="myTabContent" class="tab-content"
-          div class="tab-pane fade active in" id="active_orders"
+          div class="tab-pane fade active in" id="active"
             table class="table table-striped table-hover"
               h4 Active orders
               thead
@@ -188,32 +188,4 @@ div class="row"
               
 
 hr
-    / hr/
-    / h4 Active sellers
-    / - @brr.each do |f|
-    /   - if Order.find(f.order_id).status == "unsubmitted"
-    /     = link_to image_tag(Product.find(f.product_id).avatar.url(:medium), class: "img_related"), product_path(f.product_id)
-    /     |  
-    / h4 Ordered products
-    / - @brr.each do |f|
-    /   - if Order.find(f.order_id).status == "submitted"
-    /     = link_to image_tag(Product.find(f.product_id).avatar.url(:medium), class: "img_related"), product_path(f.product_id)
-    /     p = link_to "Paid", product_orders_order_item_path(f.id, type: "paid")
-    /     |  
-    / h4 Paid products
-    / - @brr.each do |f|
-    /   - if Order.find(f.order_id).status == "paid"
-    /     = link_to image_tag(Product.find(f.product_id).avatar.url(:medium), class: "img_related"), product_path(f.product_id)
-    /     = link_to "Sent", product_orders_order_item_path(f.id, type: "sent")
-    /     |  
-    / h4 Sent products
-    / - @brr.each do |f|
-    /   - if Order.find(f.order_id).status == "sent"
-    /     = link_to image_tag(Product.find(f.product_id).avatar.url(:medium), class: "img_related"), product_path(f.product_id)
-    /     |  
-    / h4 Delivered products
-    / - @brr.each do |f|
-    /   - if Order.find(f.order_id).status == "delivered"
-    /     = link_to image_tag(Product.find(f.product_id).avatar.url(:medium), class: "img_related"), product_path(f.product_id)
-    /     |  
-
+    
