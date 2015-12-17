@@ -1,0 +1,34 @@
+h4.text_in_center
+  = @product.title
+
+table.table.table-hover
+  tbody
+    tr 
+      td
+        b Price: 
+      td
+        p = print_price @product.price
+    tr 
+      td
+        b Company: 
+      td 
+        p      
+          i.fa.fa-building-o
+            |  
+            b 
+              = @product.company
+    tr
+      td
+        b Stock: 
+      td
+        p 
+          = print_stock (@product.stock) 
+          |  in Magazine
+        
+- if check_stock(@product.stock, @product.quantites_total)  
+  p.text_in_center.link_color 
+    = link_to order_items_path(product_id: @product.id), method: :post, class: "btn btn-success" do  
+      em.fa.fa-shopping-cart
+        |  Add to Cart
+            
+     

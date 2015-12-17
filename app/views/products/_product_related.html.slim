@@ -1,3 +1,13 @@
+h4.text_in_center
+  | Related Products: 
+  p 
+    span class="label label-default"
+      i.fa.fa-tag 
+      = @category.name
+    |  
+    span class="label label-default"
+      i.fa.fa-tags 
+      = @subcategory.name
 - @product.related.each do |f| 
   = link_to image_tag(f.avatar.url(:medium), class: "img_related"), f
   |  

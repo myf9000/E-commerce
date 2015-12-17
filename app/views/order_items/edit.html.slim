@@ -1,12 +1,10 @@
 - provide(:title, "Edit order item") 
 
-div class="col-md-4 col-md-offset-4"
-  div class="panel panel-default"
-    div class="panel-body"
-			h4 style="text-align:center" Editing quantity
-
+.col-md-4.col-md-offset-4
+  .panel.panel-default
+    .panel-body
+			h4.text_in_center Editing quantity
 			= render 'form' 
-			
-			div class="col-md-12"
-				p style="text-align:center"
+			.col-md-12
+				p.text_in_center
 					= link_to 'Back', root_path, class: "btn btn-info"

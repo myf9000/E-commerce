@@ -1,13 +1,14 @@
 class OrderItemsController < ApplicationController
   before_action :find_resource, only: [:edit, :update, :destroy]
   before_action :load_order, only: [:create, :update, :buy]
-
+  before_action :product_from_orders, only: [:edit]
 
   # GET /order_items
   # GET /order_items.json
   
   # GET /order_items/1/edit
   def edit
+    @product_id = product_from_orders
     render layout: "layout_for_form" 
   end
 
@@ -99,6 +100,11 @@ class OrderItemsController < ApplicationController
 
 
   private
+
+    def product_from_orders
+      @order_item.product_id
+    end
+
     # Use callbacks to share common setup or constraints between actions.
     def load_order
     @order = Order.find_by(id: session[:order_id], status: "unsubmitted") || current_user.orders.build(status: "unsubmitted")

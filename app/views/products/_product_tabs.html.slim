@@ -1,31 +1,31 @@
-ul class="nav nav-tabs"
+ul.nav.nav-tabs
 
   - if current_user.id == @product.user.id 
-    li class="active" 
+    li.active
       a href="#operations_order" data-toggle="tab" aria-expanded="false" 
         h5 Operations
-    li class=""
+    li 
       a href="#description_order" data-toggle="tab" aria-expanded="false" 
         h5 Description
-    li class="" 
+    li  
       a href="#technical_order" data-toggle="tab" aria-expanded="false" 
         h5 Technical
-    li class="" 
+    li  
       a href="#shipment_order" data-toggle="tab" aria-expanded="false" 
         h5 Shipment
   - else
-    li class="active" 
+    li.active
       a href="#description_order" data-toggle="tab" aria-expanded="false" 
         h5 Description
-    li class="" 
+    li 
       a href="#technical_order" data-toggle="tab" aria-expanded="false" 
         h5 Technical
-    li class="" 
+    li  
       a href="#shipment_order" data-toggle="tab" aria-expanded="false" 
         h5 Shipment
 
 
-div id="mytabcontent" class="tab-content"
+#mytabcontent.tab-content
   br
   - if current_user.id == @product.user.id 
     div class="tab-pane fade active in" id="operations_order"

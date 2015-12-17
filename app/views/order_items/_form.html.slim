@@ -8,16 +8,16 @@
         - @order_item.errors.full_messages.each do |message|
           li= message
 
-  div class="col-md-6"
-    = link_to image_tag(Product.find(@order_item.product_id).avatar.url(:thumb)), product_path(@order_item.product)
+  .col-md-6
+    = link_to image_tag(product_order(@product_id).avatar.url(:thumb)), product_path(@product_id)
 
-  div class="col-md-6"
+  .col-md-6
     .field
       = f.input :quantity, max: @order_item.product.stock, default: 1, input_html: {class: 'form-control'} 
 
-  div class="col-md-12"
+  .col-md-12
     hr
     .actions
-      p style="text-align:center"
+      p.text_in_center
         = f.button :submit, class: "btn btn-success"
   
