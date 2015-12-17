@@ -9,20 +9,23 @@
         div class="transitions-enabled" id="products"
           - @products.each do |f|
             - if f.stock > 0
-              div class="box panel panel-info"
-                = image_tag(f.avatar.url)
+              div class="box panel"
                 div class="hover13 column"
-                  h4 class="pull-right"
-                    = print_price f.price
-                  h4
-                    = link_to f.title, f
-                  p
-                    = f.description.truncate_words(25)
-                    |    
-                    = link_to "Read more", f 
-                  p class="pull-right"
-                    | Stock: 
-                    = print_stock f.stock
+                  figure 
+                    = image_tag(f.avatar.url)
+                h4 
+                  = link_to f.title, f
+                hr
+                p
+                  = f.description.truncate_words(25)
+                  |    
+                  = link_to "Read more", f 
+                h4 class="pull-right"
+                  | Price:  
+                  = print_price f.price
+                p class="pull-right"
+                  | Stock: 
+                  = print_stock f.stock
 br
 
                 

@@ -1,14 +1,8 @@
 class CommentsController < ApplicationController
-  def new  
-  	@comment = Comment.new(parent_id: params[:parent_id], user_id: params[:user_id], author_id: params[:author_id]) 
-  	@comment.author_id = current_user.id
-  	@comment.user_id = Comment.find(params[:parent_id]).user_id
 
-  	render layout: "layout_for_form" 
-  end
 
   def create 
-    if params[:comment][:parent_id].to_i > 0
+    if params[:parent_id].to_i > 0
       parent = Comment.find_by_id(params[:comment].delete(:parent_id))
       @comment = parent.children.build(comment_params)
     else
@@ -16,7 +10,11 @@ class CommentsController < ApplicationController
     end
     @comment.author_id = current_user.id
     if @comment.save
-      redirect_to :back, notice: 'Your comment was successfully added!'
+      if @comment.parent == nil
+        redirect_to :back, notice: 'Your comment was successfully added!'
+      else  
+        redirect_to user_path(Comment.find(@comment.parent).user_id), notice: 'Your comment was successfully added!'
+      end
     else
       render 'new'
     end

@@ -1,21 +1,27 @@
-div class="well"
-	p class="text-muted"
-	  p style="color: #5bc0de;"
+.well
+	p.text-muted
+	  p.p_color
 	  	= comment.root? ? "Started by " : "Replied by " 
-	  	b
-	  	  = link_to owner(comment.author_id).email, user_path(comment.author_id), {:style => 'color: #FFFFFF'}
+	  	b.link_color
+	  	  = link_to owner(comment.author_id).email, user_path(comment.author_id)
 	  	|  on 
-	    = l(comment.created_at, format: '%B, %d %Y %H:%M:%S') 
+	    = comment.created_at.strftime('%B, %d %Y %H:%M:%S')
 	    |  | 
-	    = link_to new_comment_path(comment.id), {:style => 'color: #FFFFFF'} do 
-	    	| Reply 
-	    	em.fa.fa-reply
+	   	u.link_color
+	   		a data-toggle="collapse" data-parent="#wrap" data-target=".#{comment.id}"
+		    	| Reply 
+		    	em.fa.fa-reply
 	
 	    blockquote
 	    	= comment.body
-	      
+
+		div id="#wrap"
+	    div class="#{comment.id} collapse"
+	    	= render :partial => 'comments/form',  locals: {:@comment => Comment.new(:parent_id => comment.id, :user_id => @user.id)}
+      
 	  - from_reply_form ||= nil 
 	  - unless from_reply_form 
 	    - if comment.leaf? 
-		  small class="text-muted" style="color: #5bc0de;"
-		    | There are no replies yet - be the first one to reply!
+			  small.text-muted
+			  	p.p_color
+			    	| There are no replies yet - be the first one to reply!

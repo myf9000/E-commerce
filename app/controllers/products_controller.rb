@@ -31,7 +31,7 @@ class ProductsController < ApplicationController
   def index  
     @search = Product.search(params[:q])
     @products = @search.result#.all.paginate(:page => params[:page], :per_page => 3)
-    render layout: "layout_for_form" 
+    #render layout: "layout_for_form" 
   end
 
   # GET /products/new
