@@ -10,11 +10,8 @@ class ProductsController < ApplicationController
   def searching
     @search = Product.search(params[:q])
     @products = @search.result
-    if params[:search]
-      @products = Product.title_like("%#{params[:search]}%").order('title')#.all.paginate(:page => params[:page], :per_page => 10)
-    end
     if params[:sort] 
-      @products = @products.ordered_by(params[:sort])#.paginate(:page => params[:page], :per_page => 3)
+      @products = @products.ordered_by(params[:sort])
     end
   end       
 
@@ -31,8 +28,15 @@ class ProductsController < ApplicationController
 
   def index  
     @search = Product.search(params[:q])
-    @products = @search.result#.all.paginate(:page => params[:page], :per_page => 3)
-    #render layout: "layout_for_form" 
+    @products = @search.result
+    
+    if params[:compare] and params[:what]
+      @products = Product.shows(params[:what].to_s, params[:compare].to_s)
+    elsif params[:search]
+      @products = Product.title_like("%#{params[:search]}%").order('title')
+    elsif params[:sort] 
+      @products = Product.ordered_by(params[:sort])
+    end
   end
 
   # GET /products/new
@@ -102,7 +106,7 @@ class ProductsController < ApplicationController
     end
 
     def set_index
-      @products = Product.all.paginate(:page => params[:page], :per_page => 3)
+      @products = Product.all
       t = []
       @products.all.each { |f| t << f.title }
       gon.titles = t.uniq

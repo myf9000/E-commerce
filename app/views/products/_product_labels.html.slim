@@ -1,0 +1,23 @@
+h6.text_in_center 
+	= link_to products_path(what: "category", compare: product.category) do
+	  span.label.label-success
+	    em.fa.fa-tag
+	    |  
+	    = Category.find(product.category).name
+	|  
+	= link_to products_path(what: "subcategory", compare: product.subcategory) do
+	  span.label.label-info 
+	    em.fa.fa-tags
+	    |  
+	    = Category.find(product.subcategory).name
+	|  
+	= link_to products_path(what: "company", compare: product.company) do
+	  span.label.label-primary 
+	    em.fa.fa-building-o
+	    |  
+	    = product.company
+	|  
+	= link_to products_path(what: "price", compare: product.price) do
+	  span.label.label-danger 
+	    = print_price product.price
+	

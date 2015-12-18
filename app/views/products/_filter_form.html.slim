@@ -11,6 +11,25 @@
           br
           = f.grouped_collection_select :subcategory_eq, Category.where(:categories => {:parent_id => nil } ),:subcategories, :name, :id, :name, { prompt: "Choose a category" }, { class: "form-control"}
           br
+          = f.select :company_eq, %w{IBM Microsoft Apple}, { prompt: "Choose a company" }, { class: "form-control"}
+          br
           p.text_in_center
             = f.submit "Search", class: "btn btn-success" 
+          hr
+        h4.text_in_center
+          | Sorting
+          br
+          = link_to "Sort DESC", products_path(sort: "DESC"), class: "btn btn-info" 
+          br
+          br
+          = link_to "Sort ASC", products_path(sort: "ASC"), class: "btn btn-info" 
+          br
+          br
+          = link_to "Sort small price", products_path(sort: "small"), class: "btn btn-info" 
+          br
+          br
+          = link_to "Sort big price", products_path(sort: "big"), class: "btn btn-info" 
+          br
+         
+
    

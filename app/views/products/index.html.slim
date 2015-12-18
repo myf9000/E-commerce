@@ -16,23 +16,9 @@
                 h4.text_in_center.link_color 
                   = link_to f.title, f
                 p.text_in_center
-                  = f.description.truncate_words(8)
-                  | 
-                  a data-toggle="collapse" data-parent="#wrap" data-target=".#{f.id}"    
-                    .link_index 
-                      | Read more
-
-                div id="#wrap"
-                  div class="#{f.id} collapse"
-                    p.text_in_center
-                      = f.description.truncate_words(30)
+                  = f.description.truncate_words(30)
                 hr
-                h4.text_in_center 
-                  | Price:  
-                  = print_price f.price
-                  br
-                  | Stock: 
-                  = print_stock f.stock
+                = render 'product_labels', {:product => f }
 br
 
                 

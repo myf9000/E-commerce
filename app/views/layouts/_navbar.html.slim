@@ -7,20 +7,10 @@ nav.navbar.navbar-default.navbar-fixed-top
         .navbar-form.navbar-left
           .ui-widget
             input#titles.form-control placeholder="Search..." /
-        li.dropdown
-          a.dropdown-toggle aria-expanded="false" aria-haspopup="true" data-toggle="dropdown" href="#" role="button" 
-            | Products
-            span.caret
-          ul.dropdown-menu
-            li
-              a href="#"  Filter
-            li
-              a href="#"  Top
-            li.divider role="separator" 
-            li
-              = link_to "New", new_product_path 
 
         - if user_signed_in?
+          li
+            = link_to "New", new_product_path 
           li
             = link_to user_path(current_user) do
               | Profile  

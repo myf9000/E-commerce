@@ -23,7 +23,7 @@
           .col-md-3
             = f.input :price, input_html: {class: 'form-control'}
 
-          div class="col-md-3"
+          .col-md-3
             = f.input :stock, input_html: {class: 'form-control'} 
 
           .col-md-12
@@ -40,7 +40,7 @@
             br
 
           .col-md-3
-            = f.select :company, [ "Aple", "Microsoft", "IBM" ], { :prompt => 'Select Company' }, { class: "form-control", :id => "select" } 
+            = f.select :company, [ "Apple", "Microsoft", "IBM" ], { :prompt => 'Select Company' }, { class: "form-control", :id => "select" } 
             
           .col-md-3
             = f.collection_select :category, Category.where(:categories => {:parent_id => nil } ), :id, :name, { prompt: "Choose a category" },  { class: "form-control"}

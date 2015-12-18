@@ -47,4 +47,14 @@ class Product < ActiveRecord::Base
 		    else                  		Product.all
 		end
   	end
+
+  	def self.shows(what, compare)
+  		case what
+		    when 'price'     	then 	Product.all.select {|f| if f.price <= compare.to_i; f; end  };
+		    when 'company'		then 	Product.all.select {|f| if f.company == compare; f; end  };
+		    when 'category'		then 	Product.all.select {|f| if f.category == compare; f; end };
+		    when 'subcategory'	then 	Product.all.select {|f| if f.subcategory == compare; f; end };
+		    else                  		Product.all
+		end
+  	end
 end
