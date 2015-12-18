@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
 
   before_filter :configure_permitted_parameters, if: :devise_controller?
 
-  helper_method :mailbox, :conversation, :owner, :find_category, :product_order
+  helper_method :mailbox, :conversation, :owner, :find_category, :product_order, :order
   layout :layout_by_resource
 
   
@@ -35,6 +35,10 @@ class ApplicationController < ActionController::Base
 
   def conversation
     @conversation ||= mailbox.conversations.find(params[:id])
+  end
+
+  def order(id)
+    Order.find(id)
   end
 
   def owner(id)

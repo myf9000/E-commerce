@@ -25,6 +25,7 @@ class ProductsController < ApplicationController
     @owner = owner(@product.user_id)
     @category = find_category(@product.category)
     @subcategory = find_category(@product.subcategory)
+    
   end
 
 

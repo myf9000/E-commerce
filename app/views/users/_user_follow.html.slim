@@ -1,19 +1,18 @@
 tbody
   - @user.all_following.each do |f|  
     tr 
-      div class="col-md-2"
-
+      .col-md-2
         td 
           blockquote
             - follow_user = owner(f.id)
-            h5 style="text-align:center" 
+            h5.text_in_center
               p= link_to image_tag(follow_user.avatar.url(:thumb)), follow_user
               p
                 = follow_user.email
                 |  |  
                 = link_to follow_user_path(follow_user, type: "unfollow") do
                   em.fa.fa-trash
-      div class="col-md-10"
+      .col-md-10
         td  
           h5 Products: 
           hr

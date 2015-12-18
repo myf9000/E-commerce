@@ -42,6 +42,6 @@ class ConversationsController < ApplicationController
   end
 
   def message_params
-    params.require(:message).permit(:body, :subject)
+    params.require(:message).permit(:body)
   end
 end

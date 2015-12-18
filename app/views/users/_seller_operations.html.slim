@@ -1,7 +1,7 @@
-div class="row"
-  div class="col-md-2"
-    ul class="nav nav-pills nav-stacked"
-      li class="active"
+.row
+  .col-md-2
+    ul.nav.nav-pills.nav-stacked
+      li.active
         a href="#active_orders" data-toggle="tab" aria-expanded="false"  Active
       li 
         a href="#past_orders" data-toggle="tab" aria-expanded="false" Past
@@ -12,15 +12,15 @@ div class="row"
       li 
         a href="#delivered_orders" data-toggle="tab" aria-expanded="false" Delivered
 
-  div class="col-md-10"
-    div class="panel panel-dafault"
-      div class="panel-heading"
-        div id="myTabContent" class="tab-content"
-          div class="tab-pane fade active in" id="active_orders"
-            table class="table table-striped table-hover"
+  .col-md-10
+    .panel.panel-dafault
+      .panel-heading
+        #myTabContent.tab-content
+          .tab-pane.fade id="active_orders"
+            table.table.table-striped.table-hover
               h4 Active sellers
               thead
-                tr class="success"
+                tr.success
                   td
                     | Product
                   td
@@ -33,21 +33,21 @@ div class="row"
                   - if Order.find(f.order_id).status == "unsubmitted"
                     tr
                       td 
-                        span class="label label-warning"
-                          div class="yolo"
+                        span.label.label-warning
+                          .yolo
                             = link_to Product.find(f.product_id).id, product_path(f.product_id) 
                       td
                         = link_to owner(Order.find(f.order_id).user_id).email, user_path(Order.find(f.order_id).user_id)
                       td
-                        span class="label label-danger"
-                          div class="yolo"
+                        span.label.label-warning
+                          .yolo
                             =  Order.find(f.order_id).status
           
-          div class="tab-pane fade" id="past_orders"
-            table class="table table-striped table-hover"
+          .tab-pane.fade id="past_orders"
+            table.table.table-striped.table-hover
               h4 Past sellers
               thead
-                tr class="success"
+                tr.success
                   td
                     | Product
                   td
@@ -62,23 +62,23 @@ div class="row"
                   - if Order.find(f.order_id).status == "submitted"
                     tr
                       td 
-                        span class="label label-warning"
-                          div class="yolo"
+                        span.label.label-warning
+                          .yolo
                             = link_to Product.find(f.product_id).id, product_path(f.product_id) 
                       td
                         = link_to owner(Order.find(f.order_id).user_id).email, user_path(Order.find(f.order_id).user_id)
                       td
-                        span class="label label-danger"
-                          div class="yolo"
+                        span.label.label-warning
+                          .yolo
                             =  Order.find(f.order_id).status
                       td
                         = link_to "Paid", product_orders_order_item_path(f.id, type: "paid")
 
-          div class="tab-pane fade" id="paid_orders"
-            table class="table table-striped table-hover"
+          .tab-pane.fade id="paid_orders"
+            table.table.table-striped.table-hover
               h4 Paid sellers
               thead
-                tr class="success"
+                tr.success
                   td
                     | Product
                   td
@@ -93,23 +93,23 @@ div class="row"
                   - if Order.find(f.order_id).status == "paid"
                     tr
                       td 
-                        span class="label label-warning"
-                          div class="yolo"
+                        span.label.label-warning
+                          .yolo
                             = link_to Product.find(f.product_id).id, product_path(f.product_id) 
                       td
                         = link_to owner(Order.find(f.order_id).user_id).email, user_path(Order.find(f.order_id).user_id)
                       td
-                        span class="label label-danger"
-                          div class="yolo"
+                        span.label.label-warning
+                          .yolo
                             =  Order.find(f.order_id).status
                       td
                         = link_to "Sent", product_orders_order_item_path(f.id, type: "sent")
 
-          div class="tab-pane fade" id="sent_orders"
-            table class="table table-striped table-hover"
+          .tab-pane.fade id="sent_orders"
+            table.table.table-striped.table-hover
               h4 Sent sellers
               thead
-                tr class="success"
+                tr.success
                   td
                     | Product
                   td
@@ -122,21 +122,21 @@ div class="row"
                   - if Order.find(f.order_id).status == "sent"
                     tr
                       td 
-                        span class="label label-warning"
-                          div class="yolo"
+                        span.label.label-warning
+                          .yolo
                             = link_to Product.find(f.product_id).id, product_path(f.product_id) 
                       td
                         = link_to owner(Order.find(f.order_id).user_id).email, user_path(Order.find(f.order_id).user_id)
                       td
-                        span class="label label-danger"
-                          div class="yolo"
+                        span.label.label-warning
+                          .yolo
                             =  Order.find(f.order_id).status
 
-          div class="tab-pane fade" id="delivered_orders"
-            table class="table table-striped table-hover"
+          .tab-pane.fade id="delivered_orders"
+            table.table.table-striped.table-hover
               h4 Delivered sellers
               thead
-                tr class="success"
+                tr.success
                   td
                     | Product
                   td
@@ -149,13 +149,13 @@ div class="row"
                   - if Order.find(f.order_id).status == "delivered"
                     tr
                       td 
-                        span class="label label-warning"
-                          div class="yolo"
+                        span.label.label-warning
+                          .yolo
                             = link_to Product.find(f.product_id).id, product_path(f.product_id) 
                       td
                         = link_to owner(Order.find(f.order_id).user_id).email, user_path(Order.find(f.order_id).user_id)
                       td
-                        span class="label label-danger"
-                          div class="yolo"
+                        span.label.label-warning
+                          .yolo
                             =  Order.find(f.order_id).status
                     

@@ -14,6 +14,6 @@ table.table
           i.fa.fa-star
           =  print_user_score @owner.user_score
         p.link_color 
-          = link_to root_path, class: "btn btn-warning" do
+          = link_to new_conversation_path(target: @owner.email), class: "btn btn-warning" do
             em.fa.fa-envelope
               |  Send Message 

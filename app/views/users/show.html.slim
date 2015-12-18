@@ -1,15 +1,15 @@
 - provide(:title, "#{@user.email}") 
 - breadcrumb :user, @user 
 
-div class="row"
-  div class="col-md-4"
-    div class="panel panel-dafault"
-      div class="panel-heading"
-        ul class="nav nav-pills nav-stacked" 
-          h4 style="text-align:center"
+.row
+  .col-md-4
+    .panel.panel-dafault
+      .panel-heading
+        ul.nav.nav-pills.nav-stacked 
+          p.text_in_center
             = image_tag('logo.png')
 
-          table class="table"
+          table.table
             tbody
               tr 
                 td
@@ -21,61 +21,63 @@ div class="row"
                     i.fa.fa-star
                     |  
                     = print_user_score(@user.user_score)
-                  p
-                    = link_to root_path, class: "btn btn-success" do 
+                  p.link_color
+                    = link_to new_conversation_path(target: @user.email), class: "btn btn-success" do 
                       em.fa.fa-envelope
                         |  Send Message 
-      div class="panel panel-warning"
-          div class="panel-heading"
-            h4 style="text-align:center"
+
+      .panel.panel-warning
+          .panel-heading
+            h4.text_in_center
               p
                 = @user.description
 
               - if @user == current_user
-                = link_to edit_user_registration_path, class: "btn btn-danger" do
-                  em.fa.fa-pencil
-                    |  Edit 
+                .link_color
+                  = link_to edit_user_registration_path, class: "btn btn-danger" do
+                    em.fa.fa-pencil
+                      |  Edit 
               - else
-                = link_to follow_user_path(@user), class: "btn btn-danger" do
-                  em.fa.fa-check-square
-                    |  Follow
-
+                .link_color
+                  = link_to follow_user_path(@user), class: "btn btn-danger" do
+                    em.fa.fa-check-square
+                      |  Follow
 
               - if @user.average("culture") != nil and  @user.average("speed") != nil
                 = raw pie_chart ({"Good" => (@user.average("culture").avg + @user.average("speed").avg), "Bad" => (10-(@user.average("culture").avg + @user.average("speed").avg))}) 
               hr
               = social_share_button_tag(@user.email)
 
-  div class="col-md-8"
-    div class="panel-transparent"
-      div class="panel-body"
-        div class="col-md-12"
-          ul class="nav nav-tabs"
+  .col-md-8
+    .panel-transparent
+      .panel-body
+        .col-md-12
+          ul.nav.nav-tabs
             - if @user == current_user
-              li class="active" 
+              li.active
                 a href="#buyer" data-toggle="tab" aria-expanded="false" 
                   h5 Buyer
-              li class="" 
+              li 
                 a href="#seller" data-toggle="tab" aria-expanded="false" 
                   h5 Seller
-              li class="" 
+              li 
                 a href="#actives" data-toggle="tab" aria-expanded="false" 
                   h5 Active Product
-              li class="" 
+              li 
                 a href="#sell" data-toggle="tab" aria-expanded="false" 
                   h5 Sell Product
-              li class="" 
+              li  
                 a href="#feed" data-toggle="tab" aria-expanded="false" 
                   h5 Feed list
             - else
-              li class="active" 
+              li.active 
                 a href="#active" data-toggle="tab" aria-expanded="false" 
                   h5 Active Product
-              li class="" 
+              li 
                 a href="#sell" data-toggle="tab" aria-expanded="false" 
                   h5 Sell Product
           - if @user == current_user
-            div id="myTabContent" class="tab-content"
+            #myTabContent.tab-content
               br
               div class="tab-pane fade active in" id="buyer"
                 = render 'user_operations'
@@ -91,7 +93,7 @@ div class="row"
                 table class="table table-hover"
                   = render 'user_follow'
           - else
-            div id="myTabContent" class="tab-content"
+            #myTabContent.tab-content
               br
               div class="tab-pane fade active in" id="actives"
                 table class="table table-striped table-hover"
@@ -100,7 +102,7 @@ div class="row"
                 table class="table table-hover"
                   = render 'user_sell'
               
-        div class="col-md-12"
+        .col-md-12
           h4 Comments (#{@user.comments.count})
           p Add a comment!
           = render 'comments/form'
