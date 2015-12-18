@@ -41,7 +41,7 @@
 
           .col-md-3
             = f.select :company, [ "Aple", "Microsoft", "IBM" ], { :prompt => 'Select Company' }, { class: "form-control", :id => "select" } 
-
+            
           .col-md-3
             = f.collection_select :category, Category.where(:categories => {:parent_id => nil } ), :id, :name, { prompt: "Choose a category" },  { class: "form-control"}
           
@@ -49,9 +49,18 @@
             = f.input :subcategory, label: false do              
               = f.grouped_collection_select :subcategory, Category.where(:categories => {:parent_id => nil } ),:subcategories, :name, :id, :name, { prompt: "Choose a subcategory" },  { class: "form-control"}
 
+        
           .col-md-12
             br
-            
+            = f.input :con, 
+                :collection => [[true, 'New'], [false, 'Old']], 
+                :label_method => :last, 
+                :value_method => :first,
+                :label => "Product condition",
+                :as => :radio_buttons, 
+                :item_wrapper_class => 'inline'
+                
+      
           .col-md-3
             = f.input :avatar, input_html: {class: 'control-label'}
           

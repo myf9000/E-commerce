@@ -24,7 +24,16 @@ table.table.table-hover
         p 
           = print_stock (@product.stock) 
           |  in Magazine
-        
+    tr
+      td
+        b Condition:
+      td
+        p
+          - if @product.con == true
+            | New
+          - else
+            | Usage
+
 - if check_stock(@product.stock, @product.quantites_total)  
   p.text_in_center.link_color 
     = link_to order_items_path(product_id: @product.id), method: :post, class: "btn btn-success" do  

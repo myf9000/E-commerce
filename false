@@ -1,0 +1,2 @@
+      invoke  active_record
+      create    db/migrate/20151218125322_add_condition_to_products.rb

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151213172549) do
+ActiveRecord::Schema.define(version: 20151218125322) do
 
   create_table "average_caches", force: :cascade do |t|
     t.integer  "rater_id"
@@ -207,6 +207,7 @@ ActiveRecord::Schema.define(version: 20151213172549) do
     t.string   "company"
     t.text     "technical"
     t.text     "shipment"
+    t.boolean  "con",                                         default: true
   end
 
   add_index "products", ["slug"], name: "index_products_on_slug", unique: true
