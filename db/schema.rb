@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151218125322) do
+ActiveRecord::Schema.define(version: 20151218134607) do
 
   create_table "average_caches", force: :cascade do |t|
     t.integer  "rater_id"
@@ -104,6 +104,21 @@ ActiveRecord::Schema.define(version: 20151218125322) do
   add_index "impressions", ["impressionable_type", "impressionable_id", "session_hash"], name: "poly_session_index"
   add_index "impressions", ["impressionable_type", "message", "impressionable_id"], name: "impressionable_type_message_index"
   add_index "impressions", ["user_id"], name: "index_impressions_on_user_id"
+
+  create_table "infos", force: :cascade do |t|
+    t.string   "city"
+    t.string   "code"
+    t.integer  "flat"
+    t.string   "street"
+    t.string   "first_name"
+    t.string   "last_name"
+    t.integer  "user_id"
+    t.integer  "card_code"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "infos", ["user_id"], name: "index_infos_on_user_id"
 
   create_table "mailboxer_conversation_opt_outs", force: :cascade do |t|
     t.integer "unsubscriber_id"

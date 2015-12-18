@@ -1,0 +1,29 @@
+.row
+	.col-md-6.col-md-offset-3
+		.col-md-12
+			.panel-transparento
+				.panel-body
+					p.text_in_center
+						= image_tag('logo.png')
+
+					= simple_form_for @info, html: { multipart: true }  do |f|
+						.col-md-6
+							= f.input :first_name, input_html: {class: 'form-control'}
+						.col-md-6
+							= f.input :last_name, input_html: {class: 'form-control'}
+						.col-md-4
+							= f.input :city, input_html: {class: 'form-control'}
+						.col-md-4
+							= f.input :code, input_html: {class: 'form-control'}
+						.col-md-4
+							= f.input :flat, input_html: {class: 'form-control'}
+						.col-md-12
+							= f.input :street, input_html: {class: 'form-control'}
+						.col-md-12
+							= f.input :card_code, input_html: {class: 'form-control'}
+						
+						.col-md-12
+							br
+							p.text_in_center
+								= f.button :submit, class: "btn btn-info"
+br

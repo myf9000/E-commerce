@@ -1,45 +1,46 @@
 - provide(:title, "Order") 
 - breadcrumb :order 
 
-div class="col-md-8 col-md-offset-2"
-  div class="panel panel-default"
-    div class="panel-body"
-      h4 style="text-align:center"
+.col-md-8.col-md-offset-2
+  .panel.panel-default
+    .panel-body
+      p.text_in_center
         = image_tag('logo.png')
-      table class="table table-striped table-hover"
-        tr class="success"
-          th Title
-          th Quantity
-          th Unit Price
-          th Stock
-          th Subtotal
-          th Action
-        
-        - @order.order_items.each do |item| 
-          tr
-            td
-              = link_to item.product.title, product_path(item.product)
-            - if check_stock(item.product.stock, item.quantity) &&  @order.status == "unsubmitted" 
-              td
-                = link_to item.quantity, edit_order_item_path(item) 
-            td
-              = print_price(item.product.price)
-            td
-              = print_stock(item.product.stock, item.product.quantites_total)
-            td
-              = print_price item.subtotal(item.quantity, item.product.price) 
-            - if @order.status == "unsubmitted" 
-              td
-                = link_to item, method: :delete, data: { confirm: 'Are you sure?' } 
-                  em.fa.fa-times
-         
-
+      table.table.table-striped.table-hover
+        thead
+          tr.success
+            th Title
+            th Quantity
+            th Unit Price
+            th Stock
+            th Subtotal
+            th Action
+          
+          tbody
+            - @order.order_items.each do |item| 
+              tr
+                td
+                  = link_to item.product.title, product_path(item.product)
+                - if check_stock(item.product.stock, item.quantity) &&  @order.status == "unsubmitted" 
+                  td
+                    = link_to item.quantity, edit_order_item_path(item) 
+                td
+                  = print_price(item.product.price)
+                td
+                  = print_stock(item.product.stock, item.product.quantites_total)
+                td
+                  = print_price item.subtotal(item.quantity, item.product.price) 
+                - if @order.status == "unsubmitted" 
+                  td
+                    = link_to item, method: :delete, data: { confirm: 'Are you sure?' } 
+                      em.fa.fa-times
+    
       h4 Total: #{print_price @order.total}
 
       hr
 
       - if @order.status == "unsubmitted" 
-        p style="text-align:center"
+        p.text_in_center
           = link_to buy_order_items_path, class: "btn btn-success" do 
             em.fa.fa-shopping-cart
             |  Buy
@@ -49,9 +50,9 @@ div class="col-md-8 col-md-offset-2"
             |  Empty Cart
 
       - elsif @order.status == "submitted"
-        table class="table table-striped table-hover"
+        table.table.table-striped.table-hover
           thead
-            tr class="success"
+            tr.success
               td
                 | Product:
               td
@@ -60,21 +61,34 @@ div class="col-md-8 col-md-offset-2"
                 | Pay
           tbody
             - @order.order_items.each do |f| 
-              tr class="info"
+              tr
                 td 
                   p = link_to image_tag(Product.find(f.product_id).avatar.url(:thumb))
-                  p = Product.find(f.product_id).title
                 td 
-                  = link_to owner(Product.find(f.product_id).user_id).email, user_path(Product.find(f.product_id).user_id)
+                  - seller = owner(Product.find(f.product_id).user_id)
+                  = link_to seller.email, user_path(Product.find(f.product_id).user_id)
+                  br
+                  - if seller.info != nil
+                    | First name:  
+                    = seller.info.first_name
+                    br
+                    | Last name:  
+                    = seller.info.last_name
+                    br
+                    | Account:  
+                    = seller.info.card_code
+                  - else
+                    | Info:  
+                    | Seller have to fill info form!
                 td
                   = print_price f.subtotal(f.quantity, Product.find(f.product_id).price) 
 
               
       
       - elsif @order.status == "delivered"
-        table class="table table-striped table-hover"
+        table.table.table-striped.table-hover
           thead
-            tr class="success"
+            tr.success
               td
                 | User
               td
@@ -83,7 +97,7 @@ div class="col-md-8 col-md-offset-2"
                 | Speed
             tbody
               - @order.order_items.each do |f| 
-                tr class="info"
+                tr
                   - if current_user 
                     td 
                       p = link_to image_tag(owner(Product.find(f.product_id).user_id).avatar.url(:thumb)), user_path(Product.find(f.product_id).user_id)

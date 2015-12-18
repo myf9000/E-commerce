@@ -35,20 +35,41 @@
             | Adress
       tbody
         tr.info
+          - buyer = owner(order(f.order_id).user_id)
           td
-            = link_to owner(order(f.order_id).user_id).email, user_path(order(f.order_id).user_id)
+            = link_to buyer.email, user_path(order(f.order_id).user_id)
           td 
             = f.quantity
           td 
             = f.quantity * @product.price 
           td 
-            | Wroclaw
+            - if buyer.info != nil
+              | First name:  
+              = buyer.info.first_name
+              br
+              | Last name:  
+              = buyer.info.last_name
+              br
+              | City:  
+              = buyer.info.city
+              br
+              | Code:  
+              = buyer.info.code
+              br
+              | Street:  
+              = buyer.info.street
+              br
+              | Flat:  
+              = buyer.info.flat
+            - else
+              | Info:  
+              | Buyer have to fill info form!
 
 
 - @product.order_items.each do |f| 
   table.table.table-striped.table-hover
     - if (order(f.order_id).status == "delivered")
-      h4 Info to send
+      h4 Info to vote
       thead
         tr.success
           td
