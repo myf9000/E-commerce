@@ -162,8 +162,6 @@ GEM
     jquery-ui-rails (5.0.5)
       railties (>= 3.2.16)
     json (1.8.3)
-    lightbox2-rails (2.7.1)
-      railties (>= 3.1)
     loofah (2.0.3)
       nokogiri (>= 1.5.9)
     mail (2.6.3)
@@ -317,7 +315,6 @@ DEPENDENCIES
   jquery-rails
   jquery-turbolinks
   jquery-ui-rails
-  lightbox2-rails
   mailboxer (~> 0.13.0)
   masonry-rails (~> 0.2.1)
   paperclip

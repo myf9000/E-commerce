@@ -1,5 +1,6 @@
 class ConversationsController < ApplicationController
   before_action :authenticate_user!
+  layout "layout_for_form" 
 
   def new
   end

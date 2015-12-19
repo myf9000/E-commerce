@@ -12,7 +12,6 @@
 //
 //= require jquery
 //= require jquery.turbolinks
-//= require lightbox
 //= require bootstrap-sprockets
 //= require jquery_ujs
 //= require masonry/jquery.masonry

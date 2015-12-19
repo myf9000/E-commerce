@@ -1,5 +1,6 @@
 class MailboxController < ApplicationController
   before_action :authenticate_user!
+  layout "layout_for_form" 
 
   def inbox
     @inbox = mailbox.inbox
