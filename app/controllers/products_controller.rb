@@ -37,6 +37,7 @@ class ProductsController < ApplicationController
     elsif params[:sort] 
       @products = Product.ordered_by(params[:sort])
     end
+    render layout: "layout_for_index" 
   end
 
   # GET /products/new

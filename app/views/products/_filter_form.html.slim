@@ -17,19 +17,22 @@
             = f.submit "Search", class: "btn btn-success" 
           hr
         h4.text_in_center
-          | Sorting
-          br
-          = link_to "Sort DESC", products_path(sort: "DESC"), class: "btn btn-info" 
-          br
-          br
-          = link_to "Sort ASC", products_path(sort: "ASC"), class: "btn btn-info" 
-          br
-          br
-          = link_to "Sort small price", products_path(sort: "small"), class: "btn btn-info" 
-          br
-          br
-          = link_to "Sort big price", products_path(sort: "big"), class: "btn btn-info" 
-          br
-         
+          = link_to products_path(sort: "DESC") do
+            span.label.label-info data-placement="bottom" data-toggle="tooltip" title=("Sorting created_at DESC")
+              em.fa.fa-sort-amount-desc
+          |  
+          = link_to products_path(sort: "ASC") do
+            span.label.label-info data-placement="bottom" data-toggle="tooltip" title=("Sorting created_at ASC")
+              em.fa.fa-sort-amount-asc
+          |  
+          = link_to products_path(sort: "small") do
+            span.label.label-info data-placement="bottom" data-toggle="tooltip" title=("Sorting from smallest price to greatest")
+              em.fa.fa-sort-numeric-asc
+          |  
+          = link_to products_path(sort: "big") do
+            span.label.label-info data-placement="bottom" data-toggle="tooltip" title=("Sorting from greatest price to smallest")
+              em.fa.fa-sort-numeric-desc
+          
+        
 
    

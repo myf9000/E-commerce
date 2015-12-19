@@ -1,5 +1,6 @@
 - provide(:title,"Home")
 .row
+  
   .col-md-3
     = render 'filter_form'
 
@@ -13,7 +14,7 @@
                 .hover13.column
                   figure 
                     = image_tag(f.avatar.url)
-                h4.text_in_center.link_color 
+                h4.text_in_center.link_index 
                   = link_to f.title, f
                 p.text_in_center
                   = f.description.truncate_words(30)
