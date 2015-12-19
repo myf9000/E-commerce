@@ -130,6 +130,8 @@ GEM
       warden (~> 1.2.3)
     erubis (2.7.0)
     execjs (2.6.0)
+    fancybox-rails (0.3.1)
+      railties (>= 3.1.0)
     ffi (1.9.10)
     foreigner (1.7.4)
       activerecord (>= 3.0.0)
@@ -307,6 +309,7 @@ DEPENDENCIES
   coffee-rails (~> 4.1.0)
   compass-rails!
   devise
+  fancybox-rails
   friendly_id (~> 5.1.0)
   gon
   gretel

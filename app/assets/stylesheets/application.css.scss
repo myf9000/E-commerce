@@ -22,6 +22,7 @@
 @import "social-share-button";
 @import "bootstrap-sprockets";
 @import "bootstrap";
+@import "jquery.fancybox";
 
 
 .notify{
@@ -397,3 +398,7 @@
 	 position:fixed
 }
 
+#fancybox-wrap {
+  position: absolute;
+  top: 60px !important;
+}
