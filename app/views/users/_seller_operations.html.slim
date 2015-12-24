@@ -29,19 +29,19 @@
                     | Action 
 
               tbody
-                - @brr.each do |f|
-                  - if Order.find(f.order_id).status == "unsubmitted"
+                - @seller_items.each do |f|
+                  - if f.order.status == "unsubmitted"
                     tr
                       td 
                         span.label.label-warning
                           .yolo
-                            = link_to Product.find(f.product_id).id, product_path(f.product_id) 
+                            = link_to f.product.id, product_path(f.product_id) 
                       td
-                        = link_to owner(Order.find(f.order_id).user_id).email, user_path(Order.find(f.order_id).user_id)
+                        = link_to f.order.user.email, user_path(f.order.user)
                       td
                         span.label.label-warning
                           .yolo
-                            =  Order.find(f.order_id).status
+                            =  f.order.status
           
           .tab-pane.fade id="past_orders"
             table.table.table-striped.table-hover
@@ -58,19 +58,19 @@
                     | Paid
 
               tbody
-                - @brr.each do |f|
-                  - if Order.find(f.order_id).status == "submitted"
+                - @seller_items.each do |f|
+                  - if f.order.status == "submitted"
                     tr
                       td 
                         span.label.label-warning
                           .yolo
-                            = link_to Product.find(f.product_id).id, product_path(f.product_id) 
+                            = link_to f.product.id, product_path(f.product_id) 
                       td
-                        = link_to owner(Order.find(f.order_id).user_id).email, user_path(Order.find(f.order_id).user_id)
+                        = link_to f.order.user.email, user_path(f.order.user)
                       td
                         span.label.label-warning
                           .yolo
-                            =  Order.find(f.order_id).status
+                            =  f.order.status
                       td
                         = link_to "Paid", product_orders_order_item_path(f.id, type: "paid")
 
@@ -89,19 +89,19 @@
                     | Paid
 
               tbody
-                - @brr.each do |f|
-                  - if Order.find(f.order_id).status == "paid"
+                - @seller_items.each do |f|
+                  - if f.order.status == "paid"
                     tr
                       td 
                         span.label.label-warning
                           .yolo
-                            = link_to Product.find(f.product_id).id, product_path(f.product_id) 
+                            = link_to f.product.id, product_path(f.product_id) 
                       td
-                        = link_to owner(Order.find(f.order_id).user_id).email, user_path(Order.find(f.order_id).user_id)
+                        = link_to f.order.user.email, user_path(f.order.user)
                       td
                         span.label.label-warning
                           .yolo
-                            =  Order.find(f.order_id).status
+                            =  f.order.status
                       td
                         = link_to "Sent", product_orders_order_item_path(f.id, type: "sent")
 
@@ -118,19 +118,19 @@
                     | Action 
                 
               tbody
-                - @brr.each do |f|
-                  - if Order.find(f.order_id).status == "sent"
+                - @seller_items.each do |f|
+                  - if f.order.status == "sent"
                     tr
                       td 
                         span.label.label-warning
                           .yolo
-                            = link_to Product.find(f.product_id).id, product_path(f.product_id) 
+                            = link_to f.product.id, product_path(f.product_id) 
                       td
-                        = link_to owner(Order.find(f.order_id).user_id).email, user_path(Order.find(f.order_id).user_id)
+                        = link_to f.order.user.email, user_path(f.order.user)
                       td
                         span.label.label-warning
                           .yolo
-                            =  Order.find(f.order_id).status
+                            =  f.order.status
 
           .tab-pane.fade id="delivered_orders"
             table.table.table-striped.table-hover
@@ -145,17 +145,17 @@
                     | Action 
                 
               tbody
-                - @brr.each do |f|
-                  - if Order.find(f.order_id).status == "delivered"
+                - @seller_items.each do |f|
+                  - if f.order.status == "delivered"
                     tr
                       td 
                         span.label.label-warning
                           .yolo
-                            = link_to Product.find(f.product_id).id, product_path(f.product_id) 
+                            = link_to f.product.id, product_path(f.product_id) 
                       td
-                        = link_to owner(Order.find(f.order_id).user_id).email, user_path(Order.find(f.order_id).user_id)
+                        = link_to f.order.user.email, user_path(f.order.user)
                       td
                         span.label.label-warning
                           .yolo
-                            =  Order.find(f.order_id).status
+                            =  f.order.status
                     

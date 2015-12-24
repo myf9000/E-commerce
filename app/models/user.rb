@@ -34,5 +34,8 @@ class User < ActiveRecord::Base
   def owner(product)
     self.find_by_product_id(product.id)
   end
-  
+
+  def self.seller_list(user)
+    seller_list = OrderItem.seller(user.products.pluck(:id))
+  end
 end

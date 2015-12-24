@@ -1,5 +1,5 @@
 - @product.order_items.each do |f| 
-  - if (order(f.order_id).status == "unsubmitted")
+  - if f.order.status == "unsubmitted"
     table.table.table-striped.table-hover
       h4 In Basket
       thead
@@ -13,14 +13,14 @@
       tbody
         tr.info
           td
-            = link_to owner(order(f.order_id).user_id).email, user_path(order(f.order_id).user_id)
+            = link_to f.order.user.email, user_path(f.order.user)
           td 
             = f.quantity
           td 
             = f.quantity * @product.price 
 
 - @product.order_items.each do |f|
-  - if (order(f.order_id).status != "unsubmitted" && order(f.order_id).status != "delivered") 
+  - if f.order.status != "unsubmitted" && f.order.status != "delivered"
     table.table.table-striped.table-hover
       h4 Info to send
       thead
@@ -35,9 +35,9 @@
             | Adress
       tbody
         tr.info
-          - buyer = owner(order(f.order_id).user_id)
+          - buyer = f.order.user
           td
-            = link_to buyer.email, user_path(order(f.order_id).user_id)
+            = link_to buyer.email, user_path(buyer)
           td 
             = f.quantity
           td 
@@ -68,7 +68,7 @@
 
 - @product.order_items.each do |f| 
   table.table.table-striped.table-hover
-    - if (order(f.order_id).status == "delivered")
+    - if f.order.status == "delivered"
       h4 Info to vote
       thead
         tr.success
@@ -80,10 +80,11 @@
             | Speed
       tbody
           tr.info
+            -  buyer = f.order.user
             td
-              = link_to owner(order(f.order_id).user_id).email, user_path(order(f.order_id).user_id)
+              = link_to buyer.email, user_path(buyer)
             td 
-              = rating_for owner(order(f.order_id).user_id), "culture", disable_after_rate: false, enable_half: true, imdb_avg: true 
+              = rating_for buyer, "culture", disable_after_rate: false, enable_half: true, imdb_avg: true 
             td 
-              = rating_for owner(order(f.order_id).user_id), "speed", disable_after_rate: false, enable_half: true, imdb_avg: true
+              = rating_for buyer, "speed", disable_after_rate: false, enable_half: true, imdb_avg: true
          

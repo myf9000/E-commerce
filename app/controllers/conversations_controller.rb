@@ -8,21 +8,18 @@ class ConversationsController < ApplicationController
   def create
     recipients = User.where(id: conversation_params[:recipients])
     conversation = current_user.send_message(recipients, conversation_params[:body], conversation_params[:subject]).conversation
-    flash[:notice] = "Your message was successfully sent!"
-    redirect_to conversation_path(conversation)
+    redirect_to conversation_path(conversation), notice: "Your message was successfully sent!"
   end
 
   def show
     @receipts = conversation.receipts_for(current_user).order("created_at ASC")
-    # mark conversation as read
     conversation.mark_as_read(current_user)
   end
 
 
   def reply
     current_user.reply_to_conversation(conversation, message_params[:body])
-    flash[:notice] = "Your reply message was successfully sent!"
-    redirect_to conversation_path(conversation)
+    redirect_to conversation_path(conversation), notice: "Your reply message was successfully sent!"
   end
 
   def trash

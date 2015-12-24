@@ -21,7 +21,7 @@
               tr
                 td
                   = link_to item.product.title, product_path(item.product)
-                - if check_stock(item.product.stock, item.quantity) &&  @order.status == "unsubmitted" 
+                - if @order.status == "unsubmitted" 
                   td
                     = link_to item.quantity, edit_order_item_path(item) 
                 td
@@ -40,70 +40,11 @@
       hr
 
       - if @order.status == "unsubmitted" 
-        p.text_in_center
-          = link_to buy_order_items_path, class: "btn btn-success" do 
-            em.fa.fa-shopping-cart
-            |  Buy
-          |    
-          = link_to @order, data: { confirm: 'Are you sure?' }, method: :delete, class: "btn btn-info" do
-            em.fa.fa-minus-square
-            |  Empty Cart
+        = render 'unsubmitted'
 
       - elsif @order.status == "submitted"
-        table.table.table-striped.table-hover
-          thead
-            tr.success
-              td
-                | Product:
-              td
-                | Seller
-              td
-                | Pay
-          tbody
-            - @order.order_items.each do |f| 
-              tr
-                td 
-                  p = link_to image_tag(Product.find(f.product_id).avatar.url(:thumb))
-                td 
-                  - seller = owner(Product.find(f.product_id).user_id)
-                  = link_to seller.email, user_path(Product.find(f.product_id).user_id)
-                  br
-                  - if seller.info != nil
-                    | First name:  
-                    = seller.info.first_name
-                    br
-                    | Last name:  
-                    = seller.info.last_name
-                    br
-                    | Account:  
-                    = seller.info.card_code
-                  - else
-                    | Info:  
-                    | Seller have to fill info form!
-                td
-                  = print_price f.subtotal(f.quantity, Product.find(f.product_id).price) 
+        = render 'submitted'
 
-              
-      
       - elsif @order.status == "delivered"
-        table.table.table-striped.table-hover
-          thead
-            tr.success
-              td
-                | User
-              td
-                | Culture
-              td
-                | Speed
-            tbody
-              - @order.order_items.each do |f| 
-                tr
-                  - if current_user 
-                    td 
-                      p = link_to image_tag(owner(Product.find(f.product_id).user_id).avatar.url(:thumb)), user_path(Product.find(f.product_id).user_id)
-                      p = User.find(Product.find(f.product_id).user_id).email 
-                      td
-                        = rating_for User.find(Product.find(f.product_id).user_id), "culture", disable_after_rate: true, enable_half: true, imdb_avg: true
-                      td
-                          = rating_for User.find(Product.find(f.product_id).user_id), "speed", disable_after_rate: true, enable_half: true, imdb_avg: true 
-
+        = render 'delivered'
+/ dopiero gdy status vote ocena jest dodana do uzytkownika!!! ;)

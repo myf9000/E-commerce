@@ -9,7 +9,7 @@
       .panel-body
         #products.transitions-enabled 
           - @products.each do |f|
-            - if f.stock > 0
+            - if f.active
               .box.panel
                 .hover13.column
                   figure 

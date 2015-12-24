@@ -4,15 +4,12 @@ class CategoriesController < ApplicationController
 
   def index
    @category = nil
-   @categories = Category.where(:categories => {:parent_id => nil } )
+   @categories = Category.only_category
   end
 
   def show
-	# Find the category belonging to the given id
-	# Grab all sub-categories
-	@categories = @category.subcategories
-	# We want to reuse the index renderer:
-	render :action => :index
+  	@categories = @category.subcategories
+  	render 'index'
   end
 
   def create
@@ -35,7 +32,6 @@ class CategoriesController < ApplicationController
   end
 
   def edit
-
   end
 
   def update

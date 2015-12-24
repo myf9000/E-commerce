@@ -3,7 +3,7 @@
 	  p.p_color
 	  	= comment.root? ? "Started by " : "Replied by " 
 	  	b.link_color
-	  	  = link_to owner(comment.author_id).email, user_path(comment.author_id)
+	  	  = link_to User.find(comment.author_id).email, user_path(comment.author_id)
 	  	|  on 
 	    = comment.created_at.strftime('%B, %d %Y %H:%M:%S')
 	    |  | 

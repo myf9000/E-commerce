@@ -34,7 +34,7 @@ table.table.table-hover
           - else
             | Usage
 
-- if check_stock(@product.stock, @product.quantites_total)  
+- if check_stock(@product.stock)  
   p.text_in_center.link_color 
     = link_to order_items_path(product_id: @product.id), method: :post, class: "btn btn-success" do  
       em.fa.fa-shopping-cart

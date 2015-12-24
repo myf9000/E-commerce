@@ -1,6 +1,5 @@
 class CommentsController < ApplicationController
 
-
   def create 
     if params[:parent_id].to_i > 0
       parent = Comment.find_by_id(params[:comment].delete(:parent_id))
@@ -10,11 +9,7 @@ class CommentsController < ApplicationController
     end
     @comment.author_id = current_user.id
     if @comment.save
-      if @comment.parent == nil
-        redirect_to :back, notice: 'Your comment was successfully added!'
-      else  
-        redirect_to user_path(Comment.find(@comment.parent).user_id), notice: 'Your comment was successfully added!'
-      end
+      redirect_to :back, notice: 'Your comment was successfully added!'
     else
       render 'new'
     end

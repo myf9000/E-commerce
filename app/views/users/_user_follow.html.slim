@@ -4,19 +4,18 @@ tbody
       .col-md-2
         td 
           blockquote
-            - follow_user = owner(f.id)
             h5.text_in_center
-              p= link_to image_tag(follow_user.avatar.url(:thumb)), follow_user
+              p= link_to image_tag(f.avatar.url(:thumb)), f
               p
-                = follow_user.email
+                = f.email
                 |  |  
-                = link_to follow_user_path(follow_user, type: "unfollow") do
+                = link_to follow_user_path(f, type: "unfollow") do
                   em.fa.fa-trash
       .col-md-10
         td  
           h5 Products: 
           hr
           p
-            - follow_user.products.each do |p|
+            - f.products.each do |p|
               = link_to image_tag(p.avatar.url(:medium), class: "img_related"), p
               |   

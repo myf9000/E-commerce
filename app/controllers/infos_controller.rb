@@ -1,5 +1,5 @@
 class InfosController < ApplicationController
-  before_action :set_info, only: [:show, :destroy, :edit, :update]
+  before_action :find_resource, only: [:show, :destroy, :edit, :update]
   before_action :info_params, only: [:create, :update]
   layout "layout_for_form" 
 
@@ -36,10 +36,6 @@ class InfosController < ApplicationController
   end
 
   private
-
-  def set_info
-    @info = Info.find(params[:id])
-  end
 
   def info_params
     params.require(:info).permit(:city, :code, :flat, :street, :first_name, :last_name, :card_code)

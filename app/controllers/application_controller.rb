@@ -1,12 +1,11 @@
 class ApplicationController < ActionController::Base
-  # Prevent CSRF attacks by raising an exception.
-  # For APIs, you may want to use :null_session instead.
+  
   protect_from_forgery with: :exception
   before_action :authenticate_user!
 
   before_filter :configure_permitted_parameters, if: :devise_controller?
 
-  helper_method :mailbox, :conversation, :owner, :find_category, :product_order, :order
+  helper_method :mailbox, :conversation, :find_category, :find_resource
   layout :layout_by_resource
 
   
@@ -37,18 +36,6 @@ class ApplicationController < ActionController::Base
     @conversation ||= mailbox.conversations.find(params[:id])
   end
 
-  def order(id)
-    Order.find(id)
-  end
-
-  def owner(id)
-    User.friendly.find(id)
-  end
-
-  def product_order(id)
-    Product.friendly.find(id)
-  end
-
   def find_category(id)
     Category.find(id)
   end
@@ -56,16 +43,12 @@ class ApplicationController < ActionController::Base
   protected
 
   def layout_by_resource
-    if devise_controller?
-      "layout_for_form"
-    else
-      "application"
-    end
+    devise_controller? ? "layout_for_form" : "application"
   end
 
   def configure_permitted_parameters
-    devise_parameter_sanitizer.for(:sign_up) { |u| u.permit(:name, :email, :password) }
-    devise_parameter_sanitizer.for(:account_update) { |u| u.permit(:name, :email, :description, :password, :current_password, :is_female, :date_of_birth, :avatar) }
+    devise_parameter_sanitizer.for(:sign_up) { |u| u.permit(:email, :password) }
+    devise_parameter_sanitizer.for(:account_update) { |u| u.permit(:email, :description, :password, :current_password,  :avatar) }
   end
 
 

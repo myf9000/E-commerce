@@ -1,0 +1,8 @@
+p.text_in_center
+	= link_to buy_order_items_path, class: "btn btn-success" do 
+	  em.fa.fa-shopping-cart
+	  |  Buy
+	|    
+	= link_to @order, data: { confirm: 'Are you sure?' }, method: :delete, class: "btn btn-info" do
+	  em.fa.fa-minus-square
+	  |  Empty Cart

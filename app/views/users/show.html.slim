@@ -13,14 +13,15 @@
             tbody
               tr 
                 td
-                  = link_to image_tag(@user.avatar.url(:thumb), class: "img_user_profile"), user_path(@user.id)
+                  = link_to image_tag(@user.avatar.url(:thumb), class: "img_user_profile"), user_path(@user)
                 td
                   p 
                     h5 = @user.email
                   p 
                     i.fa.fa-star
-                    |  
-                    = print_user_score(@user.user_score)
+                    | 
+                    - if @user.average("culture") != nil and  @user.average("speed") != nil 
+                      = print_user_score(@user.user_score)
                   p.link_color
                     = link_to new_conversation_path(target: @user.email), class: "btn btn-success" do 
                       em.fa.fa-envelope
@@ -32,7 +33,7 @@
               p
                 = @user.description
 
-              - if @user == current_user
+              - if  @user == current_user
                 .link_color
                   = link_to edit_user_registration_path, class: "btn btn-danger" do
                     em.fa.fa-pencil
@@ -43,7 +44,7 @@
                         em.fa.fa-credit-card
                           |  New Info
                     - else
-                      = link_to info_path(Info.find_by_user_id(current_user.id)), class: "btn btn-info" do
+                      = link_to info_path(current_user.info), class: "btn btn-info" do
                         em.fa.fa-credit-card
                           | Info 
 

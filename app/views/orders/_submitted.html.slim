@@ -1,0 +1,32 @@
+table.table.table-striped.table-hover
+  thead
+    tr.success
+      td
+        | Product:
+      td
+        | Seller
+      td
+        | Pay
+  tbody
+    - @order.order_items.each do |f| 
+      tr
+        td 
+          p = link_to image_tag(f.product.avatar.url(:thumb))
+        td 
+          - seller = owner(f.product.user_id)
+          = link_to seller.email, user_path(f.product.user_id)
+          br
+          - if seller.info != nil
+            | First name:  
+            = seller.info.first_name
+            br
+            | Last name:  
+            = seller.info.last_name
+            br
+            | Account:  
+            = seller.info.card_code
+          - else
+            | Info:  
+            | Seller have to fill info form!
+        td
+          = print_price f.subtotal(f.quantity, f.product.price) 

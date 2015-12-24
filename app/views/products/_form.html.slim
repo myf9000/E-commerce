@@ -43,11 +43,11 @@
             = f.select :company, [ "Apple", "Microsoft", "IBM" ], { :prompt => 'Select Company' }, { class: "form-control", :id => "select" } 
             
           .col-md-3
-            = f.collection_select :category, Category.where(:categories => {:parent_id => nil } ), :id, :name, { prompt: "Choose a category" },  { class: "form-control"}
+            = f.collection_select :category, Category.only_category, :id, :name, { prompt: "Choose a category" },  { class: "form-control"}
           
           .col-md-3 
             = f.input :subcategory, label: false do              
-              = f.grouped_collection_select :subcategory, Category.where(:categories => {:parent_id => nil } ),:subcategories, :name, :id, :name, { prompt: "Choose a subcategory" },  { class: "form-control"}
+              = f.grouped_collection_select :subcategory, Category.only_category,:subcategories, :name, :id, :name, { prompt: "Choose a subcategory" },  { class: "form-control"}
 
         
           .col-md-12

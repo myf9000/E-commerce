@@ -4,29 +4,13 @@ class UsersController < ApplicationController
   def show
     @comments = @user.comments.hash_tree
     @comment = @user.comments.build(parent_id: params[:parent_id])
-    @comment.user.id = @user.id
-  	arr = Array.new
-  	@user.products.each do |f|
-  		arr << f.id
-  	end
-
-  	order_items = OrderItem.all
-  	@brr = Array.new
-  	order_items.each do |o|
-	  	arr.each do |i|
-	  	  if o.product_id == i 
-	  		@brr << o
-	  	  end
-  		end
-  	end
+  	@seller_items = User.seller_list(current_user)
   end
 
   def follow
-    type = params[:type]
-    if type == "unfollow"
+    if params[:type].to_s == "unfollow"
       current_user.stop_following(@user)
       redirect_to user_path(current_user), notice: "You delete user from feed list"
-      
     else
       current_user.follow(@user)
       redirect_to user_path(current_user), notice: "You add user from feed list"
@@ -35,8 +19,8 @@ class UsersController < ApplicationController
 
   private
 
-  def user_set
-    @user = User.friendly.find(params[:id])
-  end
-  # ze statusami zamowienia pobawie sie pozniej 
+    def user_set
+      @user = User.friendly.find(params[:id])
+    end
+  
 end

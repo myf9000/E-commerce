@@ -1,7 +1,7 @@
 tbody
   - @user.products.each do |f| 
     tr 
-      - if f.stock == 0
+      - if !f.active
         td 
           = link_to image_tag(f.avatar.url(:thumb)), f
         td
