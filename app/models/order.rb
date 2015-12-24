@@ -2,6 +2,8 @@ class Order < ActiveRecord::Base
 	has_many :order_items, dependent: :destroy
 	belongs_to :user
 
+ 	validates :user_id, :status, presence: true
+
 	def total
 	  t = 0
 	    order_items.each do |f|

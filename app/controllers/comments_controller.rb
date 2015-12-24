@@ -11,7 +11,7 @@ class CommentsController < ApplicationController
     if @comment.save
       redirect_to :back, notice: 'Your comment was successfully added!'
     else
-      render 'new'
+      redirect_to user_path(@comment.user), notice: @comment.errors.full_messages.join
     end
   end
 
