@@ -22,4 +22,5 @@ class Order < ActiveRecord::Base
       end
       x
     end
+
 end

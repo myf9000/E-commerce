@@ -2,40 +2,44 @@ class OrderItemsController < ApplicationController
   before_action :find_resource, only: [:edit, :update, :destroy]
   before_action :load_order, only: [:create, :update, :buy]
 
+  layout "layout_for_form" 
+  
   def edit
-    render layout: "layout_for_form" 
   end
 
   def create
-    @order_item = @order.order_items.find_by(product_id: params[:product_id]) ||  @order.order_items.new(quantity: 1, product_id: params[:product_id]) 
-    @order_item.check_new_record(@order_item)
-
-    
-      if current_user != @order_item.product.user
-        if @order_item.save 
-          redirect_to @order, notice: 'Order item was successfully created.' 
+    if current_user.info != nil 
+      @order_item = @order.order_items.find_by(product_id: params[:product_id]) ||  @order.order_items.new(quantity: 1, product_id: params[:product_id]) 
+      @order_item.check_new_record(@order_item)
+        if current_user != @order_item.product.user
+          if @order_item.quantity <= @order_item.product.stock
+            if @order_item.save 
+              redirect_to @order, notice: 'Order item was successfully created.' 
+            else
+              redirect_to :back, notice: 'Order item was not created.'  
+            end
+          else 
+            redirect_to :back , notice: 'Too big quantity!' 
+          end
         else
-          redirect_to :back, notice: 'Order item was not created.'  
+          redirect_to :back , notice: 'You can not buy your product' 
         end
-      else
-        redirect_to :back , notice: 'You can not buy your product' 
-      end
-   
+    else 
+      redirect_to new_info_path, notice: 'Fill your info' 
+    end
   end
 
+  # refactor codu i przeklikanie, nastepnie testy - Happy New Year
+
   def update
-    if @order.check_in == true
-      if params[:order_item][:quantity].to_i == 0
-        @order_item.destroy
-        redirect_to @order, notice: 'Order item was successfully destroyed.'
-      elsif @order_item.update(order_item_params)
-        redirect_to @order, notice: 'Order item was successfully updated.'
-      else
-        render :edit, notice: 'Order item was not updated.' 
-      end
-    else 
-      @order_item.quantity = 1
-      render :edit, notice: "Quantity is wrong!"
+    if params[:order_item][:quantity].to_i == 0
+      @order_item.destroy
+      redirect_to @order, notice: 'Order item was successfully destroyed.'
+    elsif @order_item.update(order_item_params) && @order.check_in == true
+      redirect_to @order, notice: 'Order item was successfully updated.'
+    else
+      flash[:warning] = 'Too big quantity!' 
+      render :edit
     end
   end
 
@@ -80,7 +84,6 @@ class OrderItemsController < ApplicationController
     @order.save
     redirect_to user_path(current_user.id)
   end
-
 
   private
 
