@@ -1,13 +1,13 @@
 class ProductsController < ApplicationController
-  impressionist :actions=>[:show]
+  impressionist actions: [:show]
   before_action :set_product, only: [:show, :edit, :update, :destroy]
   before_action :set_index, only: :index
 
   def show
-    #impressionist(@product)
     @owner = @product.user
     @category = find_category(@product.category)
     @subcategory =  find_category(@product.subcategory)
+    impressionist(@product) # problem z squelem
   end
 
 

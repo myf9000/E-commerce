@@ -12,5 +12,14 @@ class Order < ActiveRecord::Base
 		t
 	end
 
-
+	def check_in
+      x = true
+      order_items.each do |f|
+        check = f.product.stock - f.quantity
+        if check < 0
+          x = false
+        end
+      end
+      x
+    end
 end

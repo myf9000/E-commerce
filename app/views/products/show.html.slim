@@ -23,10 +23,12 @@
         .col-md-12
           hr
           = render 'product_tabs'
-          
-            b Viewed: 
-            | 12
-            = social_share_button_tag(@product.title)
+        
+        .col-md-12 
+          b Viewed: 
+          /| 12
+          = @product.impressionist_count
+          = social_share_button_tag(@product.title)
 
         .col-md-12
           hr

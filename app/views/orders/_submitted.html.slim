@@ -13,7 +13,7 @@ table.table.table-striped.table-hover
         td 
           p = link_to image_tag(f.product.avatar.url(:thumb))
         td 
-          - seller = owner(f.product.user_id)
+          - seller = f.product.user
           = link_to seller.email, user_path(f.product.user_id)
           br
           - if seller.info != nil

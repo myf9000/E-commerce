@@ -1,6 +1,6 @@
 class OrdersController < ApplicationController
   before_action :find_resource, only: [:destroy, :show]
-  load_and_authorize_resource
+  #load_and_authorize_resource
 
   def show
     render layout: "layout_for_form" 

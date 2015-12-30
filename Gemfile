@@ -41,7 +41,6 @@ gem 'chosen-rails'
 gem "compass-rails", github: "Compass/compass-rails", branch: "master"
 gem 'ratyrate'
 gem 'friendly_id', '~> 5.1.0'
-gem 'impressionist'
 gem 'will_paginate', '~> 3.0.6'
 gem 'paperclip'
 gem 'cocoon', '~> 1.2.6'
@@ -57,6 +56,7 @@ gem 'chartkick'
 gem 'closure_tree'
 gem 'masonry-rails', '~> 0.2.1'
 gem 'fancybox-rails'
+gem 'impressionist', github: 'godfat/impressionist', branch: 'compatible-with-squeel'
 
 
 group :development, :test do
