@@ -54,7 +54,7 @@ class ProductsController < ApplicationController
 
   def destroy
     @product.destroy
-    redirect_to products_path, notice: "Product was deleted"  
+    redirect_to products_path, alert: "Product was deleted"  
   end
 
   private

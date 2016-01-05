@@ -1,44 +1,31 @@
 class OrderItemsController < ApplicationController
-  before_action :find_resource, only: [:edit, :update, :destroy]
+  before_action :find_resource, only: [:edit, :update, :destroy, :product_orders]
   before_action :load_order, only: [:create, :update, :buy]
-
+  
   layout "layout_for_form" 
   
   def edit
   end
 
   def create
-    if current_user.info != nil 
-      @order_item = @order.order_items.find_by(product_id: params[:product_id]) ||  @order.order_items.new(quantity: 1, product_id: params[:product_id]) 
-      @order_item.check_new_record(@order_item)
-        if current_user != @order_item.product.user
-          if @order_item.quantity <= @order_item.product.stock
-            if @order_item.save 
-              redirect_to @order, notice: 'Order item was successfully created.' 
-            else
-              redirect_to :back, notice: 'Order item was not created.'  
-            end
-          else 
-            redirect_to :back , notice: 'Too big quantity!' 
-          end
-        else
-          redirect_to :back , notice: 'You can not buy your product' 
-        end
-    else 
-      redirect_to new_info_path, notice: 'Fill your info' 
+    @order_item = item_set 
+    @order_item.check_new_record(@order_item)
+    if current_user != @order_item.product.user && @order_item.quantity <= @order_item.product.stock
+        @order_item.save 
+        redirect_to @order, notice: 'Order item was successfully created.' 
+    else
+      redirect_to :back , notice: 'Error - you want to buy your own product, or product quantity is too big!' 
     end
   end
-
-  # refactor codu i przeklikanie, nastepnie testy - Happy New Year
 
   def update
     if params[:order_item][:quantity].to_i == 0
       @order_item.destroy
       redirect_to @order, notice: 'Order item was successfully destroyed.'
-    elsif @order_item.update(order_item_params) && @order.check_in == true
+    elsif @order_item.update(order_item_params) && @order.check_in 
       redirect_to @order, notice: 'Order item was successfully updated.'
     else
-      flash[:warning] = 'Too big quantity!' 
+      flash.now[:warning] = 'Too big quantity!' 
       render :edit
     end
   end
@@ -50,15 +37,11 @@ class OrderItemsController < ApplicationController
   end
   
   def buy
-    if @order.check_in == true
+    if @order.check_in 
       @order.order_items.each do |f|
         check = f.product.stock - f.quantity
-        if check > 0
-          f.product.stock = check
-        elsif check == 0
-          f.product.active = false
-          f.product.stock = check
-        end
+        f.product.active = false if check == 0
+        f.product.stock = check
         f.product.save
       end
       @order.status = "submitted"
@@ -70,19 +53,10 @@ class OrderItemsController < ApplicationController
   end
 
   def product_orders
-    @order_item = OrderItem.find(params[:id])
-    type = params[:type]
-
-    @order = Order.find(@order_item.order_id)
-    if type == "paid"
-      @order.status = "paid"
-    elsif type == "sent"
-      @order.status = "sent"
-    elsif type == "delivered"
-      @order.status = "delivered"
-    end
+    @order = @order_item.order
+    @order.status = params[:type].to_s
     @order.save
-    redirect_to user_path(current_user.id)
+    redirect_to user_path(current_user)
   end
 
   private
@@ -97,5 +71,9 @@ class OrderItemsController < ApplicationController
 
     def order_item_params
       params.require(:order_item).permit(:product_id, :order_id, :quantity)
+    end
+
+    def item_set
+      @order.order_items.find_by(product_id: params[:product_id]) || @order.order_items.new(quantity: 1, product_id: params[:product_id]) 
     end
 end

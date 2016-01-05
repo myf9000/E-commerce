@@ -20,7 +20,7 @@
             = f.quantity * @product.price 
 
 - @product.order_items.each do |f|
-  - if f.order.status != "unsubmitted" && f.order.status != "delivered"
+  - if f.order.status == "submitted"
     table.table.table-striped.table-hover
       h4 Info to send
       thead

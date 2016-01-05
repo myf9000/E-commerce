@@ -13,14 +13,13 @@ class Order < ActiveRecord::Base
 	end
 
 	def check_in
-      x = true
-      order_items.each do |f|
-        check = f.product.stock - f.quantity
-        if check < 0
-          x = false
-        end
+    x = true
+    order_items.each do |f|
+      check = f.product.stock - f.quantity
+      if check < 0
+        x = false
       end
-      x
     end
-
+    x
+  end
 end

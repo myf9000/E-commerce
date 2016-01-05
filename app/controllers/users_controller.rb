@@ -10,7 +10,7 @@ class UsersController < ApplicationController
   def follow
     if params[:type].to_s == "unfollow"
       current_user.stop_following(@user)
-      redirect_to user_path(current_user), notice: "You delete user from feed list"
+      redirect_to user_path(current_user), alert: "You delete user from feed list"
     else
       current_user.follow(@user)
       redirect_to user_path(current_user), notice: "You add user from feed list"
