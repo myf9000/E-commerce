@@ -7,3 +7,4 @@ class Category < ActiveRecord::Base
 
   scope :only_category, -> { where(:categories => {:parent_id => nil } ) }
 end
+ 

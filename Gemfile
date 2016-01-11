@@ -57,11 +57,14 @@ gem 'closure_tree'
 gem 'masonry-rails', '~> 0.2.1'
 gem 'fancybox-rails'
 gem 'impressionist', github: 'godfat/impressionist', branch: 'compatible-with-squeel'
+gem 'faker', '~> 1.6', '>= 1.6.1'
 
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
+  gem 'shoulda-matchers', '~> 2.8.0'
+  gem 'rspec-rails', '~> 3.4.0'
 end
 
 group :development do
@@ -71,5 +74,10 @@ group :development do
   gem 'binding_of_caller'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
+end
+
+group :test do
+  gem 'factory_girl_rails'
+  gem 'simplecov', require: false
 end
 
