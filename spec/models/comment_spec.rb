@@ -1,49 +1,36 @@
 require 'rails_helper'
 
 RSpec.describe Comment, type: :model do
-	describe "#validation attr body" do 
-		it "is valid with body" do 
-			comment = Comment.new(body: "Rails")
-			expect(comment).to be_valid
-		end
 
-		it "is invalid without body" do 
-			comment = Comment.new()
-			expect(comment).to_not be_valid
-		end
+	it "has a valid comment" do
+    expect(build(:comment)).to be_valid
+  end
 
-		it "is valid with body which has 2 characters" do 
-			comment = Comment.new(body: "Ra")
-			expect(comment).to be_valid
-		end
+  it "has a valid comment_child" do
+    expect(build(:comment_child)).to be_valid
+  end
 
-		it "is invalid with body which has not 2 characters" do 
-			comment = Comment.new(body: "R")
-			expect(comment).to_not be_valid
-		end
+  let(:comment) { FactoryGirl.build(:comment) }
+  let(:comment_child) { FactoryGirl.build(:comment_child, :parent_id => comment.id) }
 
-		it "is invalid with body which has 241 characters" do 
-			body = "R" * 241
-			comment = Comment.new(body: body)
-			expect(comment).to_not be_valid
-		end
+  describe "validations" do
+  	# Basic validations
+  	it { expect(comment).to validate_presence_of(:body) }
 
-		it "is invalid with wrong REGEX" do
-			body = "R<>!?"
-			comment = Comment.new(body: body)
-			expect(comment).to_not be_valid
-		end
-	end
+  	# Inclusion/acceptance of values
+  	it { expect(comment).to validate_length_of(:body).is_at_least(2).is_at_most(240) }
 
-	describe "belongs_to relationship with user" do
-  	it { should belong_to(:user) }
-	end
+  	# Format validations
+  	it { expect(comment).to_not allow_value("R<>%@?!").for(:body) }
+  end
 
-	describe "#acts as tree model" do
+  describe "associations" do
+  	it { expect(comment).to belong_to(:user) }
+  end
+
+	describe "#acts as tree" do
 		it "child should has parent_id" do
-			parent = FactoryGirl.create(:comment)
-			child = FactoryGirl.create(:comment, :parent_id => parent.id)
-			expect(child.parent_id).to eq(parent.id)
+			expect(comment_child.parent_id).to eq(comment.id)
 		end
 	end
 

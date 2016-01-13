@@ -2,11 +2,11 @@ require 'faker'
 
 FactoryGirl.define do
   factory :category do 
-  	name { Faker::Lorem.word }
-  end
+  	name { Faker::App.name }
 
-  factory :category_child, :class => "Category" do 
-  	name { Faker::Lorem.word }
-  	parent_id 1
-  end
+	  trait :category_child do
+	  	name { Faker::App.name }
+	  	parent_id 1
+	  end
+	end
 end

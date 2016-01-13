@@ -6,7 +6,7 @@ class OrderItem < ActiveRecord::Base
 	validates :quantity, numericality: { only_integer: true, greater_than: 0 }
 
   def subtotal(quantity, price)
-    quantity * price
+    quantity * price  
   end
   
   def check_new_record(order)
