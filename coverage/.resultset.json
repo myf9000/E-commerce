@@ -1,13 +1,14 @@
 {
   "RSpec": {
     "coverage": {
-      "/Users/gilbert/rails_app/merchant/spec/models/rating_cache_spec.rb": [
+      "/Users/gilbert/rails_app/merchant/spec/helpers/users_helper_spec.rb": [
         1,
         null,
         1,
-        null,
+        1,
         1,
         2,
+        null,
         null,
         null
       ],
@@ -1084,8 +1085,6 @@
       "/Users/gilbert/rails_app/merchant/app/helpers/mailbox_helper.rb": [
         1,
         1,
-        null,
-        null,
         0,
         null,
         null
@@ -1119,16 +1118,11 @@
       "/Users/gilbert/rails_app/merchant/app/helpers/users_helper.rb": [
         1,
         1,
-        0,
+        1,
         null,
-        null
-      ],
-      "/Users/gilbert/rails_app/merchant/app/models/rating_cache.rb": [
-        1,
-        1,
         null
       ]
     },
-    "timestamp": 1452724954
+    "timestamp": 1452765688
   }
 }

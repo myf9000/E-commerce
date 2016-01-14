@@ -19,6 +19,7 @@
 RSpec.configure do |config|
   require 'factory_girl_rails'
   require 'simplecov'
+  require "paperclip/matchers"
   SimpleCov.start
   # rspec-expectations config goes here. You can use an alternate
   # assertion/expectation library such as wrong or the stdlib/minitest
@@ -45,6 +46,10 @@ RSpec.configure do |config|
 
   RSpec.configure do |config|
     config.include FactoryGirl::Syntax::Methods
+  end
+
+  RSpec.configure do |config|
+    config.include Paperclip::Shoulda::Matchers
   end
 # The settings below are suggested to provide a good initial experience
 # with RSpec, but feel free to customize to your heart's content.
