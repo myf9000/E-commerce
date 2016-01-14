@@ -28,10 +28,10 @@ RSpec.describe Category, type: :model do
   	it { expect(category).to have_many(:subcategories).class_name('Category').with_foreign_key('parent_id') }
   end
 
-  describe "scopes" do # poprawic
-  	context "#only_category" do
+  describe "scopes" do 
+  	context ".only_category" do
 			it { expect(Category.only_category).to_not include category_child }
-			it { expect(Category.only_category).to include category } #clean database??
+			it { expect(Category.only_category).to include category } 
 		end
   end
 end

@@ -65,6 +65,7 @@ group :development, :test do
   gem 'byebug'
   gem 'shoulda-matchers', '~> 2.8.0'
   gem 'rspec-rails', '~> 3.4.0'
+  gem 'database_cleaner', '~> 1.5', '>= 1.5.1'
 end
 
 group :development do

@@ -129,6 +129,7 @@ GEM
       sass (>= 3.3.0, < 3.5)
     compass-import-once (1.0.5)
       sass (>= 3.2, < 3.5)
+    database_cleaner (1.5.1)
     debug_inspector (0.0.2)
     devise (3.5.2)
       bcrypt (~> 3.0)
@@ -347,6 +348,7 @@ DEPENDENCIES
   cocoon (~> 1.2.6)
   coffee-rails (~> 4.1.0)
   compass-rails!
+  database_cleaner (~> 1.5, >= 1.5.1)
   devise
   factory_girl_rails
   faker (~> 1.6, >= 1.6.1)

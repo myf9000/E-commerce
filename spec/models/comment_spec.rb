@@ -28,7 +28,7 @@ RSpec.describe Comment, type: :model do
   	it { expect(comment).to belong_to(:user) }
   end
 
-	describe "#acts as tree" do
+	describe ".acts as tree" do
 		it "child should has parent_id" do
 			expect(comment_child.parent_id).to eq(comment.id)
 		end
