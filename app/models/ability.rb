@@ -10,7 +10,7 @@ class Ability
     else
         can :read, :all
         can :manage, Product, :user_id => user.id
-        can :order, Order, :user_id => user.id
+        can :manage, Order, :user_id => user.id  # sprawdzic kod
     end
   end
 end

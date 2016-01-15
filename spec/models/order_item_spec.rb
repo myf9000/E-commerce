@@ -38,7 +38,7 @@ RSpec.describe OrderItem, type: :model do
 
   describe "model methods" do
   	context "responds to its methods" do
-  		it { expect(OrderItem).to respond_to(:seller) } # User products
+  		it { expect(OrderItem).to respond_to(:seller) } # User products 
   	end 
   end
 end
