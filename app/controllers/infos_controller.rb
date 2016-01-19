@@ -41,3 +41,4 @@ class InfosController < ApplicationController
     params.require(:info).permit(:city, :code, :flat, :street, :first_name, :last_name, :card_code)
   end
 end
+  

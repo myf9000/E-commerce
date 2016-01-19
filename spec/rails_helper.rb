@@ -48,6 +48,10 @@ RSpec.configure do |config|
 
 end
 
+RSpec.configure do |config|
+  config.include Devise::TestHelpers, type: :controller
+end
+
 ActiveRecord::Migration.maintain_test_schema!
 
 RSpec.configure do |config|
