@@ -11,12 +11,9 @@ RSpec.describe InfosController, type: :controller do
   end
 
 	context "User logged in" do 
-    before :each do 
-      @user = create(:user)
-      sign_in @user
-    end 
-
-	  let(:info) { create(:info, user: @user) }
+		let(:user) { create(:user) }
+	  let(:info) { create(:info, user: user) }
+	  before { sign_in(user) }
 
 	  describe "GET #show" do
 	    it "assigns @info" do
@@ -26,7 +23,7 @@ RSpec.describe InfosController, type: :controller do
 
 	    it "renders the :show view" do
 	      get :show, id: info
-	      expect(response).to render_template(:show)
+	      expect(response).to render_template :show
 	    end
 	  end
 
@@ -45,18 +42,22 @@ RSpec.describe InfosController, type: :controller do
 	  describe "POST #create" do 
       context "with valid attributes" do 
         it "saves the new photo object" do
-	        expect{ post :create, info:  attributes_for(:info) }.to change(Info, :count).by(1)
+	        expect do
+	         	post :create, info: attributes_for(:info) 
+	       	end.to change(Info, :count).by(1)
         end
 
         it "redirect to :show view " do 
           post :create, info: attributes_for(:info)
-          expect(response).to redirect_to info_path(Info.last)
+          expect(response).to redirect_to Info.last
         end
       end
 
       context "with invalid attributes" do
 	  	  it "does not save the new info" do
-	  	    expect{post :create, info: attributes_for(:invalid_info)}.to_not change(Info, :count)
+	  	    expect do
+	  	    	post :create, info: attributes_for(:invalid_info)
+	  	    end.to_not change(Info, :count)
 	  	  end
 
 	  	  it "re-render to :new view" do
@@ -119,7 +120,7 @@ RSpec.describe InfosController, type: :controller do
 	  describe "DELETE #destroy" do 
 	  	it "it redirect to root path" do
 	  	  get :destroy, id: info
-	  	  expect(response).to redirect_to user_path(info.user)
+	  	  expect(response).to redirect_to user
 	  	end
 
 	  	it "deletes info" do

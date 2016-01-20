@@ -11,10 +11,8 @@ RSpec.describe CategoriesController, type: :controller do
   end
 
   context "User logged in" do 
-    before :each do 
-      @user = create(:user)
-      sign_in @user
-    end 
+    let(:user) { create(:user) }
+	  before { sign_in(user) }
 
     describe "check privigles" do
       it "redirects to products" do 
@@ -25,13 +23,11 @@ RSpec.describe CategoriesController, type: :controller do
    end
 
 	context "Admin logged in" do 
-    before :each do 
-      @user = create(:user, admin: true)
-      sign_in @user
-    end 
-
+    let(:user) { create(:user, admin: true) }
 	  let(:category) { create(:category) }
 	  let(:subcategory) { create(:category, :category_child, parent_id: category.id) }
+
+	  before { sign_in(user) }
 
 	  describe "GET #index" do
 	    it "assigns @categories" do
@@ -77,7 +73,7 @@ RSpec.describe CategoriesController, type: :controller do
 
         it "redirect to :show view " do 
           post :create, category: attributes_for(:category)
-          expect(response).to redirect_to category_path(Category.last)
+          expect(response).to redirect_to Category.last
         end
       end
 

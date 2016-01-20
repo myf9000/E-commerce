@@ -5,19 +5,19 @@ class CommentsController < ApplicationController
       parent = Comment.find_by_id(params[:comment].delete(:parent_id))
       @comment = parent.children.build(comment_params)
     else
-      @comment = Comment.new(comment_params)
+      @comment = current_user.comments.new(comment_params)
     end
     @comment.author_id = current_user.id
     if @comment.save
-      redirect_to :back, notice: 'Your comment was successfully added!'
+      redirect_to @comment.user, notice: 'Your comment was successfully added!'
     else
-      redirect_to user_path(@comment.user), notice: @comment.errors.full_messages.join
+      redirect_to @comment.user, notice: @comment.errors.full_messages.join
     end
   end
 
 private
 
   def comment_params
-    params.require(:comment).permit(:body, :user_id, :author, :parent_id)
+    params.require(:comment).permit(:body, :author, :parent_id)
   end
 end

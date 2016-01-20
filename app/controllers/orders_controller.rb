@@ -13,7 +13,7 @@ class OrdersController < ApplicationController
 
   private
     def order_params
-      params.require(:order).permit(:user_id, :status)
+      params.require(:order).permit(:status)
     end
 
     def order_privigles

@@ -32,7 +32,7 @@ class InfosController < ApplicationController
 
   def destroy
     @info.destroy
-    redirect_to user_path(current_user), alert: 'Product was successfully destroyed.'
+    redirect_to current_user, alert: 'Product was successfully destroyed.'
   end
 
   private
