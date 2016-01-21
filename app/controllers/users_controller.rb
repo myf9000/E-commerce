@@ -13,7 +13,7 @@ class UsersController < ApplicationController
       redirect_to user_path(current_user), alert: "You delete user from feed list"
     else
       current_user.follow(@user)
-      redirect_to user_path(current_user), notice: "You add user from feed list"
+      redirect_to user_path(current_user), notice: "You add user to feed list"
     end
   end
 
@@ -24,3 +24,4 @@ class UsersController < ApplicationController
     end
   
 end
+ 
