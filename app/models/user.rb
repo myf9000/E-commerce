@@ -25,10 +25,10 @@ class User < ActiveRecord::Base
   end
 
   def user_score
-    self.average("culture").avg + self.average("speed").avg
+    average("culture").avg + average("speed").avg
   end
 
-  def self.seller_list(user)
-    seller_list = OrderItem.seller(user.products.pluck(:id))
+  def seller_list
+    seller_list = OrderItem.seller(self.products.pluck(:id))
   end
 end

@@ -17,44 +17,36 @@ RSpec.describe Ability, type: :model do
 	let(:ability_user)  { Ability.new(user) }
 	let(:ability_user2) { Ability.new(user2) }
 	let(:ability_admin) { Ability.new(admin) }
+	let(:product) 		{ create(:product, :user=> user) }
+	let(:order)			{ create(:order, :user=> user)}
 
 	describe "#initialize" do
 		context "product" do
-		  before do
-		  	@product = create(:product, :user=> user)
-		  end
-
 		  it "when is admin" do
-		    expect(ability_admin).to be_able_to(:manage, @product)
+		    expect(ability_admin).to be_able_to(:manage, product)
 		  end
 
 		  it "when is product user" do
-		    expect(ability_user).to be_able_to(:manage, @product)
+		    expect(ability_user).to be_able_to(:manage, product)
 		  end
 
 		  it "when is other user" do
-		    expect(ability_user2).to_not be_able_to(:manage, @product)
+		    expect(ability_user2).to_not be_able_to(:manage, product)
 		  end
 		end
 
 		context "order" do
-		  before do
-		  	@order = create(:order, :user=> user)
-		  end
-
 		  it "when is admin" do
-		    expect(ability_admin).to be_able_to(:manage, @order)
+		    expect(ability_admin).to be_able_to(:manage, order)
 		  end
 
 		  it "when is order user" do
-		    expect(ability_user).to be_able_to(:manage, @order)
+		    expect(ability_user).to be_able_to(:manage, order)
 		  end
 
 		  it "when is other user" do
-		    expect(ability_user2).to_not be_able_to(:manage, @order)
+		    expect(ability_user2).to_not be_able_to(:manage, order)
 		  end
 		end
-
-
 	end
 end

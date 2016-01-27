@@ -42,11 +42,6 @@ class Product < ActiveRecord::Base
 		end
 	end
 
-	# def price=(input)
-	# 	input.delete!("$")
-	# 	super
-	# end
-
 	def quantites_total
 	  q = 0
 	    order_items.each do |f|

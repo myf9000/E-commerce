@@ -5,16 +5,16 @@ table.table
   tbody
     tr 
       td
-        = link_to image_tag(@owner.avatar.url(:thumb), class: "img_user"), user_path(@owner)
+        = link_to image_tag(@product.user.avatar.url(:thumb), class: "img_user"), @product.user
       td
         p
-          h5 = @owner.email
+          h5 = @product.user.email
 
         p 
           i.fa.fa-star
-          - if @owner.average("culture") != nil and  @owner.average("speed") != nil 
-            =  print_user_score @owner.user_score
+          - if @product.user.average("culture") != nil and  @product.user.average("speed") != nil 
+            =  print_user_score @product.user.user_score
         p.link_color 
-          = link_to new_conversation_path(target: @owner.email), class: "btn btn-warning" do
+          = link_to new_conversation_path(target: @product.user.email), class: "btn btn-warning" do
             em.fa.fa-envelope
               |  Send Message 

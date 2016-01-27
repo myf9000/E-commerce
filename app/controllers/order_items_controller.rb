@@ -14,7 +14,7 @@ class OrderItemsController < ApplicationController
         @order_item.save 
         redirect_to @order, notice: 'Order item was successfully created.' 
     else
-      redirect_to :back , notice: 'Error - you want to buy your own product, or product quantity is too big!' 
+      redirect_to :back, notice: 'Error - you want to buy your own product, or product quantity is too big!' 
     end
   end
 
@@ -48,7 +48,7 @@ class OrderItemsController < ApplicationController
       @order.save
       redirect_to @order, notice: 'You buyed' 
     else
-      redirect_to :back, notice: 'To big quantity'
+      redirect_to @order, notice: 'To big quantity'
     end
   end
 
@@ -56,7 +56,7 @@ class OrderItemsController < ApplicationController
     @order = @order_item.order
     @order.status = params[:type].to_s
     @order.save
-    redirect_to user_path(current_user)
+    redirect_to current_user
   end
 
   private

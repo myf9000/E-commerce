@@ -4,12 +4,11 @@ class ProductsController < ApplicationController
   before_action :set_index, only: :index
 
   def show
-    @owner = @product.user
     @category = find_category(@product.category)
     @subcategory =  find_category(@product.subcategory)
     impressionist(@product) # problem z squelem
   end
-
+ 
 
   def index  
     @search = Product.search(params[:q])

@@ -2,7 +2,7 @@ require 'faker'
 
 FactoryGirl.define do
   factory :order do 
-  	status { Faker::Lorem.word }
+  	status "submitted"
   	user
   end
 end

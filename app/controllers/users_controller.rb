@@ -4,16 +4,16 @@ class UsersController < ApplicationController
   def show
     @comments = @user.comments.hash_tree
     @comment = @user.comments.build(parent_id: params[:parent_id])
-  	@seller_items = User.seller_list(current_user)
+  	@seller_items = @user.seller_list
   end
 
   def follow
     if params[:type].to_s == "unfollow"
       current_user.stop_following(@user)
-      redirect_to user_path(current_user), alert: "You delete user from feed list"
+      redirect_to current_user, alert: "You delete user from feed list"
     else
       current_user.follow(@user)
-      redirect_to user_path(current_user), notice: "You add user to feed list"
+      redirect_to current_user, notice: "You add user to feed list"
     end
   end
 

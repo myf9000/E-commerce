@@ -4,7 +4,7 @@ class InfosController < ApplicationController
   layout "layout_for_form" 
 
   def new
-    @info = current_user.build_info(params[:info])
+    @info = Info.new
   end
 
   def show
@@ -32,7 +32,7 @@ class InfosController < ApplicationController
 
   def destroy
     @info.destroy
-    redirect_to current_user, alert: 'Product was successfully destroyed.'
+    redirect_to current_user, alert: 'Info was successfully destroyed.'
   end
 
   private

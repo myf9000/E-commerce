@@ -28,21 +28,7 @@ RSpec.describe User, type: :model do
 		context "responds to its methods" do
   		it { expect(user).to respond_to(:mailboxer_email) }
   		it { expect(user).to respond_to(:user_score) }
-  	end
-
-  	context "executes methods correctly" do
-			context "#mailboxer_email" do
-				it "email" do
-  		    user.email = "jaja@jaja.pl"
-					expect(user.mailboxer_email(user)).to eq("jaja@jaja.pl")
-				end
-			end
-		end
-	end
-
-	describe "model methods" do
-		context "responds to its methods" do
-  		it { expect(User).to respond_to(:seller_list) }
+  		it { expect(user).to respond_to(:seller_list) }
   	end
 
   	context "executes methods correctly" do
@@ -56,13 +42,20 @@ RSpec.describe User, type: :model do
 				oi = create(:order_item, :product => @p, :order => o)
   		end
 
-			context ".seller_list" do
+  		context ".seller_list" do
 				it "include sells product" do
-					expect(User.seller_list(user).last.product_id).to eq(@p.id)
+					expect(user.seller_list.last.product_id).to eq(@p.id)
 				end
 
 				it "does not include other product" do
-					expect(User.seller_list(user).last.product_id).to_not eq(@p2.id)
+					expect(user.seller_list.last.product_id).to_not eq(@p2.id)
+				end
+			end
+
+			context "#mailboxer_email" do
+				it "email" do
+  		    user.email = "jaja@jaja.pl"
+					expect(user.mailboxer_email(user)).to eq("jaja@jaja.pl")
 				end
 			end
 		end
