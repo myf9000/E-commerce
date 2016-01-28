@@ -10,8 +10,9 @@ RSpec.describe Comment, type: :model do
     expect(build(:comment_child)).to be_valid
   end
 
-  let(:comment) { FactoryGirl.build(:comment) }
-  let(:comment_child) { FactoryGirl.build(:comment_child, :parent_id => comment.id) }
+  let(:comment) { build(:comment) }
+  let(:comment_child) { build(:comment_child, :parent_id => comment.id) }
+  let(:user) { create(:user) }
 
   describe "validations" do
   	# Basic validations
@@ -32,6 +33,23 @@ RSpec.describe Comment, type: :model do
 		it "child should has parent_id" do
 			expect(comment_child.parent_id).to eq(comment.id)
 		end
-	end
+	end 
 
+  # describe "class methods" do
+  #   context "responds to its methods" do
+  #     it { expect(Comment).to respond_to(:new_comment) }
+  #   end
+
+  #   context "executes methods correctly" do
+  #     context ".new_comment" do
+  #       before do 
+  #         @c = Comment.new_comment({body: "Koko", user: user}, user)
+  #       end
+
+  #       it { expect(@c.body).to eq("Koko") }
+  #       it { expect(@c.user).to eq(user) }
+  #       it { expect(@c.author_id).to eq(user.id) }
+  #     end
+  #   end
+  # end
 end 

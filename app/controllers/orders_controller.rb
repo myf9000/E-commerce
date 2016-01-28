@@ -1,6 +1,7 @@
 class OrdersController < ApplicationController
   before_action :find_resource, only: [:destroy, :show]
   before_action :order_privigles, only: [:destroy, :show]
+  
   layout "layout_for_form" 
 
   def show

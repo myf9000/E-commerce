@@ -11,7 +11,7 @@
           br
           = f.grouped_collection_select :subcategory_eq, Category.only_category,:subcategories, :name, :id, :name, { prompt: "Choose a category" }, { class: "form-control"}
           br
-          = f.select :company_eq, %w{IBM Microsoft Apple}, { prompt: "Choose a company" }, { class: "form-control"}
+          = f.select :company_eq, options_for_company, { prompt: "Choose a company" }, { class: "form-control"}
           br
           p.text_in_center
             = f.submit "Search", class: "btn btn-success" 

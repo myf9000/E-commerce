@@ -6,32 +6,24 @@ class ProductsController < ApplicationController
   def show
     @category = find_category(@product.category)
     @subcategory =  find_category(@product.subcategory)
-    impressionist(@product) # problem z squelem
+    impressionist(@product) # configuration issue with squeel
   end
  
 
   def index  
     @search = Product.search(params[:q])
-    @products = @search.result
-    
-    if params[:compare] and params[:what]
-      @products = Product.shows(params[:what].to_s, params[:compare].to_s)
-    elsif params[:search]
-      @products = Product.title_like("%#{params[:search]}%").order('title')
-    elsif params[:sort] 
-      @products = Product.ordered_by(params[:sort])
-    end
+    @products = params[:q] ? @search.result : Product.find_products(params)
 
-    render layout: "layout_for_index" 
+    render layout: "layout_for_index"
   end
 
   def new
     @product = current_user.products.build
-    render layout: "layout_for_form" 
+    render layout: "layout_for_form"
   end
 
   def edit
-    render layout: "layout_for_form" 
+    render layout: "layout_for_form"
   end
 
   def create

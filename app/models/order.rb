@@ -22,4 +22,20 @@ class Order < ActiveRecord::Base
     end
     x
   end
+ 
+  def buyed
+  	order_items.each do |f|
+      check = f.product.stock - f.quantity
+      f.product.active = false if check == 0
+      f.product.stock = check
+      f.product.save
+    end
+    self.status = "submitted"
+    self.save
+  end
+
+  def set_status(status)
+  	self.status = status
+    self.save
+  end
 end

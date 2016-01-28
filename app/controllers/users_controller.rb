@@ -3,7 +3,6 @@ class UsersController < ApplicationController
 
   def show
     @comments = @user.comments.hash_tree
-    @comment = @user.comments.build(parent_id: params[:parent_id])
   	@seller_items = @user.seller_list
   end
 

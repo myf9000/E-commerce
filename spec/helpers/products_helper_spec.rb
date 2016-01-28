@@ -19,5 +19,9 @@ describe ProductsHelper do
 	  	stock = 100
 	    it { expect(helper.print_stock(stock, 101)).to eq("<span class=\"low_stock\">Insufficient stock (#{stock})</span>") }
 	  end
+
+	  context "#options_for_company" do
+	    it { expect(helper.options_for_company).to include "Apple" }
+	  end
 	end
 end

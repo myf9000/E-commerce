@@ -67,6 +67,7 @@ RSpec.describe Product, type: :model do
 		context "responds to its methods" do
   		it { expect(Product).to respond_to(:ordered_by) }
   		it { expect(Product).to respond_to(:shows) }
+      it { expect(Product).to respond_to(:find_products) }
   	end
 
   	context "executes methods correctly" do

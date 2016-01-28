@@ -6,7 +6,7 @@ RSpec.describe OrderItem, type: :model do
     expect(build(:order_item)).to be_valid
   end
 
-	let(:order_item) { FactoryGirl.build(:order_item) }
+	let(:order_item) { build(:order_item) }
 
 	describe "validations" do
 		it { expect(order_item).to validate_presence_of(:order_id) }
@@ -23,6 +23,7 @@ RSpec.describe OrderItem, type: :model do
   	context "responds to its methods" do
   		it { expect(order_item).to respond_to(:subtotal) }
   		it { expect(order_item).to respond_to(:check_new_record) }
+      it { expect(order_item).to respond_to(:is_ok?) }
   	end
 
   	context "executes methods correctly" do
@@ -31,14 +32,14 @@ RSpec.describe OrderItem, type: :model do
   		end
 
   		context "#check_new_record" do
-  			it { expect(order_item.check_new_record(order_item)).to eq(1) }
+  			it { expect(order_item.check_new_record).to eq(1) }
   		end
   	end
   end
 
   describe "model methods" do
   	context "responds to its methods" do
-  		it { expect(OrderItem).to respond_to(:seller) } # User products 
+  		it { expect(OrderItem).to respond_to(:seller) } # tested in user
   	end 
   end
-end
+end 

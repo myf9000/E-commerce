@@ -116,7 +116,7 @@
         .col-md-12
           h4 Comments (#{@user.comments.count})
           p Add a comment!
-          = render 'comments/form'
+          = render :partial => 'comments/form', locals: {:@comment => Comment.new(:user_id => @user.id, :author_id => current_user.id )}
           = comments_tree_for @comments 
 br
 

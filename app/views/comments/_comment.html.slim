@@ -17,7 +17,7 @@
 
 		div id="#wrap"
 	    div class="#{comment.id} collapse"
-	    	= render :partial => 'comments/form',  locals: {:@comment => Comment.new(:parent_id => comment.id, :user_id => @user.id)}
+	    	= render :partial => 'comments/form',  locals: {:@comment => Comment.new(:parent_id => comment.id, :user_id => @user.id, :author_id => current_user.id )}
       
 	  - from_reply_form ||= nil 
 	  - unless from_reply_form 

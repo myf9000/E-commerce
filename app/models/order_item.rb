@@ -9,8 +9,12 @@ class OrderItem < ActiveRecord::Base
     quantity * price  
   end
   
-  def check_new_record(order)
-  	order.new_record? ? order.quantity = 1 : order.quantity += 1
+  def check_new_record
+  	self.new_record? ? self.quantity = 1 : self.quantity += 1
+  end
+
+  def is_ok?(current_user)
+    current_user != self.product.user && self.quantity <= self.product.stock
   end
 
   def self.seller(sell)
@@ -24,5 +28,4 @@ class OrderItem < ActiveRecord::Base
 	  end
 	  list
 	end
-
 end

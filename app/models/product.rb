@@ -22,24 +22,36 @@ class Product < ActiveRecord::Base
 	is_impressionable #:counter_cache => true, :column_name => :viewed_count, :uniq => true
 
 	def self.ordered_by(param)
-	    case param
-		    when 'DESC'     then 	Product.all.order("created_at DESC")
-		    when 'ASC'		 	then 	Product.all.order("created_at ASC")
-		    when 'small'		then 	Product.all.order("price ASC")
-		    when 'big'			then 	Product.all.order("price DESC")
-		    when 'top'			then 	Product.all.order("viewed_count ASC")
-		    else                  Product.all
+    case param
+	    when 'DESC'     then 	self.all.order("created_at DESC")
+	    when 'ASC'		 	then 	self.all.order("created_at ASC")
+	    when 'small'		then 	self.all.order("price ASC")
+	    when 'big'			then 	self.all.order("price DESC")
+	    when 'top'			then 	self.all.order("viewed_count ASC")
+	    else                  self.all
 		end
   end
 
   def self.shows(what, compare)
   	case what
-	    when 'price'     	then 	Product.all.select {|f| if f.price <= compare.to_i; f; end  };
-	    when 'company'		then 	Product.all.select {|f| if f.company == compare; f; end  };
-	    when 'category'		then 	Product.all.select {|f| if f.category == compare; f; end };
-	    when 'subcategory'then 	Product.all.select {|f| if f.subcategory == compare; f; end };
-	    else                  	Product.all
+	    when 'price'     	then 	self.all.select {|f| if f.price <= compare.to_i; f; end  };
+	    when 'company'		then 	self.all.select {|f| if f.company == compare; f; end  };
+	    when 'category'		then 	self.all.select {|f| if f.category == compare; f; end };
+	    when 'subcategory'then 	self.all.select {|f| if f.subcategory == compare; f; end };
+	    else                  	self.all
 		end
+	end
+
+	def self.find_products(params)
+    if params[:compare] and params[:what]
+      self.shows(params[:what].to_s, params[:compare].to_s)
+    elsif params[:search]
+      self.title_like("%#{params[:search]}%").order('title')
+    elsif params[:sort] 
+      self.ordered_by(params[:sort])
+    else
+      self.all
+    end
 	end
 
 	def quantites_total

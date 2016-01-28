@@ -42,7 +42,7 @@ RSpec.describe User, type: :model do
 				oi = create(:order_item, :product => @p, :order => o)
   		end
 
-  		context ".seller_list" do
+  		context "#seller_list" do
 				it "include sells product" do
 					expect(user.seller_list.last.product_id).to eq(@p.id)
 				end

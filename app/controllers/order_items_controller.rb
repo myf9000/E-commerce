@@ -8,11 +8,11 @@ class OrderItemsController < ApplicationController
   end
 
   def create
-    @order_item = item_set 
-    @order_item.check_new_record(@order_item)
-    if current_user != @order_item.product.user && @order_item.quantity <= @order_item.product.stock
-        @order_item.save 
-        redirect_to @order, notice: 'Order item was successfully created.' 
+    @order_item = item_set
+    @order_item.check_new_record
+    if @order_item.is_ok?(current_user)
+      @order_item.save 
+      redirect_to @order, notice: 'Order item was successfully created.' 
     else
       redirect_to :back, notice: 'Error - you want to buy your own product, or product quantity is too big!' 
     end
@@ -38,14 +38,7 @@ class OrderItemsController < ApplicationController
   
   def buy
     if @order.check_in 
-      @order.order_items.each do |f|
-        check = f.product.stock - f.quantity
-        f.product.active = false if check == 0
-        f.product.stock = check
-        f.product.save
-      end
-      @order.status = "submitted"
-      @order.save
+      @order.buyed
       redirect_to @order, notice: 'You buyed' 
     else
       redirect_to @order, notice: 'To big quantity'
@@ -54,8 +47,7 @@ class OrderItemsController < ApplicationController
 
   def product_orders
     @order = @order_item.order
-    @order.status = params[:type].to_s
-    @order.save
+    @order.set_status(params[:type])
     redirect_to current_user
   end
 

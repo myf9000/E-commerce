@@ -19,6 +19,10 @@ RSpec.describe CommentsController, type: :controller do
 	  before { sign_in(user) }
 
 	  describe "POST #create" do 
+			before(:each) do
+		    request.env["HTTP_REFERER"] = user_path(comment.user)
+		  end
+
 	  	it "check parent in comment child" do
         expect(comment_child.parent_id).to eq(comment.id)
 	  	end
@@ -32,7 +36,7 @@ RSpec.describe CommentsController, type: :controller do
 
 	      it "redirects to the user" do 
 	        post :create, comment: attributes_for(:comment)
-	        expect(response).to redirect_to user
+	        expect(response).to redirect_to comment.user
 	      end
 	    end
 
@@ -45,7 +49,7 @@ RSpec.describe CommentsController, type: :controller do
 
         it "re-render to :new view" do
           post :create, comment: attributes_for(:invalid_comment)
-          expect(response).to redirect_to user
+          expect(response).to redirect_to comment.user
         end
       end
 	  end

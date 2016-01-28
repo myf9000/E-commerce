@@ -29,12 +29,7 @@ RSpec.describe UsersController, type: :controller do
 	      get :show, id: user
 	      expect(assigns(:user)).to eq(user)
 	    end
-
-	  	it "should assigns new comment" do 
-        get :show, id: user
-        expect(assigns(:comment)).to be_instance_of(Comment)
-      end
-
+	    
       it "should assigns @comments" do
 	      get :show, id: user
 	      expect(assigns(:comments)).to eq(user.comments.hash_tree)
