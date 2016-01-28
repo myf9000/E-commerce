@@ -1,10 +1,10 @@
 == README
 	
 <tt>rake db:seed</tt>.
-	* user: email: user@vp.pl, pass: 12345678
-	* admin: email: admin@vp.pl, pass: 12345678
+* user: email: user@vp.pl, pass: 12345678
+* admin: email: admin@vp.pl, pass: 12345678
 
 == TODO
-	* add .js
-	* easier shopping
-	* and much much more... 
+* add .js
+* easier shopping
+* and much much more... 
